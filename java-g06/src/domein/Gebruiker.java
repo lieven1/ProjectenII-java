@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Gebruiker {
-
     // Declarations
     private final String _gebruikersnaam, _rijksregisternummer; 
     private String _naam, _voornaam, _geboorteplaats, 
@@ -23,6 +22,8 @@ public class Gebruiker {
             throw new IllegalArgumentException("Gebruikersnaam mag geen lege waarde bevatten.");
         if(rijksregisternummer == null)
             throw new IllegalArgumentException("Rijksregisternummer mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^\\d{11}$").matcher(rijksregisternummer).matches())
+            throw new IllegalArgumentException("Ongeldige waarde voor rijksregisternummer");
         
         this._gebruikersnaam = gebruikersnaam;
         this._rijksregisternummer = rijksregisternummer;
@@ -189,7 +190,7 @@ public class Gebruiker {
     private void setInschrijvingsDatum(Date _inschrijvingsDatum) {
         if(_inschrijvingsDatum == null)
             throw new IllegalArgumentException("Inschrijvingsdatum mag geen lege waarde bevatten.");
-        if(_inschrijvingsDatum.compareTo(new Date()) > 0)
+        if(_inschrijvingsDatum.compareTo(new Date()) < 0)
             throw new IllegalArgumentException("Inschrijvingsdatum mag niet in de toekomst liggen.");
         
         this._inschrijvingsDatum = _inschrijvingsDatum;
@@ -198,7 +199,7 @@ public class Gebruiker {
     private void setGeboorteDatum(Date _geboorteDatum) {
         if(_geboorteDatum == null)
             throw new IllegalArgumentException("Geboortedatum mag geen lege waarde bevatten.");
-        if(_geboorteDatum.compareTo(new Date()) > 0)
+        if(_geboorteDatum.compareTo(new Date()) < 0)
             throw new IllegalArgumentException("Geboortedatum mag niet in de toekomst liggen.");
         
         this._geboorteDatum = _geboorteDatum;

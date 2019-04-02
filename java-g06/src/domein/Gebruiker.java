@@ -18,9 +18,9 @@ public class Gebruiker {
     
     // Constructors
     public Gebruiker(String gebruikersnaam, String rijksregisternummer, Date inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Date geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
-        if(gebruikersnaam == null)
+        if(gebruikersnaam == null || gebruikersnaam.isBlank())
             throw new IllegalArgumentException("Gebruikersnaam mag geen lege waarde bevatten.");
-        if(rijksregisternummer == null)
+        if(rijksregisternummer == null || rijksregisternummer.isBlank())
             throw new IllegalArgumentException("Rijksregisternummer mag geen lege waarde bevatten.");
         if(! Pattern.compile("^\\d{11}$").matcher(rijksregisternummer).matches())
             throw new IllegalArgumentException("Ongeldige waarde voor rijksregisternummer");
@@ -115,7 +115,7 @@ public class Gebruiker {
     
     // Setters
     private void setNaam(String _naam) {
-        if(_naam.isBlank())
+        if(_naam == null || _naam.isBlank())
             throw new IllegalArgumentException("Naam mag geen lege waarde bevatten.");
         if(_naam.length() > 50)
             throw new IllegalArgumentException("Naam mag niet bestaan uit meer dan 50 karakters.");
@@ -130,7 +130,7 @@ public class Gebruiker {
     }
 
     private void setVoornaam(String _voornaam) {
-        if(_voornaam.isBlank())
+        if(_voornaam == null || _voornaam.isBlank())
             throw new IllegalArgumentException("Voornaam mag geen lege waarde bevatten.");
         if(_voornaam.length() > 50)
             throw new IllegalArgumentException("Voornaam mag niet bestaan uit meer dan 50 karakters.");
@@ -145,14 +145,14 @@ public class Gebruiker {
     }
 
     private void setGeboorteplaats(String _geboorteplaats) {
-        if(_geboorteplaats.isBlank())
+        if(_geboorteplaats == null || _geboorteplaats.isBlank())
             throw new IllegalArgumentException("Geboorteplaats mag geen lege waarde bevatten.");
         
         this._geboorteplaats = _geboorteplaats;
     }
 
     private void setTelefoonnummer(String _telefoonnummer) {
-        if(_telefoonnummer != null){
+        if(_telefoonnummer != null && !_telefoonnummer.isBlank()){
             if(! Pattern.compile("((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))").matcher(_telefoonnummer).matches())
                 throw new IllegalArgumentException("Ongeldig formaat voor telefoonnummer.");
         }
@@ -161,7 +161,7 @@ public class Gebruiker {
     }
 
     private void setGsmnummer(String _gsmnummer) {
-        if(_gsmnummer.isBlank())
+        if(_gsmnummer == null || _gsmnummer.isBlank())
             throw new IllegalArgumentException("Gsmnummer mag geen lege waarde bevatten.");
         if(! Pattern.compile("((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))").matcher(_gsmnummer).matches())
             throw new IllegalArgumentException("Ongeldig formaat voor gsmnummer.");
@@ -170,7 +170,7 @@ public class Gebruiker {
     }
 
     private void setEmail(String _email) {
-        if(_email.isBlank())
+        if(_email == null || _email.isBlank())
             throw new IllegalArgumentException("Email mag geen lege waarde bevatten.");
         if(! Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]+$").matcher(_email).matches())
             throw new IllegalArgumentException("Ongeldig formaat voor Emailadres.");
@@ -213,6 +213,9 @@ public class Gebruiker {
     }
 
     private void setGeslacht(Geslacht _geslacht) {
+        if(_geslacht == null)
+            throw new IllegalArgumentException("Geslacht mag geen lege waarde bevatten.");
+        
         this._geslacht = _geslacht;
     }
 
@@ -224,6 +227,9 @@ public class Gebruiker {
     }
 
     private void setGraad(Gradatie _graad) {
+        if(_graad == null)
+            _graad = Gradatie.RokkuKyu;
+        
         this._graad = _graad;
     }
 
@@ -237,6 +243,7 @@ public class Gebruiker {
     
     // Methods
     public void wijzigGegevens(Date inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Date geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule, String land, String postcode, String stad, String straat, String nummer){
+        // Gebruikersnaam en Rijksregisternummer kunnen niet gewijzigd worden.
         this.setInschrijvingsDatum(inschrijvingsdatum);
         this.setNaam(naam);
         this.setVoornaam(voornaam);

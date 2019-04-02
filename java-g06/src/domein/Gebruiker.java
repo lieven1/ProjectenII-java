@@ -3,7 +3,7 @@ package domein;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class Gebruiker {
+public class Gebruiker implements IGebruiker {
     // Declarations
     private final String _gebruikersnaam, _rijksregisternummer; 
     private String _naam, _voornaam, _geboorteplaats, 
@@ -45,6 +45,7 @@ public class Gebruiker {
     }
     
     // Getters 
+    @Override
     public String getGebruikersnaam() {
         return _gebruikersnaam;
     }
@@ -53,10 +54,12 @@ public class Gebruiker {
         return _rijksregisternummer;
     }
 
+    @Override
     public String getNaam() {
         return _naam;
     }
 
+    @Override
     public String getVoornaam() {
         return _voornaam;
     }
@@ -65,6 +68,7 @@ public class Gebruiker {
         return _geboorteplaats;
     }
 
+    @Override
     public String getTelefoonnummer() {
         return _telefoonnummer;
     }
@@ -73,6 +77,7 @@ public class Gebruiker {
         return _gsmnummer;
     }
 
+    @Override
     public String getEmail() {
         return _email;
     }
@@ -81,6 +86,7 @@ public class Gebruiker {
         return _emailOuders;
     }
 
+    @Override
     public Date getInschrijvingsDatum() {
         return _inschrijvingsDatum;
     }
@@ -105,6 +111,7 @@ public class Gebruiker {
         return _graad;
     }
 
+    @Override
     public TypeGebruiker getType() {
         return _type;
     }
@@ -236,6 +243,8 @@ public class Gebruiker {
     private void setType(TypeGebruiker _type) {
         if(_type == null)
             _type = TypeGebruiker.Lid;
+        if(_type == TypeGebruiker.Proefgebruiker)
+            throw new IllegalArgumentException("Een bestaande gebruiker kan geen proefgebruiker worden.");
         
         this._type = _type;
     }

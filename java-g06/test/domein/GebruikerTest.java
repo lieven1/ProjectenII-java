@@ -285,6 +285,11 @@ public class GebruikerTest {
         g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
         Assert.assertEquals(TypeGebruiker.Lid, g1.getType());
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_TypeGebruiker_ProefGebruiker_throwsIllegalArgumentException() {
+        TypeGebruiker = TypeGebruiker.Proefgebruiker;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
     
     // Lesformule
     @Test

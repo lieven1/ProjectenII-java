@@ -48,14 +48,14 @@ public class Adres {
     
     // Setters
     private void setLand(String _land) {
-        if(_land.isBlank())
+        if(_land == null || _land.isBlank())
             throw new IllegalArgumentException("Land mag geen lege waarde bevatten.");
         
         this._land = _land;
     }
     
     private void setPostcode(String _postcode) {
-        if(_postcode.isBlank())
+        if(_postcode == null || _postcode.isBlank())
             throw new IllegalArgumentException("Postcode mag geen lege waarde bevatten.");
         if(! Pattern.compile("^\\d{4}$").matcher(_postcode).matches())
             throw new IllegalArgumentException("Ongeldige waarde voor postcode.");
@@ -64,21 +64,21 @@ public class Adres {
     }
 
     private void setStad(String _stad) {
-        if(_stad.isBlank())
+        if(_stad == null || _stad.isBlank())
             throw new IllegalArgumentException("Stad mag geen lege waarde bevatten.");
         
         this._stad = _stad;
     }
 
     private void setStraat(String _straat) {
-        if(_straat.isBlank())
+        if(_straat == null || _straat.isBlank())
             throw new IllegalArgumentException("Straat mag geen lege waarde bevatten.");
         
         this._straat = _straat;
     }
 
     private void setNummer(String _nummer) {
-        if(_nummer.isBlank())
+        if(_nummer == null || _nummer.isBlank())
             throw new IllegalArgumentException("Nummer mag geen lege waarde bevatten.");
         
         this._nummer = _nummer;

@@ -1,11 +1,26 @@
 package domein;
 
 import java.util.regex.Pattern;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Adres {
     // Declarations
+    @Id
+    @Column(name = "AdresId")
     private int _adresId;
-    private String _land, _postcode, _stad, _straat, _nummer;
+    @Column(name = "Land")
+    private String _land;
+    @Column(name = "Postcode")
+    private String _postcode;
+    @Column(name = "Stad")
+    private String _stad;
+    @Column(name = "Straat")
+    private String _straat;
+    @Column(name = "Nummer")
+    private String _nummer;
     
     // Constructors
     public Adres(int adresId, String land, String postcode, String stad, String straat, String nummer){

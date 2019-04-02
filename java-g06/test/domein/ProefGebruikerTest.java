@@ -20,7 +20,7 @@ public class ProefGebruikerTest {
 
     // Constructor
     @Test
-    public void maakAdres_ValidGegevens_MaaktAdres() {
+    public void maakProefGebruiker_ValidGegevens_MaaktProefGebruiker() {
         p1 = new ProefGebruiker(Gebruikersnaam, InschrijvingsDatum, Naam, Voornaam, Telefoonnummer, Email);
         Assert.assertEquals("ProefGebruiker", p1.getClass().getSimpleName());
         Assert.assertEquals(Gebruikersnaam, p1.getGebruikersnaam());

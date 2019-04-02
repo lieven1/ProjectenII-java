@@ -179,8 +179,8 @@ public class Gebruiker {
     }
 
     private void setEmailOuders(String _emailOuders) {
-        if(_emailOuders != null){
-            if(! Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]+$").matcher(_email).matches())
+        if(_emailOuders != null && !_emailOuders.isBlank()){
+            if(! Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]+$").matcher(_emailOuders).matches())
                 throw new IllegalArgumentException("Ongeldig formaat voor Emailadres.");
         }
         
@@ -234,6 +234,9 @@ public class Gebruiker {
     }
 
     private void setType(TypeGebruiker _type) {
+        if(_type == null)
+            _type = TypeGebruiker.Lid;
+        
         this._type = _type;
     }
 

@@ -2,11 +2,9 @@ package domein;
 
 import java.util.Date;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class GebruikerTest {
-
     private Gebruiker g1;
     private String Gebruikersnaam, Rijksregisternummer, Naam, Voornaam, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders;
     private Date Geboortedatum, Inschrijvingsdatum;
@@ -17,8 +15,7 @@ public class GebruikerTest {
     private Lesformule Lesformule;
     private int Punten;
 
-    @Before
-    public void before() {
+    public GebruikerTest() {
         Gebruikersnaam = "Gebruiker1";
         Rijksregisternummer = "11111111111";
         Voornaam = "John";
@@ -36,13 +33,30 @@ public class GebruikerTest {
         TypeGebruiker = TypeGebruiker.Lid;
         Lesformule = new Lesformule(1, "Woensdag");
         Punten = 15;
-        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
     }
 
     // Constructor
     @Test
-    public void maakGebruiker_ValidGegevens_MaaktGebruiker() {
+    public void maakGebruiker_ValidGegevens_MaaktGebruiker() {        
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
         Assert.assertEquals("Gebruiker", g1.getClass().getSimpleName());
+        Assert.assertEquals(Gebruikersnaam, g1.getGebruikersnaam());
+        Assert.assertEquals(Rijksregisternummer, g1.getRijksregisternummer());
+        Assert.assertEquals(Voornaam, g1.getVoornaam());
+        Assert.assertEquals(Naam, g1.getNaam());
+        Assert.assertEquals(Geboorteplaats, g1.getGeboorteplaats());
+        Assert.assertEquals(Telefoonnummer, g1.getTelefoonnummer());
+        Assert.assertEquals(Gsmnummer, g1.getGsmnummer());
+        Assert.assertEquals(Email, g1.getEmail());
+        Assert.assertEquals(Emailouders, g1.getEmailOuders());
+        Assert.assertEquals(Geboortedatum, g1.getGeboorteDatum());
+        Assert.assertEquals(Inschrijvingsdatum, g1.getInschrijvingsDatum());
+        Assert.assertEquals(Geslacht, g1.getGeslacht());
+        Assert.assertEquals(Adres, g1.getAdres());
+        Assert.assertEquals(Gradatie, g1.getGraad());
+        Assert.assertEquals(TypeGebruiker, g1.getType());
+        Assert.assertEquals(Lesformule, g1.getLesformule());
+        Assert.assertEquals(Punten, g1.getPunten());
     }
 
     // Gebruikersnaam
@@ -163,13 +177,13 @@ public class GebruikerTest {
     public void maakGebruiker_Telefoonnummer_Empty_MaaktGebruiker() {
         Telefoonnummer = "";
         g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
-        Assert.assertEquals("Gebruiker", g1.getClass().getSimpleName());
+        Assert.assertEquals(Telefoonnummer, g1.getTelefoonnummer());
     }
     @Test
     public void maakGebruiker_Telefoonnummer_Null_MaaktGebruiker() {
         Telefoonnummer = null;
         g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
-        Assert.assertEquals("Gebruiker", g1.getClass().getSimpleName());
+        Assert.assertEquals(Telefoonnummer, g1.getTelefoonnummer());
     }
     @Test(expected = IllegalArgumentException.class)
     public void maakGebruiker_Telefoonnummer_OngeldigeWaarde_throwsIllegalArgumentException() {
@@ -195,17 +209,135 @@ public class GebruikerTest {
     }
     
     // Email
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Email_Empty_throwsIllegalArgumentException() {
+        Email = "";
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Email_Null_throwsIllegalArgumentException() {
+        Email = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Email_OngeldigeWaarde_throwsIllegalArgumentException() {
+        Email = "Emailadres@emailadres";
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
     
     // Emailouders
+    @Test
+    public void maakGebruiker_Emailouders_Empty_MaaktGebruiker() {
+        Emailouders = "";
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(Emailouders, g1.getEmailOuders());
+    }
+    @Test
+    public void maakGebruiker_Emailouders_Null_MaaktGebruiker() {
+        Emailouders = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(Emailouders, g1.getEmailOuders());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Emailouders_OngeldigeWaarde_throwsIllegalArgumentException() {
+        Emailouders = "Emailadres@emailadres";
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
     
     // Adres
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Adres_Null_throwsIllegalArgumentException() {
+        Adres = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
     
     // Punten
+    @Test
+    public void maakGebruiker_Punten_0_MaaktGebruiker() {
+        Punten = 0;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(0, g1.getPunten());
+    }
+    @Test
+    public void maakGebruiker_Punten_PositiefGetal_MaaktGebruiker() {
+        Punten = 1;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(1, g1.getPunten());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void maakGebruiker_Punten_NegatiefGetal_throwsIllegalArgumentException() {
+        Punten = -1;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+    }
     
     // Gradatie
+    @Test
+    public void maakGebruiker_Gradatie_Null_MaaktGebruiker_RokkuKyu() {
+        Gradatie = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(Gradatie.RokkuKyu, g1.getGraad());
+    }
     
     // TypeGebruiker
+    @Test
+    public void maakGebruiker_TypeGebruiker_Null_MaaktGebruiker_Lid() {
+        TypeGebruiker = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(TypeGebruiker.Lid, g1.getType());
+    }
     
     // Lesformule
+    @Test
+    public void maakGebruiker_Lesformule_Null_MaaktGebruiker() {
+        Lesformule = null;
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Assert.assertEquals(Lesformule, g1.getLesformule());
+    }
+    
+    // Wijzig Gegevens
+    @Test
+    public void WijzigGegevens_ValidGegevens_WijzigtGebruiker() {        
+        g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
+        Voornaam = "Patricia";
+        Naam = "S. Goldman-Rakic";
+        Geboorteplaats = "Brussel";
+        Telefoonnummer = "092433333";
+        Gsmnummer = "0478821109";
+        Email = "nieuwEmailadres@hogent.be";
+        Emailouders = null;
+        Geboortedatum = new Date(1998, 10, 10);
+        Inschrijvingsdatum = new Date(2014, 8, 20);
+        Geslacht = Geslacht.Vrouw;
+        Adres = new Adres("Belgie", "9200", "Dendermonde", "Zuidlaan", "3B");
+        Gradatie = Gradatie.JuichiDan;
+        TypeGebruiker = TypeGebruiker.Beheerder;
+        Lesformule = new Lesformule(2, "Donderdag");
+        Punten = 200;
+        
+        g1.wijzigGegevens(Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Punten, Gradatie, TypeGebruiker, Lesformule, Adres.getLand(), Adres.getPostcode(), Adres.getStad(), Adres.getStraat(), Adres.getNummer());
+        
+        Assert.assertEquals("Gebruiker", g1.getClass().getSimpleName());
+        Assert.assertEquals(Gebruikersnaam, g1.getGebruikersnaam());
+        Assert.assertEquals(Rijksregisternummer, g1.getRijksregisternummer());
+        Assert.assertEquals(Voornaam, g1.getVoornaam());
+        Assert.assertEquals(Naam, g1.getNaam());
+        Assert.assertEquals(Geboorteplaats, g1.getGeboorteplaats());
+        Assert.assertEquals(Telefoonnummer, g1.getTelefoonnummer());
+        Assert.assertEquals(Gsmnummer, g1.getGsmnummer());
+        Assert.assertEquals(Email, g1.getEmail());
+        Assert.assertEquals(Emailouders, g1.getEmailOuders());
+        Assert.assertEquals(Geboortedatum, g1.getGeboorteDatum());
+        Assert.assertEquals(Inschrijvingsdatum, g1.getInschrijvingsDatum());
+        Assert.assertEquals(Geslacht, g1.getGeslacht());
+        Assert.assertEquals(Adres.getLand(), g1.getAdres().getLand());
+        Assert.assertEquals(Adres.getPostcode(), g1.getAdres().getPostcode());
+        Assert.assertEquals(Adres.getStad(), g1.getAdres().getStad());
+        Assert.assertEquals(Adres.getStraat(), g1.getAdres().getStraat());
+        Assert.assertEquals(Adres.getNummer(), g1.getAdres().getNummer());
+        Assert.assertEquals(Gradatie, g1.getGraad());
+        Assert.assertEquals(TypeGebruiker, g1.getType());
+        Assert.assertEquals(Lesformule, g1.getLesformule());
+        Assert.assertEquals(Punten, g1.getPunten());
+    }
     
 }

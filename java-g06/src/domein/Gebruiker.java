@@ -2,23 +2,14 @@ package domein;
 
 import java.util.Date;
 import java.util.regex.Pattern;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@Entity
-@DiscriminatorValue(value = "2")
 public class Gebruiker extends AGebruiker {
     // Declarations
     private final String _rijksregisternummer; 
     private String _geboorteplaats, _gsmnummer, _emailOuders;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date _geboorteDatum;
     private int _punten;
     private Geslacht _geslacht;
-    @OneToOne
     private Adres _adres;
     private Gradatie _graad;
     private Lesformule _lesformule;

@@ -2,11 +2,7 @@ package domein;
 
 import java.util.Date;
 import java.util.regex.Pattern;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue(value = "3")
 public class ProefGebruiker extends AGebruiker {
     // Constructors
     public ProefGebruiker(String gebruikersnaam, Date inschrijvingsdatum, String naam, String voornaam, String telefoonnummer, String email){

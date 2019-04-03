@@ -2,25 +2,11 @@ package domein;
 
 import java.util.Date;
 import java.util.regex.Pattern;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@Entity
-@Table(name="Gebruiker")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class AGebruiker {
     // Declarations
-    @Id
     protected String _gebruikersnaam;
     protected String _naam, _voornaam, _telefoonnummer, _email;
-    @Temporal(TemporalType.TIMESTAMP)
     protected Date _inschrijvingsDatum;
     protected TypeGebruiker _type;
 

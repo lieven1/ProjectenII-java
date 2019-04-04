@@ -20,8 +20,8 @@ public class GebruikerMapper {
 
     public GebruikerMapper() {
         this._gebruikers = new ArrayList<>();
-        Date inschrijvingsDatum = new Date(2019, 2, 12);
-        Date geboorteDatum = new Date(2000, 10, 10);
+        Calendar inschrijvingsDatum = getCalendar(2019, 2, 12);
+        Calendar geboorteDatum = getCalendar(2000, 10, 10);
         Random rand = new Random();
         List<Lesformule> lesformules = new ArrayList<>();
         lesformules.add(new Lesformule(1, "Dinsdag"));
@@ -83,5 +83,11 @@ public class GebruikerMapper {
 
     public List<AGebruiker> getAll() {
         return _gebruikers;
+    }
+
+    private Calendar getCalendar(int year, int month, int date){
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date);
+        return cal;
     }
 }

@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -7,7 +8,7 @@ public abstract class AGebruiker {
     // Declarations
     protected String _gebruikersnaam;
     protected String _naam, _voornaam, _telefoonnummer, _email;
-    protected Date _inschrijvingsDatum;
+    protected Calendar _inschrijvingsDatum;
     protected TypeGebruiker _type;
 
     // Getters
@@ -31,7 +32,7 @@ public abstract class AGebruiker {
         return _email;
     }
 
-    public Date getInschrijvingsDatum() {
+    public Calendar getInschrijvingsDatum() {
         return _inschrijvingsDatum;
     }
 
@@ -90,10 +91,10 @@ public abstract class AGebruiker {
         this._email = _email;
     }
 
-    protected void setInschrijvingsDatum(Date _inschrijvingsDatum) {
+    protected void setInschrijvingsDatum(Calendar _inschrijvingsDatum) {
         if(_inschrijvingsDatum == null)
             throw new IllegalArgumentException("Inschrijvingsdatum mag geen lege waarde bevatten.");
-        if(_inschrijvingsDatum.compareTo(new Date()) < 0)
+        if(_inschrijvingsDatum.after(Calendar.getInstance()))
             throw new IllegalArgumentException("Inschrijvingsdatum mag niet in de toekomst liggen.");
         this._inschrijvingsDatum = _inschrijvingsDatum;
     }

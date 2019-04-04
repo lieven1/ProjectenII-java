@@ -6,6 +6,8 @@ import domein.Gebruiker;
 import domein.Geslacht;
 import domein.Gradatie;
 import domein.TypeGebruiker;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +22,11 @@ public class test {
         dc.addGebruiker((new Gebruiker(
                     String.format("Gebruiker-%d", 1),
                     String.format("111111111%02d", 1),
-                    new Date(2000, 0, 0),
+                    getCalendar(2000, 0, 0),
                     "Naam",
                     "Voornaam",
                     Geslacht.Man,
-                    new Date(2000, 0, 0),
+                    getCalendar(2000, 0, 0),
                     "Gent",
                     "052256751",
                     "0473545457",
@@ -39,5 +41,11 @@ public class test {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    private static Calendar getCalendar(int year, int month, int date){
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date);
+        return cal;
     }
 }

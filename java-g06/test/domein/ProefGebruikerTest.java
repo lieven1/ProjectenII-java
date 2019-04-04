@@ -1,13 +1,13 @@
 package domein;
 
-import java.util.Date;
+import java.util.Calendar;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ProefGebruikerTest {
     private ProefGebruiker p1;
     private String Gebruikersnaam, Naam, Voornaam, Telefoonnummer, Email;
-    private Date InschrijvingsDatum;
+    private Calendar InschrijvingsDatum;
 
     public ProefGebruikerTest() {
         Gebruikersnaam = "Proefgebruiker";
@@ -15,7 +15,19 @@ public class ProefGebruikerTest {
         Voornaam = "John";
         Telefoonnummer = "092432004";
         Email = "gebruiker1@taijitan.be";
-        InschrijvingsDatum = new Date(2019, 1, 10);
+        InschrijvingsDatum = getCalendar(2019, 1, 10);
+    }
+
+    private Calendar getCalendar(int year, int month, int date){
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date);
+        return cal;
+    }
+
+    private Calendar getCalendar(int year){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        return cal;
     }
 
     // Constructor
@@ -52,8 +64,8 @@ public class ProefGebruikerTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void maakProefGebruiker_Inschrijvingsdatum_InToekomst_throwsIllegalArgumentException() {
-        Date now = new Date();
-        InschrijvingsDatum = new Date(now.getYear() + 3);
+        Calendar now = Calendar.getInstance();
+        InschrijvingsDatum = getCalendar(now.YEAR + 3);
         p1 = new ProefGebruiker(Gebruikersnaam, InschrijvingsDatum, Naam, Voornaam, Telefoonnummer, Email);
     }
     

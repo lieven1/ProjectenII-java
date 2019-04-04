@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Calendar;
 import java.util.Date;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.junit.Test;
 public class GebruikerTest {
     private Gebruiker g1;
     private String Gebruikersnaam, Rijksregisternummer, Naam, Voornaam, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders;
-    private Date Geboortedatum, Inschrijvingsdatum;
+    private Calendar Geboortedatum, Inschrijvingsdatum;
     private Geslacht Geslacht;
     private Adres Adres;
     private Gradatie Gradatie;
@@ -25,14 +26,26 @@ public class GebruikerTest {
         Gsmnummer = "0476585152";
         Email = "gebruiker1@taijitan.be";
         Emailouders = "oudersGebruiker1@taijitan.be";
-        Geboortedatum = new Date(2002, 3, 12);
-        Inschrijvingsdatum = new Date(2019, 1, 10);
+        Geboortedatum = getCalendar(2002, 3, 12);
+        Inschrijvingsdatum = getCalendar(2019, 1, 10);
         Geslacht = Geslacht.Man;
         Adres = new Adres("Belgie", "9000", "Gent", "Valentin Vaerwyckweg", "1");
         Gradatie = Gradatie.JuichiDan;
         TypeGebruiker = TypeGebruiker.Lid;
         Lesformule = new Lesformule(1, "Woensdag");
         Punten = 15;
+    }
+
+    private Calendar getCalendar(int year, int month, int date){
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date);
+        return cal;
+    }
+
+    private Calendar getCalendar(int year){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        return cal;
     }
 
     // Constructor
@@ -91,8 +104,8 @@ public class GebruikerTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void maakGebruiker_Inschrijvingsdatum_InToekomst_throwsIllegalArgumentException() {
-        Date now = new Date();
-        Inschrijvingsdatum = new Date(now.getYear() + 3);
+        Calendar now = Calendar.getInstance();
+        Inschrijvingsdatum = getCalendar(now.YEAR + 3);
         g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
     }
     
@@ -155,8 +168,8 @@ public class GebruikerTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void maakGebruiker_Geboortedatum_InToekomst_throwsIllegalArgumentException() {
-        Date now = new Date();
-        Geboortedatum = new Date(now.getYear() + 3);
+        Calendar now = Calendar.getInstance();
+        Geboortedatum = getCalendar(now.YEAR + 3);
         g1 = new Gebruiker(Gebruikersnaam, Rijksregisternummer, Inschrijvingsdatum, Naam, Voornaam, Geslacht, Geboortedatum, Geboorteplaats, Telefoonnummer, Gsmnummer, Email, Emailouders, Adres, Punten, Gradatie, TypeGebruiker, Lesformule);
     }
     
@@ -310,8 +323,8 @@ public class GebruikerTest {
         Gsmnummer = "0478821109";
         Email = "nieuwEmailadres@hogent.be";
         Emailouders = null;
-        Geboortedatum = new Date(1998, 10, 10);
-        Inschrijvingsdatum = new Date(2014, 8, 20);
+        Geboortedatum = getCalendar(1998, 10, 10);
+        Inschrijvingsdatum = getCalendar(2014, 8, 20);
         Geslacht = Geslacht.Vrouw;
         Adres = new Adres("Belgie", "9200", "Dendermonde", "Zuidlaan", "3B");
         Gradatie = Gradatie.JuichiDan;

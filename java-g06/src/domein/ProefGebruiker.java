@@ -1,11 +1,11 @@
 package domein;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class ProefGebruiker extends AGebruiker {
     // Constructors
-    public ProefGebruiker(String gebruikersnaam, Date inschrijvingsdatum, String naam, String voornaam, String telefoonnummer, String email){
+    public ProefGebruiker(String gebruikersnaam, Calendar inschrijvingsdatum, String naam, String voornaam, String telefoonnummer, String email){
         this.setGebruikersnaam(gebruikersnaam);
         this.setInschrijvingsDatum(inschrijvingsdatum);
         this.setNaam(naam);

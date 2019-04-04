@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -7,7 +8,7 @@ public class Gebruiker extends AGebruiker {
     // Declarations
     private final String _rijksregisternummer; 
     private String _geboorteplaats, _gsmnummer, _emailOuders;
-    private Date _geboorteDatum;
+    private Calendar _geboorteDatum;
     private int _punten;
     private Geslacht _geslacht;
     private Adres _adres;
@@ -15,7 +16,7 @@ public class Gebruiker extends AGebruiker {
     private Lesformule _lesformule;
     
     // Constructors
-    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Date inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Date geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
+    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
         if(gebruikersnaam == null || gebruikersnaam.isBlank())
             throw new IllegalArgumentException("Gebruikersnaam mag geen lege waarde bevatten.");
         if(rijksregisternummer == null || rijksregisternummer.isBlank())
@@ -59,7 +60,7 @@ public class Gebruiker extends AGebruiker {
         return _emailOuders;
     }
 
-    public Date getGeboorteDatum() {
+    public Calendar getGeboorteDatum() {
         return _geboorteDatum;
     }
 
@@ -109,10 +110,10 @@ public class Gebruiker extends AGebruiker {
         this._emailOuders = _emailOuders;
     }
 
-    private void setGeboorteDatum(Date _geboorteDatum) {
+    private void setGeboorteDatum(Calendar _geboorteDatum) {
         if(_geboorteDatum == null)
             throw new IllegalArgumentException("Geboortedatum mag geen lege waarde bevatten.");
-        if(_geboorteDatum.compareTo(new Date()) < 0)
+        if(_geboorteDatum.after(Calendar.getInstance()))
             throw new IllegalArgumentException("Geboortedatum mag niet in de toekomst liggen.");
         
         this._geboorteDatum = _geboorteDatum;
@@ -164,7 +165,7 @@ public class Gebruiker extends AGebruiker {
     }
     
     // Methods
-    public void wijzigGegevens(Date inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Date geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule, String land, String postcode, String stad, String straat, String nummer){
+    public void wijzigGegevens(Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule, String land, String postcode, String stad, String straat, String nummer){
         // Gebruikersnaam en Rijksregisternummer kunnen niet gewijzigd worden.
         this.setInschrijvingsDatum(inschrijvingsdatum);
         this.setNaam(naam);

@@ -1,4 +1,4 @@
-package domein;
+package Gebruiker;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;

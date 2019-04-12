@@ -1,4 +1,4 @@
-package domein;
+package Gebruiker;
 
 public enum Gradatie {
     // Kyu

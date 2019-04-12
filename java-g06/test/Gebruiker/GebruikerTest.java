@@ -1,5 +1,11 @@
-package domein;
+package Gebruiker;
 
+import Gebruiker.TypeGebruiker;
+import Gebruiker.Lesformule;
+import Gebruiker.Gradatie;
+import Gebruiker.Gebruiker;
+import Gebruiker.Geslacht;
+import Gebruiker.Adres;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
 import java.util.Date;

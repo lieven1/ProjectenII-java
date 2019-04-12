@@ -1,6 +1,7 @@
-package domein;
+package Gebruiker;
 
 public enum TypeGebruiker {
+    Onbekend(0),
     Beheerder(1),
     Lid(2),
     Proefgebruiker(3);

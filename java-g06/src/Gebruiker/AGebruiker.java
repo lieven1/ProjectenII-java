@@ -1,4 +1,4 @@
-package domein;
+package Gebruiker;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -9,10 +9,16 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "AGebruiker.findAll",
+            query = "Select g from Gebruiker g")
+})
 @Table(name = "Gebruiker")
 @DiscriminatorColumn(name = "TypeGebruiker", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class AGebruiker implements Serializable {

@@ -1,5 +1,7 @@
-package domein;
+package Gebruiker;
 
+import Gebruiker.ProefGebruiker;
+import Gebruiker.TypeGebruiker;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
 import java.util.GregorianCalendar;

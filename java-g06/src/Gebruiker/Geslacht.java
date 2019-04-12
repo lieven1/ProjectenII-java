@@ -1,4 +1,4 @@
-package domein;
+package Gebruiker;
 
 public enum Geslacht {
     Onbekend(0),

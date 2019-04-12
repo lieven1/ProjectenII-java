@@ -1,4 +1,4 @@
-package domein;
+package Gebruiker;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;

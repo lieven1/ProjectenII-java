@@ -1,5 +1,6 @@
-package domein;
+package Gebruiker;
 
+import Gebruiker.Adres;
 import org.junit.Assert;
 import org.junit.Test;
 

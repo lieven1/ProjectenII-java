@@ -2,6 +2,7 @@ package domein;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -116,7 +117,7 @@ public abstract class AGebruiker implements Serializable {
     protected void setInschrijvingsDatum(Calendar _inschrijvingsDatum) {
         if(_inschrijvingsDatum == null)
             throw new IllegalArgumentException("Inschrijvingsdatum mag geen lege waarde bevatten.");
-        if(_inschrijvingsDatum.after(Calendar.getInstance()))
+        if(_inschrijvingsDatum.after(new GregorianCalendar()))
             throw new IllegalArgumentException("Inschrijvingsdatum mag niet in de toekomst liggen.");
         this._inschrijvingsDatum = _inschrijvingsDatum;
     }

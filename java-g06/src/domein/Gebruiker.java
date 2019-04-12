@@ -27,8 +27,6 @@ public class Gebruiker extends AGebruiker {
     @Column(name = "Geboortedatum")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar _geboorteDatum;
-    @Column(name = "Punten")
-    private int _punten;
     @Column(name = "Geslacht")
     @Enumerated(EnumType.ORDINAL)
     private Geslacht _geslacht;
@@ -42,13 +40,16 @@ public class Gebruiker extends AGebruiker {
     private Lesformule _lesformule;
     
     // Constructors
-    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
+    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
         if(gebruikersnaam == null || gebruikersnaam.isBlank())
             throw new IllegalArgumentException("Gebruikersnaam mag geen lege waarde bevatten.");
         if(rijksregisternummer == null || rijksregisternummer.isBlank())
             throw new IllegalArgumentException("Rijksregisternummer mag geen lege waarde bevatten.");
         if(! Pattern.compile("^\\d{11}$").matcher(rijksregisternummer).matches())
             throw new IllegalArgumentException("Ongeldige waarde voor rijksregisternummer");
+        // Toevoegen geboortedatum check (6cijfers)
+        // Toevoegen GeslachtCheck: even=vrouw (3cijfers)
+        // Toevoegen rijksregisternummercheck modulo 97 (2cijfers)
         
         this._gebruikersnaam = gebruikersnaam;
         this._rijksregisternummer = rijksregisternummer;
@@ -63,7 +64,6 @@ public class Gebruiker extends AGebruiker {
         super.setEmail(email);
         this.setEmailOuders(emailOuders);
         this.setAdres(adres);
-        this.setPunten(punten);
         this.setGraad(graad);
         this.setTypeG(type);
         this.setLesformule(lesformule);
@@ -90,11 +90,7 @@ public class Gebruiker extends AGebruiker {
     public Calendar getGeboorteDatum() {
         return _geboorteDatum;
     }
-
-    public int getPunten() {
-        return _punten;
-    }
-
+    
     public Geslacht getGeslacht() {
         return _geslacht;
     }
@@ -146,13 +142,6 @@ public class Gebruiker extends AGebruiker {
         this._geboorteDatum = _geboorteDatum;
     }
 
-    private void setPunten(int _punten) {
-        if(_punten < 0)
-            throw new IllegalArgumentException("Punten kan geen negatieve warde bevatten");
-        
-        this._punten = _punten;
-    }
-
     private void setGeslacht(Geslacht _geslacht) {
         if(_geslacht == null)
             throw new IllegalArgumentException("Geslacht mag geen lege waarde bevatten.");
@@ -192,7 +181,7 @@ public class Gebruiker extends AGebruiker {
     }
     
     // Methods
-    public void wijzigGegevens(Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, int punten, Gradatie graad, TypeGebruiker type, Lesformule lesformule, String land, String postcode, String stad, String straat, String nummer){
+    public void wijzigGegevens(Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Gradatie graad, TypeGebruiker type, Lesformule lesformule, String land, String postcode, String stad, String straat, String nummer){
         // Gebruikersnaam en Rijksregisternummer kunnen niet gewijzigd worden.
         this.setInschrijvingsDatum(inschrijvingsdatum);
         this.setNaam(naam);
@@ -204,7 +193,6 @@ public class Gebruiker extends AGebruiker {
         this.setGsmnummer(gsmnummer);
         this.setEmail(email);
         this.setEmailOuders(emailOuders);
-        this.setPunten(punten);
         this.setGraad(graad);
         this.setType(type);
         this.setLesformule(lesformule);

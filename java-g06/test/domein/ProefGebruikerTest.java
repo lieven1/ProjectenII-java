@@ -1,6 +1,8 @@
 package domein;
 
 import java.util.Calendar;
+import static java.util.Calendar.YEAR;
+import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -64,8 +66,8 @@ public class ProefGebruikerTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void maakProefGebruiker_Inschrijvingsdatum_InToekomst_throwsIllegalArgumentException() {
-        Calendar now = Calendar.getInstance();
-        InschrijvingsDatum = getCalendar(now.YEAR + 3);
+        InschrijvingsDatum = new GregorianCalendar();
+        InschrijvingsDatum.add(YEAR, 3);
         p1 = new ProefGebruiker(Gebruikersnaam, InschrijvingsDatum, Naam, Voornaam, Telefoonnummer, Email);
     }
     

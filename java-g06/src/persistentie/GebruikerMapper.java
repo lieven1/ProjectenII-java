@@ -10,7 +10,6 @@ import domein.ProefGebruiker;
 import domein.TypeGebruiker;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -42,7 +41,6 @@ public class GebruikerMapper {
                     String.format("gebruiker-%d@taijitan.be", i),
                     String.format("Oudersgebruiker-%d@taijitan.be", i),
                     new Adres("Belgie", "9000", "Gent", "Valentyn Vaerwyckweg", "1"),
-                    rand.nextInt(300),
                     Gradatie.values()[rand.nextInt(17) + 1],
                     TypeGebruiker.Lid,
                     lesformules.get(rand.nextInt(1))
@@ -73,7 +71,6 @@ public class GebruikerMapper {
                     String.format("beheerder-%d@taijitan.be", i),
                     String.format("Oudersbeheerder-%d@taijitan.be", i),
                     new Adres("Belgie", "9000", "Gent", "Valentyn Vaerwyckweg", "1"),
-                    rand.nextInt(300),
                     Gradatie.values()[rand.nextInt(17) + 1],
                     TypeGebruiker.Lid,
                     lesformules.get(rand.nextInt(1))

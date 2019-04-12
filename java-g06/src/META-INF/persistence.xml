@@ -3,6 +3,9 @@
   <persistence-unit name="Taijitan" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domein.Adres</class>
+    <class>domein.AGebruiker</class>
+    <class>domein.Gebruiker</class>
+    <class>domein.ProefGebruiker</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://taijitan.database.windows.net:1433;database=Taijitan;user=sv_g06@taijitan;password=HogentSQL1;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
       <property name="javax.persistence.jdbc.user" value="sv_g06"/>

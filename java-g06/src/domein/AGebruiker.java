@@ -1,14 +1,36 @@
 package domein;
 
+import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Pattern;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
-public abstract class AGebruiker {
+@Entity
+@Table(name = "Gebruiker")
+@DiscriminatorColumn(name = "TypeGebruiker", discriminatorType = DiscriminatorType.INTEGER)
+public abstract class AGebruiker implements Serializable {
     // Declarations
+    @Id
+    @Column(name = "Gebruikersnaam")
     protected String _gebruikersnaam;
-    protected String _naam, _voornaam, _telefoonnummer, _email;
+    @Column(name = "Naam")
+    protected String _naam;
+    @Column(name = "Voornaam")
+    protected String _voornaam;
+    @Column(name = "Telefoonnummer")
+    protected String _telefoonnummer;
+    @Column(name = "Email")
+    protected String _email;
+    @Column(name = "Inschrijvingsdatum")
+    @Temporal(javax.persistence.TemporalType.DATE)
     protected Calendar _inschrijvingsDatum;
+    @Column(name = "TypeGebruiker")
     protected TypeGebruiker _type;
 
     // Getters

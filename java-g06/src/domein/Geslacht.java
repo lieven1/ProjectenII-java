@@ -1,6 +1,7 @@
 package domein;
 
 public enum Geslacht {
+    Onbekend(0),
     Man(1),
     Vrouw(2);
 

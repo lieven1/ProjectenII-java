@@ -1,16 +1,28 @@
 package domein;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-public class Adres {
+@Entity
+public class Adres implements Serializable {
     // Declarations
+    @Id
+    @Column(name = "AdresId")
     private int _adresId;
+    @Column(name = "Land")
     private String _land;
+    @Column(name = "Postcode")
     private String _postcode;
+    @Column(name = "Stad")
     private String _stad;
+    @Column(name = "Straat")
     private String _straat;
+    @Column(name = "Nummer")
     private String _nummer;
-    
+
     // Constructors
     public Adres(int adresId, String land, String postcode, String stad, String straat, String nummer){
         this(land, postcode, stad, straat, nummer);
@@ -24,6 +36,7 @@ public class Adres {
         this.setStraat(straat);
         this.setNummer(nummer);
     }
+    public Adres() {}
     
     // Getters
     public int getAdresId() {

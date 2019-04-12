@@ -1,18 +1,44 @@
 package domein;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Pattern;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
+@Entity
+@DiscriminatorValue("2")
 public class Gebruiker extends AGebruiker {
     // Declarations
-    private final String _rijksregisternummer; 
-    private String _geboorteplaats, _gsmnummer, _emailOuders;
+    @Column(name = "Rijksregisternummer")
+    private String _rijksregisternummer;
+    @Column(name = "Geboorteplaats")
+    private String _geboorteplaats;
+    @Column(name = "Gsmnummer")
+    private String _gsmnummer;
+    @Column(name = "EmailOuders")
+    private String _emailOuders;
+    @Column(name = "Geboortedatum")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar _geboorteDatum;
+    @Column(name = "Punten")
     private int _punten;
+    @Column(name = "Geslacht")
+    @Enumerated(EnumType.ORDINAL)
     private Geslacht _geslacht;
+    @JoinColumn(name = "AdresId")
+    @OneToOne
     private Adres _adres;
+    @Column(name = "Gradatie")    
+    @Enumerated(EnumType.ORDINAL)
     private Gradatie _graad;
+    @Transient
     private Lesformule _lesformule;
     
     // Constructors
@@ -42,7 +68,8 @@ public class Gebruiker extends AGebruiker {
         this.setTypeG(type);
         this.setLesformule(lesformule);
     }
-    
+    public Gebruiker(){}
+  
     // Getters 
     public String getRijksregisternummer() {
         return _rijksregisternummer;

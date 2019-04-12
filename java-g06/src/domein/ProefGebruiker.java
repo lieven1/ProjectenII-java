@@ -2,7 +2,11 @@ package domein;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("3")
 public class ProefGebruiker extends AGebruiker {
     // Constructors
     public ProefGebruiker(String gebruikersnaam, Calendar inschrijvingsdatum, String naam, String voornaam, String telefoonnummer, String email){
@@ -14,7 +18,9 @@ public class ProefGebruiker extends AGebruiker {
         this.setEmail(email);
         this.setType(TypeGebruiker.Proefgebruiker);
     }
+    public ProefGebruiker(){}
     
+    // Setters
     @Override
     protected final void setTelefoonnummer(String _telefoonnummer){
         if(_telefoonnummer == null || _telefoonnummer.isBlank())

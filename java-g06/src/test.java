@@ -1,51 +1,48 @@
-
-import domein.AGebruiker;
 import domein.Adres;
-import domein.DomeinController;
 import domein.Gebruiker;
-import domein.Geslacht;
-import domein.Gradatie;
-import domein.TypeGebruiker;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class test {
-    public static void main(String[] args){
-        DomeinController dc = new DomeinController();
-        List<AGebruiker> _gebruikers = dc.getAllGebruikers();
-        _gebruikers.forEach((gebruiker) -> {
-            System.out.printf("%s - %b%n", gebruiker.getGebruikersnaam(), gebruiker instanceof Gebruiker);
-        });
-        try{
-        dc.addGebruiker((new Gebruiker(
-                    String.format("Gebruiker-%d", 1),
-                    String.format("111111111%02d", 1),
-                    getCalendar(2000, 0, 0),
-                    "Naam",
-                    "Voornaam",
-                    Geslacht.Man,
-                    getCalendar(2000, 0, 0),
-                    "Gent",
-                    "052256751",
-                    "0473545457",
-                    String.format("gebruiker-%d@taijitan.be", 1),
-                    String.format("Oudersgebruiker-%d@taijitan.be", 1),
-                    new Adres("Belgie", "9000", "Gent", "Valentyn Vaerwyckweg", "1"),
-                    100,
-                    Gradatie.GoKyu,
-                    TypeGebruiker.Lid,
-                    null)
-            ));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+    private static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("Taijitan"); 
+    private static final EntityManager ENTITYMANAGER = EMF.createEntityManager();
+
+    public static void main(String[] args) {
+        findAllAdressen();
+        findAllGebruikers();
+        ENTITYMANAGER.close();
+        EMF.close();
     }
 
-    private static Calendar getCalendar(int year, int month, int date){
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, date);
-        return cal;
+    public static List<Adres> findAllAdressen() {
+        ENTITYMANAGER.getTransaction().begin();
+        List<Adres> listAdres = ENTITYMANAGER.createQuery(
+                "SELECT p FROM Adres p").getResultList();
+        ENTITYMANAGER.getTransaction().commit();
+        if (listAdres == null) {
+            System.out.println("No adresses found . ");
+        } else {
+            listAdres.forEach((adres) -> {
+                System.out.println(adres.getAdresId());
+            });
+        }
+        return listAdres;
+    }
+
+    public static List<Gebruiker> findAllGebruikers() {
+        ENTITYMANAGER.getTransaction().begin();
+        List<Gebruiker> listGebruiker = ENTITYMANAGER.createQuery(
+                "SELECT p FROM Gebruiker p").getResultList();
+        ENTITYMANAGER.getTransaction().commit();
+        if (listGebruiker == null) {
+            System.out.println("No users found . ");
+        } else {
+            listGebruiker.forEach((gebruiker) -> {
+                System.out.println(gebruiker.getGebruikersnaam());
+            });
+        }
+        return listGebruiker;
     }
 }

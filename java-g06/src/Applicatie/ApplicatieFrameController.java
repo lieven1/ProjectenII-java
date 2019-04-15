@@ -1,13 +1,17 @@
 package Applicatie;
 
+import Gebruiker.GebruikerBeheerPanel;
+import Gebruiker.GebruikerToevoegenPanel;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class ApplicatieFrameController extends VBox {
+public class ApplicatieFrameController extends VBox implements Panel {
     Pane contentPane;
     
     public ApplicatieFrameController(){
@@ -29,9 +33,34 @@ public class ApplicatieFrameController extends VBox {
         // contentPane
         contentPane = new ApplicatieStartPanel(this);
         this.getChildren().add(contentPane);
+        
+        // EventHandlers
+        appMenu1.setOnAction((ActionEvent t) -> {
+            setContentPane(new ApplicatieStartPanel(this));
+        });
+        appMenu2.setOnAction((ActionEvent t) -> {
+            ((Stage)this.getScene().getWindow()).close();
+        });
+        gebMenu1.setOnAction((ActionEvent t) -> {
+            setContentPane(new GebruikerBeheerPanel(this));
+        });
+        gebMenu2.setOnAction((ActionEvent t) -> {
+            setContentPane(new GebruikerToevoegenPanel(this));
+        });
     }
     
     public void setContentPane(Pane contentPane){
         this.contentPane = contentPane;
+        this.getChildren().set(1, contentPane);
+    }
+
+    @Override
+    public void resizeWidth(double width) {
+        ((Panel)contentPane).resizeWidth(width);
+    }
+
+    @Override
+    public void resizeHeight(double height) {
+        ((Panel)contentPane).resizeHeight(height);
     }
 }

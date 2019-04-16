@@ -23,7 +23,12 @@ public class GebruikerBeheerGegevensPanel extends GridPane{
     }
     
     public void beheerGebruiker(AGebruiker gebruiker){
-        txfGebruikersnaam.setText(gebruiker.getGebruikersnaam());
-        txfTypeGebruiker.setText(gebruiker.getType().toString());
+        if(gebruiker != null){
+            txfGebruikersnaam.setText(gebruiker.getGebruikersnaam());
+            txfTypeGebruiker.setText(gebruiker.getType().toString());
+        }else{
+            txfGebruikersnaam.setText("Gebruikersnaam");
+            txfTypeGebruiker.setText("TypeGebruiker");
+        }
     }
 }

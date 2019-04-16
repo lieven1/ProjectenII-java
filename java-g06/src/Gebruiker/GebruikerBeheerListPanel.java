@@ -1,9 +1,14 @@
 package Gebruiker;
 
+import Gebruiker.Models.AGebruiker;
+import Gebruiker.Models.TypeGebruiker;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -17,6 +22,7 @@ import javafx.scene.text.Font;
 
 public class GebruikerBeheerListPanel extends VBox{
     GebruikerBeheerPanelController controller;
+    ListView<String> gebruikerList;
     
     public GebruikerBeheerListPanel(GebruikerBeheerPanelController controller){
         this.controller = controller;
@@ -61,17 +67,43 @@ public class GebruikerBeheerListPanel extends VBox{
         CheckBox cbLid = new CheckBox("Lid");
         cbLid.setLayoutX(20);
         cbLid.setLayoutY(135);
+        cbLid.setSelected(true);
         CheckBox cbProeflid = new CheckBox("Proeflid");
         cbProeflid.setLayoutX(77);
         cbProeflid.setLayoutY(135);
+        cbProeflid.setSelected(true);
         CheckBox cbBeheerder = new CheckBox("Beheerder");
         cbBeheerder.setLayoutX(160);
         cbBeheerder.setLayoutY(135);
+        cbBeheerder.setSelected(true);
         Button btnFilter = new Button("Filter");
         btnFilter.getStyleClass().addAll("lg", "info");
         btnFilter.setPrefWidth(290);
         btnFilter.setLayoutX(10);
         btnFilter.setLayoutY(160);
+        
+        // Use the filter
+        btnFilter.setOnAction((ActionEvent t) -> {
+            List<AGebruiker> _gebruikerList = new ArrayList<>(controller.getGebruikerList());
+            String gebruikersnaam = txfGebruikersnaamFilter.getText();
+            String naam = txfNaamFilter.getText();
+            String voornaam = txfVoornaamFilter.getText();
+            if(!cbLid.isSelected())                
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Lid)).collect(Collectors.toList()));
+            if(!cbProeflid.isSelected())                
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Proefgebruiker)).collect(Collectors.toList()));
+            if(!cbBeheerder.isSelected())                
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Beheerder)).collect(Collectors.toList()));
+            if(gebruikersnaam != null && !gebruikersnaam.isBlank())
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getGebruikersnaam().toUpperCase().contains(gebruikersnaam.toUpperCase())).collect(Collectors.toList()));
+            if(naam != null && !naam.isBlank())
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getNaam().toUpperCase().contains(naam.toUpperCase())).collect(Collectors.toList()));
+            if(voornaam != null && !voornaam.isBlank())
+                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getVoornaam().toUpperCase().contains(voornaam.toUpperCase())).collect(Collectors.toList()));
+            
+            ObservableList<String> gebruikerListContent = FXCollections.observableArrayList(_gebruikerList.stream().map(g -> g.getGebruikersnaam()).collect(Collectors.toList()));
+            gebruikerList.getItems().setAll(gebruikerListContent);
+        });
         
         filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, cbBeheerder, btnFilter);
         return filterPane;
@@ -79,7 +111,7 @@ public class GebruikerBeheerListPanel extends VBox{
     
     private ListView createGebruikerList(){
         ObservableList<String> gebruikerListContent = FXCollections.observableArrayList(controller.getGebruikerList().stream().map(g -> g.getGebruikersnaam()).collect(Collectors.toList()));
-        ListView<String> gebruikerList = new ListView<>(gebruikerListContent);
+        gebruikerList = new ListView<>(gebruikerListContent);
         
         gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             controller.beheerGebruiker(controller.getGebruikerList().stream().filter(g -> g.getGebruikersnaam().equals(newValue)).findFirst().orElse(null));

@@ -1,5 +1,9 @@
-package Gebruiker;
+package Gebruiker.Models;
 
+import Gebruiker.Models.Gradatie;
+import Gebruiker.Models.Geslacht;
+import Gebruiker.Models.TypeGebruiker;
+import Gebruiker.Models.Lesformule;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 import javax.persistence.Column;

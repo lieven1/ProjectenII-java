@@ -1,8 +1,13 @@
 package Gebruiker;
 
+import java.util.stream.Collectors;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -10,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class GebruikerBeheerListPanel extends VBox {
+public class GebruikerBeheerListPanel extends VBox{
     GebruikerBeheerPanelController controller;
     
     public GebruikerBeheerListPanel(GebruikerBeheerPanelController controller){
@@ -18,10 +23,10 @@ public class GebruikerBeheerListPanel extends VBox {
         
         // VBox Constraints
         this.setPrefWidth(310);
-        this.setPrefHeight(800);
+        this.setPrefHeight(2000);
         this.setStyle("-fx-border-width: 0 1 0 0; -fx-border-color: #999;");
         
-        this.getChildren().addAll(createFilterPane(), new Separator());
+        this.getChildren().addAll(createFilterPane(), new Separator(), createGebruikerList());
     }
     
     private AnchorPane createFilterPane(){
@@ -70,5 +75,16 @@ public class GebruikerBeheerListPanel extends VBox {
         
         filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, cbBeheerder, btnFilter);
         return filterPane;
+    }
+    
+    private ListView createGebruikerList(){
+        ObservableList<String> gebruikerListContent = FXCollections.observableArrayList(controller.getGebruikerList().stream().map(g -> g.getGebruikersnaam()).collect(Collectors.toList()));
+        ListView<String> gebruikerList = new ListView<>(gebruikerListContent);
+        
+        gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            controller.beheerGebruiker(controller.getGebruikerList().stream().filter(g -> g.getGebruikersnaam().equals(newValue)).findFirst().orElse(null));
+        });
+        
+        return gebruikerList;
     }
 }

@@ -1,4 +1,4 @@
-package Gebruiker;
+package Gebruiker.Models;
 
 public enum TypeGebruiker {
     Onbekend(0),

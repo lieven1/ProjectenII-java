@@ -1,4 +1,4 @@
-package Gebruiker;
+package Gebruiker.Models;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;

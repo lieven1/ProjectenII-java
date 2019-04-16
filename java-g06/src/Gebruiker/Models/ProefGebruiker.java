@@ -1,4 +1,4 @@
-package Gebruiker;
+package Gebruiker.Models;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;

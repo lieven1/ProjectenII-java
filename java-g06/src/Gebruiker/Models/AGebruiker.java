@@ -1,5 +1,6 @@
-package Gebruiker;
+package Gebruiker.Models;
 
+import Gebruiker.Models.TypeGebruiker;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

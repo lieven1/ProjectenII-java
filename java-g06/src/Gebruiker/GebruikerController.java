@@ -1,5 +1,6 @@
 package Gebruiker;
 
+import Gebruiker.Models.AGebruiker;
 import java.util.List;
 import persistentie.GenericDao;
 import persistentie.GenericDaoJpa;

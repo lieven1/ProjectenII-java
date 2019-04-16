@@ -1,7 +1,6 @@
 package Applicatie;
 
 import Gebruiker.GebruikerBeheerPanelController;
-import Gebruiker.GebruikerToevoegenPanel;
 import java.io.File;
 import java.net.MalformedURLException;
 import javafx.event.ActionEvent;
@@ -51,7 +50,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
             frame.setContentPane(new GebruikerBeheerPanelController(frame));
         });
         createButton("Overzicht", 1, 1).setOnAction((ActionEvent t) -> {
-            frame.setContentPane(new GebruikerToevoegenPanel(frame));
+            frame.setContentPane(new GebruikerBeheerPanelController(frame));
         });
         
         this.getChildren().addAll(logo, menuPanel);

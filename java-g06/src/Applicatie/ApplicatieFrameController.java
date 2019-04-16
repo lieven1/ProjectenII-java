@@ -1,7 +1,6 @@
 package Applicatie;
 
 import Gebruiker.GebruikerBeheerPanelController;
-import Gebruiker.GebruikerToevoegenPanel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -24,10 +23,9 @@ public class ApplicatieFrameController extends VBox implements Panel {
         MenuItem appMenu2 = new MenuItem("Afsluiten");
         Menu gebMenu = new Menu("Gebruiker");
         MenuItem gebMenu1 = new MenuItem("Beheren");
-        MenuItem gebMenu2 = new MenuItem("Toevoegen");
         // --
         appMenu.getItems().addAll(appMenu1, appMenu2);
-        gebMenu.getItems().addAll(gebMenu1, gebMenu2);
+        gebMenu.getItems().addAll(gebMenu1);
         mainMenu.getMenus().addAll(appMenu, gebMenu);
         this.getChildren().add(mainMenu);
         
@@ -45,9 +43,6 @@ public class ApplicatieFrameController extends VBox implements Panel {
         });
         gebMenu1.setOnAction((ActionEvent t) -> {
             setContentPane(new GebruikerBeheerPanelController(this));
-        });
-        gebMenu2.setOnAction((ActionEvent t) -> {
-            setContentPane(new GebruikerToevoegenPanel(this));
         });
     }
     

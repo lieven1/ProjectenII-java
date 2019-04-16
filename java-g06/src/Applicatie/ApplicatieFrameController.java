@@ -1,6 +1,6 @@
 package Applicatie;
 
-import Gebruiker.GebruikerBeheerPanel;
+import Gebruiker.GebruikerBeheerPanelController;
 import Gebruiker.GebruikerToevoegenPanel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
@@ -18,6 +18,7 @@ public class ApplicatieFrameController extends VBox implements Panel {
         // MenuBar
         MenuBar mainMenu = new MenuBar();
         VBox.setVgrow(mainMenu, Priority.NEVER);
+        mainMenu.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: #999;");
         Menu appMenu = new Menu("Applicatie");
         MenuItem appMenu1 = new MenuItem("Startpagina");
         MenuItem appMenu2 = new MenuItem("Afsluiten");
@@ -39,10 +40,11 @@ public class ApplicatieFrameController extends VBox implements Panel {
             setContentPane(new ApplicatieStartPanel(this));
         });
         appMenu2.setOnAction((ActionEvent t) -> {
+            // Voeg confirmationknop toe
             ((Stage)this.getScene().getWindow()).close();
         });
         gebMenu1.setOnAction((ActionEvent t) -> {
-            setContentPane(new GebruikerBeheerPanel(this));
+            setContentPane(new GebruikerBeheerPanelController(this));
         });
         gebMenu2.setOnAction((ActionEvent t) -> {
             setContentPane(new GebruikerToevoegenPanel(this));

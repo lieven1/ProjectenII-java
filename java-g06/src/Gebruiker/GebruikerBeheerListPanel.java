@@ -32,7 +32,12 @@ public class GebruikerBeheerListPanel extends VBox{
         this.setPrefHeight(2000);
         this.setStyle("-fx-border-width: 0 1 0 0; -fx-border-color: #999;");
         
-        this.getChildren().addAll(createFilterPane(), new Separator(), createGebruikerList());
+        Label lblGebruikersTitle = new Label("Gebruikers");
+        lblGebruikersTitle.setFont(new Font("Arial Black", 16.0));
+        lblGebruikersTitle.setTextFill(Paint.valueOf("#393980"));
+        lblGebruikersTitle.setStyle("-fx-label-padding: 0 0 0 10");
+        
+        this.getChildren().addAll(createFilterPane(), new Separator(), lblGebruikersTitle, createGebruikerList());
     }
     
     private AnchorPane createFilterPane(){

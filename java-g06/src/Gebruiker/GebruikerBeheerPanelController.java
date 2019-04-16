@@ -2,22 +2,27 @@ package Gebruiker;
 
 import Gebruiker.Models.AGebruiker;
 import Applicatie.ApplicatieFrameController;
+import static Applicatie.ApplicatieFrameController.GEBRUIKERCONTROLLER;
 import Applicatie.Panel;
 import java.util.List;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class GebruikerBeheerPanelController extends Pane implements Panel {
-    private static final GebruikerController GEBRUIKERCONTROLLER = new GebruikerController();
+public class GebruikerBeheerPanelController extends HBox implements Panel {
     private ApplicatieFrameController frame;
     private GebruikerBeheerListPanel listPanel;
     private GebruikerBeheerGegevensPanel gegevensPanel;
     private List<AGebruiker> _gebruikerList;
+    VBox gegevensPanelcontainer;
     
     public GebruikerBeheerPanelController(ApplicatieFrameController frame){
         this.frame = frame;
         _gebruikerList = GEBRUIKERCONTROLLER.getGebruikerList();
+        
+        // Panels
         listPanel = new GebruikerBeheerListPanel(this);
         gegevensPanel = new GebruikerBeheerGegevensPanel(this);
+        resizeWidth(frame.getWidth());
         this.getChildren().addAll(listPanel, gegevensPanel);
     }
     
@@ -31,7 +36,7 @@ public class GebruikerBeheerPanelController extends Pane implements Panel {
     
     @Override
     public void resizeWidth(double width) {
-        // No resizeWidth actions just yet
+        gegevensPanel.setPrefWidth(width-300);
     }
 
     @Override

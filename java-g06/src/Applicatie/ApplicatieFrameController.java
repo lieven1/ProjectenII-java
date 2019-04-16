@@ -1,6 +1,7 @@
 package Applicatie;
 
 import Gebruiker.GebruikerBeheerPanelController;
+import Gebruiker.GebruikerController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -11,7 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ApplicatieFrameController extends VBox implements Panel {
-    Pane contentPane;
+    public static final GebruikerController GEBRUIKERCONTROLLER = new GebruikerController();
+    
+    private Pane contentPane;
     
     public ApplicatieFrameController(){
         // MenuBar

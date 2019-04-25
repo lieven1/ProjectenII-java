@@ -25,34 +25,35 @@ public class Activiteit {
 
     public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<Gebruiker> deelnemers, List<Gebruiker> begeleiders) {
         setTitel(titel);
-        setType(type);        
+        setType(type);
         setStartDatum(startDatum);
         setEindDatum(eindDatum);
         setMaxAantalDeelnemers(maxAantalDeelnemers);
         setDeelnemers(deelnemers);
         setBegeleiders(begeleiders);
     }
-    
-    public boolean isVolzet(){
+
+    public boolean isVolzet() {
         return deelnemers.size() == maxAantalDeelnemers;
     }
-    
-    public void addDeelnemer(Gebruiker deelnemer){
-        if(isVolzet())
+
+    public void addDeelnemer(Gebruiker deelnemer) {
+        if (isVolzet()) {
             throw new IllegalArgumentException("De activiteit is al volzet.");
+        }
         deelnemers.add(deelnemer);
     }
-    
-    public void deleteDeelnemer(Gebruiker deelnemer){
+
+    public void deleteDeelnemer(Gebruiker deelnemer) {
         deelnemers.remove(deelnemer);
     }
-    
-    public void addBegeleider(Gebruiker begeleider){
+
+    public void addBegeleider(Gebruiker begeleider) {
         begeleiders.add(begeleider);
     }
-    
-    public void deleteBegeleider(Gebruiker begeleider){
-        if(begeleiders.size() < 2){
+
+    public void deleteBegeleider(Gebruiker begeleider) {
+        if (begeleiders.size() < 2) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
         begeleiders.remove(begeleider);
@@ -66,7 +67,7 @@ public class Activiteit {
     }
 
     public void setTitel(String titel) {
-        if (type.length() < 1) {
+        if (titel.length() < 1) {
             throw new IllegalArgumentException("Een type is verplicht.");
         }
         this.titel = titel;
@@ -88,7 +89,7 @@ public class Activiteit {
     }
 
     public void setStartDatum(Calendar startDatum) {
-        if (eindDatum != null && startDatum.before(eindDatum)) {
+        if (eindDatum != null && startDatum.after(eindDatum)) {
             throw new IllegalArgumentException("De einddatum mag niet eerder plaatsvinden dan de startdatum.");
         }
         this.startDatum = startDatum;
@@ -99,7 +100,7 @@ public class Activiteit {
     }
 
     public void setEindDatum(Calendar eindDatum) {
-        if (startDatum != null && startDatum.before(eindDatum)) {
+        if (startDatum != null && startDatum.after(eindDatum)) {
             throw new IllegalArgumentException("De einddatum mag niet eerder plaatsvinden dan de startdatum.");
         }
         this.eindDatum = eindDatum;
@@ -113,6 +114,9 @@ public class Activiteit {
         if (maxAantalDeelnemers < 1) {
             throw new IllegalArgumentException("Het maximum aantal deelnemers moet minstens 0 zijn.");
         }
+        if (deelnemers != null && maxAantalDeelnemers < deelnemers.size()) {
+            throw new IllegalArgumentException("Het maximum aantal deelnemers kan niet lager liggen dan het aantal werkelijke deelnemers");        
+        }
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
@@ -121,8 +125,9 @@ public class Activiteit {
     }
 
     public void setDeelnemers(List<Gebruiker> deelnemers) {
-        if (deelnemers.size() > maxAantalDeelnemers) 
-            throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");        
+        if (deelnemers.size() > maxAantalDeelnemers) {
+            throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
+        }
         this.deelnemers = deelnemers;
     }
 
@@ -131,8 +136,9 @@ public class Activiteit {
     }
 
     public void setBegeleiders(List<Gebruiker> begeleiders) {
-        if (begeleiders.size() < 1) 
-            throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");        
+        if (begeleiders.size() < 1) {
+            throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
+        }
         this.begeleiders = begeleiders;
     }
 

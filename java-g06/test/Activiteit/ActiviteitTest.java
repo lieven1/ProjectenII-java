@@ -80,7 +80,7 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetStartDatumNaEindDatumThrowsIllegalArgumentException() {
-        Calendar start = validActiviteit.getEindDatum();
+        Calendar start = (GregorianCalendar)validActiviteit.getEindDatum().clone();
         start.add(Calendar.DAY_OF_MONTH, 1);
         validActiviteit.setStartDatum(start);
     }

@@ -5,10 +5,9 @@
  */
 package domain;
 
-import Gebruiker.Models.Gebruiker;
+import domain.GebruikerModels.Gebruiker;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *

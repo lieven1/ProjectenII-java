@@ -6,7 +6,7 @@
 package controllers;
 
 import domain.Activiteit;
-import beheerders.ActiviteitenBeheerder;
+import domain.ActiviteitenBeheerder;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;

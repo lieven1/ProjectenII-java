@@ -1,8 +1,8 @@
 package StartUp;
 
-import controllers.GebruikerController;
-import Views.Panel;
-import Views.Start.ApplicatieFrameController;
+import controllers.DomeinController;
+import gui.Panel;
+import gui.Start.ApplicatieFrameController;
 import java.io.File;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
@@ -13,9 +13,9 @@ import javafx.stage.WindowEvent;
 public class StartUp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        GebruikerController gc = new GebruikerController();
+        DomeinController dc = new DomeinController();
         
-        Scene scene = new Scene(new ApplicatieFrameController(gc));
+        Scene scene = new Scene(new ApplicatieFrameController(dc));
         stage.setTitle("Taijitan");
         scene.getStylesheets().add((new File("src/resources/bootstrap-3.css")).toURI().toURL().toExternalForm());
         stage.setScene(scene);
@@ -25,13 +25,15 @@ public class StartUp extends Application {
             stage.setMinHeight(768);
             stage.setHeight(800);
         });
-        stage.show();
+        
+        // ResizeListeners to children
         scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
             ((Panel)scene.getRoot()).resizeWidth((double) newSceneWidth);
         });
         scene.heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
             ((Panel)scene.getRoot()).resizeHeight((double) newSceneHeight);
         });
+        stage.show();
     }
     
     public static void main(String[] args){

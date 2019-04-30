@@ -1,4 +1,4 @@
-package Views;
+package gui;
 
 public interface Panel {
     public void resizeWidth(double width);

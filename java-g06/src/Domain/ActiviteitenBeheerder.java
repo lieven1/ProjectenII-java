@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beheerders;
+package Domain;
 
-import controllers.ActiviteitenController;
-import domain.Activiteit;
+import Domain.Activiteit;
 import java.util.List;
-import javafx.beans.value.ObservableValue;
 import persistentie.ActiviteitenRepository;
 
 /**
@@ -17,11 +15,9 @@ import persistentie.ActiviteitenRepository;
  */
 public class ActiviteitenBeheerder {
     
-    private ActiviteitenController controller;
     private ActiviteitenRepository repository;
     
     public ActiviteitenBeheerder(){
-        controller = new ActiviteitenController(this);
     }
     
     public List<Activiteit> getAllActiviteiten(){

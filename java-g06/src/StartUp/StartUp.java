@@ -1,5 +1,8 @@
-package Applicatie;
+package StartUp;
 
+import Controllers.GebruikerController;
+import Views.Panel;
+import Views.Start.ApplicatieFrameController;
 import java.io.File;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
@@ -10,7 +13,9 @@ import javafx.stage.WindowEvent;
 public class StartUp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(new ApplicatieFrameController());
+        GebruikerController gc = new GebruikerController();
+        
+        Scene scene = new Scene(new ApplicatieFrameController(gc));
         stage.setTitle("Taijitan");
         scene.getStylesheets().add((new File("src/resources/bootstrap-3.css")).toURI().toURL().toExternalForm());
         stage.setScene(scene);

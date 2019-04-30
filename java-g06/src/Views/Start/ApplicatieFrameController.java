@@ -1,7 +1,8 @@
-package Applicatie;
+package Views.Start;
 
-import Gebruiker.GebruikerBeheerPanelController;
-import Gebruiker.GebruikerController;
+import Controllers.GebruikerController;
+import Views.Gebruiker.GebruikerBeheerPanelController;
+import Views.Panel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -12,11 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ApplicatieFrameController extends VBox implements Panel {
-    public static final GebruikerController GEBRUIKERCONTROLLER = new GebruikerController();
     
     private Pane contentPane;
+    private GebruikerController gc;
     
-    public ApplicatieFrameController(){
+    public ApplicatieFrameController(GebruikerController gc){
         // MenuBar
         MenuBar mainMenu = new MenuBar();
         VBox.setVgrow(mainMenu, Priority.NEVER);
@@ -32,20 +33,22 @@ public class ApplicatieFrameController extends VBox implements Panel {
         mainMenu.getMenus().addAll(appMenu, gebMenu);
         this.getChildren().add(mainMenu);
         
+        this.gc = gc;
+        
         // contentPane
-        contentPane = new ApplicatieStartPanel(this);
+        contentPane = new ApplicatieStartPanel(this, gc);
         this.getChildren().add(contentPane);
         
         // EventHandlers
         appMenu1.setOnAction((ActionEvent t) -> {
-            setContentPane(new ApplicatieStartPanel(this));
+            setContentPane(new ApplicatieStartPanel(this, gc));
         });
         appMenu2.setOnAction((ActionEvent t) -> {
             // Voeg confirmationknop toe
             ((Stage)this.getScene().getWindow()).close();
         });
         gebMenu1.setOnAction((ActionEvent t) -> {
-            setContentPane(new GebruikerBeheerPanelController(this));
+            setContentPane(new GebruikerBeheerPanelController(this, gc));
         });
     }
     

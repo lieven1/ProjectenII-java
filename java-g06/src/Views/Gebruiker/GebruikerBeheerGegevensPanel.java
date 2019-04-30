@@ -1,12 +1,12 @@
-package Gebruiker;
+package Views.Gebruiker;
 
-import Gebruiker.Models.AGebruiker;
-import Gebruiker.Models.Gebruiker;
-import Gebruiker.Models.Geslacht;
-import Gebruiker.Models.Gradatie;
-import Gebruiker.Models.Lesformule;
-import Gebruiker.Models.ProefGebruiker;
-import Gebruiker.Models.TypeGebruiker;
+import Domain.GebruikerModels.AGebruiker;
+import Domain.GebruikerModels.Gebruiker;
+import Domain.GebruikerModels.Geslacht;
+import Domain.GebruikerModels.Gradatie;
+import Domain.GebruikerModels.Lesformule;
+import Domain.GebruikerModels.ProefGebruiker;
+import Domain.GebruikerModels.TypeGebruiker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -26,8 +26,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class GebruikerBeheerGegevensPanel extends VBox{
+    
     private final GebruikerBeheerPanelController controller;
-    private AGebruiker gebruiker;
     private TypeGebruiker formType;
     private GridPane formPane;
     
@@ -217,7 +217,6 @@ public class GebruikerBeheerGegevensPanel extends VBox{
     }
     
     public void beheerGebruiker(AGebruiker gebruiker){
-        this.gebruiker = gebruiker;
         if(gebruiker != null){
             if(gebruiker.getType() != formType)
                 createForm(gebruiker.getType());

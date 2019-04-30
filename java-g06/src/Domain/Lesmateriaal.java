@@ -1,4 +1,4 @@
-package Lesmateriaal.Models;
+package Domain;
 
 import java.util.List;
 

@@ -1,6 +1,8 @@
-package Applicatie;
+package Views.Start;
 
-import Gebruiker.GebruikerBeheerPanelController;
+import Controllers.GebruikerController;
+import Views.Panel;
+import Views.Gebruiker.GebruikerBeheerPanelController;
 import java.io.File;
 import java.net.MalformedURLException;
 import javafx.event.ActionEvent;
@@ -17,10 +19,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class ApplicatieStartPanel extends AnchorPane implements Panel {
+    
     private ImageView logo;
     private GridPane menuPanel;
     
-    public ApplicatieStartPanel(ApplicatieFrameController frame){
+    private GebruikerController gc;
+    
+    public ApplicatieStartPanel(ApplicatieFrameController frame, GebruikerController gc){
+        this.gc = gc;
+        
         // Applicatie Logo
         logo = new ImageView();
         try {
@@ -47,10 +54,10 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         
         // Buttons
         createButton("Gebruikers", 0, 1).setOnAction((ActionEvent t) -> {
-            frame.setContentPane(new GebruikerBeheerPanelController(frame));
+            frame.setContentPane(new GebruikerBeheerPanelController(frame, gc));
         });
         createButton("Overzicht", 1, 1).setOnAction((ActionEvent t) -> {
-            frame.setContentPane(new GebruikerBeheerPanelController(frame));
+            frame.setContentPane(new GebruikerBeheerPanelController(frame, gc));
         });
         
         this.getChildren().addAll(logo, menuPanel);

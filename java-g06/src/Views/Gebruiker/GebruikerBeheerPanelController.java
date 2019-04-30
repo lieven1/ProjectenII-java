@@ -1,9 +1,9 @@
-package Gebruiker;
+package Views.Gebruiker;
 
-import Gebruiker.Models.AGebruiker;
-import Applicatie.ApplicatieFrameController;
-import static Applicatie.ApplicatieFrameController.GEBRUIKERCONTROLLER;
-import Applicatie.Panel;
+import Controllers.GebruikerController;
+import Domain.GebruikerModels.AGebruiker;
+import Views.Start.ApplicatieFrameController;
+import Views.Panel;
 import java.util.List;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,12 +12,13 @@ public class GebruikerBeheerPanelController extends HBox implements Panel {
     private ApplicatieFrameController frame;
     private GebruikerBeheerListPanel listPanel;
     private GebruikerBeheerGegevensPanel gegevensPanel;
-    private List<AGebruiker> _gebruikerList;
     VBox gegevensPanelcontainer;
     
-    public GebruikerBeheerPanelController(ApplicatieFrameController frame){
+    private GebruikerController gc;
+    
+    public GebruikerBeheerPanelController(ApplicatieFrameController frame, GebruikerController gc){
+        this.gc = gc;
         this.frame = frame;
-        _gebruikerList = GEBRUIKERCONTROLLER.getGebruikerList();
         
         // Panels
         listPanel = new GebruikerBeheerListPanel(this);
@@ -27,7 +28,7 @@ public class GebruikerBeheerPanelController extends HBox implements Panel {
     }
     
     public List<AGebruiker> getGebruikerList(){
-        return this._gebruikerList;
+        return gc.getGebruikerList();
     }
     
     public void beheerGebruiker(AGebruiker gebruiker){

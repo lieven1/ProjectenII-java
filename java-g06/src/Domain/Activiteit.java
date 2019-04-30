@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Activiteit;
+package Domain;
 
-import Gebruiker.Models.Gebruiker;
+import Domain.GebruikerModels.Gebruiker;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *

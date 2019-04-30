@@ -1,7 +1,7 @@
 package Gebruiker;
 
-import Gebruiker.Models.ProefGebruiker;
-import Gebruiker.Models.TypeGebruiker;
+import Domain.GebruikerModels.ProefGebruiker;
+import Domain.GebruikerModels.TypeGebruiker;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
 import java.util.GregorianCalendar;

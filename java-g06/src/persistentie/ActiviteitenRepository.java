@@ -5,7 +5,7 @@
  */
 package persistentie;
 
-import domain.Activiteit;
+import Domain.Activiteit;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 

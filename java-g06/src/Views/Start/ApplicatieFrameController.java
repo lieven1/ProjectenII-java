@@ -1,6 +1,6 @@
 package Views.Start;
 
-import Controllers.GebruikerController;
+import controllers.GebruikerController;
 import Views.Gebruiker.GebruikerBeheerPanelController;
 import Views.Panel;
 import javafx.event.ActionEvent;

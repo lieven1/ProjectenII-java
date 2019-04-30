@@ -5,8 +5,8 @@
  */
 package Activiteit;
 
-import Domain.GebruikerModels.Gebruiker;
-import Domain.Activiteit;
+import domain.GebruikerModels.Gebruiker;
+import domain.Activiteit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;

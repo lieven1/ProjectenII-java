@@ -1,11 +1,11 @@
 package Gebruiker;
 
-import Domain.GebruikerModels.TypeGebruiker;
-import Domain.GebruikerModels.Lesformule;
-import Domain.GebruikerModels.Gradatie;
-import Domain.GebruikerModels.Gebruiker;
-import Domain.GebruikerModels.Geslacht;
-import Domain.GebruikerModels.Adres;
+import domain.GebruikerModels.TypeGebruiker;
+import domain.GebruikerModels.Lesformule;
+import domain.GebruikerModels.Gradatie;
+import domain.GebruikerModels.Gebruiker;
+import domain.GebruikerModels.Geslacht;
+import domain.GebruikerModels.Adres;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
 import java.util.Date;

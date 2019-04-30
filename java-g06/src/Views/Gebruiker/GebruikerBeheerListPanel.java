@@ -1,7 +1,7 @@
 package Views.Gebruiker;
 
-import Domain.GebruikerModels.AGebruiker;
-import Domain.GebruikerModels.TypeGebruiker;
+import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.TypeGebruiker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

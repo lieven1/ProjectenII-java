@@ -1,6 +1,6 @@
 package StartUp;
 
-import Controllers.GebruikerController;
+import controllers.GebruikerController;
 import Views.Panel;
 import Views.Start.ApplicatieFrameController;
 import java.io.File;

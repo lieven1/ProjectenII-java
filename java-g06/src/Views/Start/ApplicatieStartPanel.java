@@ -1,6 +1,6 @@
 package Views.Start;
 
-import Controllers.GebruikerController;
+import controllers.GebruikerController;
 import Views.Panel;
 import Views.Gebruiker.GebruikerBeheerPanelController;
 import java.io.File;

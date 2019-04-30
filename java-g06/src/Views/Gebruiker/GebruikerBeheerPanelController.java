@@ -1,7 +1,7 @@
 package Views.Gebruiker;
 
-import Controllers.GebruikerController;
-import Domain.GebruikerModels.AGebruiker;
+import controllers.GebruikerController;
+import domain.GebruikerModels.AGebruiker;
 import Views.Start.ApplicatieFrameController;
 import Views.Panel;
 import java.util.List;

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package controllers;
 
+import domain.Activiteit;
 import domain.Activiteit;
 import java.util.List;
 import persistentie.ActiviteitenRepository;

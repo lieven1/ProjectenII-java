@@ -1,13 +1,15 @@
 package gui.Gebruiker;
 
 import controllers.GebruikerController;
+import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.TypeGebruiker;
 import gui.Panel;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GebruikerBeheerPanelController extends HBox implements Panel {
     private GebruikerBeheerListPanel listPanel;
-    private GebruikerBeheerGegevensPanel gegevensPanel;
+    private GebruikerForm gegevensPanel;
     VBox gegevensPanelcontainer;
     
     private GebruikerController gc;
@@ -16,9 +18,27 @@ public class GebruikerBeheerPanelController extends HBox implements Panel {
         this.gc = gc;
         
         // Panels
-        listPanel = new GebruikerBeheerListPanel(gc);
-        gegevensPanel = new GebruikerBeheerGegevensPanel(gc);
+        listPanel = new GebruikerBeheerListPanel(this, gc);
+        gegevensPanel = new FormLidController(this, gc);
         this.getChildren().addAll(listPanel, gegevensPanel);
+    }
+    
+    public void createForm(TypeGebruiker type){
+        switch(type){
+            case Lid:
+                gegevensPanel = new FormLidController(this, gc);
+                this.getChildren().set(1, gegevensPanel);
+                break;
+            case Proefgebruiker:
+                gegevensPanel = new FormProefgebruikerController(this, gc);
+                this.getChildren().set(1, gegevensPanel);
+                break;
+        }
+    }
+    
+    public void loadGebruiker(TypeGebruiker type, AGebruiker gebruiker){
+        createForm(type);
+        gegevensPanel.loadGebruiker(gebruiker);
     }
     
     @Override
@@ -28,6 +48,6 @@ public class GebruikerBeheerPanelController extends HBox implements Panel {
 
     @Override
     public void resizeHeight(double height) {
-        // No resizeHeight actions just yet
+        gegevensPanel.setPrefHeight(2*height);
     }
 }

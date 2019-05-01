@@ -2,6 +2,7 @@ package domain.GebruikerModels;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Gebruiker extends AGebruiker {
     @Enumerated(EnumType.ORDINAL)
     private Geslacht _geslacht;
     @JoinColumn(name = "AdresId")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Adres _adres;
     @Column(name = "Gradatie")    
     @Enumerated(EnumType.ORDINAL)

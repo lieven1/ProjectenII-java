@@ -21,9 +21,12 @@ public class GebruikerBeheerder {
         GenericDaoJpa.commitTransaction();
     }
     
-    public void modify(AGebruiker gebruiker){
+    public void modify(AGebruiker oldGeb, AGebruiker gebruiker){
         GenericDaoJpa.startTransaction();
-        gebruikerRepo.update(gebruiker);
+        gebruikerRepo.delete(oldGeb);
+        GenericDaoJpa.commitTransaction();
+        GenericDaoJpa.startTransaction();
+        gebruikerRepo.insert(gebruiker);
         GenericDaoJpa.commitTransaction();
     }
     

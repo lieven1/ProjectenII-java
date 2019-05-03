@@ -3,8 +3,6 @@ package gui.Gebruiker;
 import controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.TypeGebruiker;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,20 +11,24 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class GebruikerBeheerListPanel extends VBox{
+    GebruikerBeheerPanelController c;
     GebruikerController gc;
-    ListView<String> gebruikerList;
+    TableView gebruikerList;
     
-    public GebruikerBeheerListPanel(GebruikerController gc){
+    public GebruikerBeheerListPanel(GebruikerBeheerPanelController c, GebruikerController gc){
         this.gc = gc;
+        this.c = c;
         
         // VBox Constraints
         this.setPrefWidth(310);
@@ -90,36 +92,35 @@ public class GebruikerBeheerListPanel extends VBox{
         
         // Use the filter
         btnFilter.setOnAction((ActionEvent t) -> {
-            List<AGebruiker> _gebruikerList = new ArrayList<>();
             String gebruikersnaam = txfGebruikersnaamFilter.getText();
             String naam = txfNaamFilter.getText();
             String voornaam = txfVoornaamFilter.getText();
-            if(!cbLid.isSelected())                
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Lid)).collect(Collectors.toList()));
-            if(!cbProeflid.isSelected())                
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Proefgebruiker)).collect(Collectors.toList()));
-            if(!cbBeheerder.isSelected())                
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> g.getType().equals(TypeGebruiker.Beheerder)).collect(Collectors.toList()));
-            if(gebruikersnaam != null && !gebruikersnaam.isBlank())
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getGebruikersnaam().toUpperCase().contains(gebruikersnaam.toUpperCase())).collect(Collectors.toList()));
-            if(naam != null && !naam.isBlank())
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getNaam().toUpperCase().contains(naam.toUpperCase())).collect(Collectors.toList()));
-            if(voornaam != null && !voornaam.isBlank())
-                _gebruikerList.removeAll(_gebruikerList.stream().filter(g -> !g.getVoornaam().toUpperCase().contains(voornaam.toUpperCase())).collect(Collectors.toList()));
             
-            ObservableList<String> gebruikerListContent = FXCollections.observableArrayList(_gebruikerList.stream().map(g -> g.getGebruikersnaam()).collect(Collectors.toList()));
-            gebruikerList.getItems().setAll(gebruikerListContent);
+            ObservableList<AGebruiker> _gebruikerList = gc.getFilteredList(gebruikersnaam, naam, voornaam, cbProeflid.selectedProperty().getValue(), cbLid.selectedProperty().getValue(), cbBeheerder.selectedProperty().getValue());
+            
+            gebruikerList.setItems(_gebruikerList);
         });
         
         filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, cbBeheerder, btnFilter);
         return filterPane;
     }
     
-    private ListView createGebruikerList(){
-        ObservableList<String> gebruikerListContent = FXCollections.observableArrayList(gc.getObservableList().stream().map(g -> g.getGebruikersnaam()).collect(Collectors.toList()));
-        gebruikerList = new ListView<>(gebruikerListContent);
+    private TableView createGebruikerList(){
+        gebruikerList = new TableView<AGebruiker>();
+        gebruikerList.setEditable(false);
+        TableColumn usernameColumn = new TableColumn("Gebruikersnaam");
+        TableColumn firstNameColumn = new TableColumn("Voornaam");
+        TableColumn lastNameColumn = new TableColumn("Achternaam");
+        TableColumn typeColumn = new TableColumn("Type");
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("gebruikersnaam"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, TypeGebruiker>("type"));
+        gebruikerList.getColumns().addAll(usernameColumn, firstNameColumn, lastNameColumn, typeColumn);
+        gebruikerList.setItems(gc.getObservableList());
         
-        gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+         gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
+             c.loadGebruiker(((AGebruiker)gebruikerList.getSelectionModel().getSelectedItem()).getType(), (AGebruiker)gebruikerList.getSelectionModel().getSelectedItem());
         });
         
         return gebruikerList;

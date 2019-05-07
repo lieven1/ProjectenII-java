@@ -63,5 +63,8 @@ public class GebruikerBeheerder {
         GenericDaoJpa.startTransaction();
         gebruikerRepo.delete(gebruiker);
         GenericDaoJpa.commitTransaction();
+        gebruikerList.remove(gebruiker);
+        if(filteredList.contains(gebruiker))
+            filteredList.remove(gebruiker);
     }
 }

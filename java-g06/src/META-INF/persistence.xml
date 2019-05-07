@@ -7,8 +7,8 @@
     <class>domain.GebruikerModels.ProefGebruiker</class>
     <class>domain.GebruikerModels.Adres</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://taijitan.database.windows.net:1433;database=Taijitan;user=sv_g06@taijitan;password=HogentSQL1;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
-      <property name="javax.persistence.jdbc.user" value="sv_g06"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://sql6007.site4now.net;database=DB_A486C0_Taijitan;user=DB_A486C0_Taijitan_admin;password=HogentSQL1;encrypt=true;trustServerCertificate=true;loginTimeout=30;"/>
+      <property name="javax.persistence.jdbc.user" value="DB_A486C0_Taijitan_admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="HogentSQL1"/>
     </properties>

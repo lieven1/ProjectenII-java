@@ -6,7 +6,6 @@ import domain.GebruikerModels.Adres;
 import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Geslacht;
 import domain.GebruikerModels.Gradatie;
-import domain.GebruikerModels.Lesformule;
 import domain.GebruikerModels.ProefGebruiker;
 import domain.GebruikerModels.TypeGebruiker;
 import java.io.IOException;
@@ -28,7 +27,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 
 public class FormLidController extends GebruikerForm {
     private GebruikerController gc;

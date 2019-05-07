@@ -22,11 +22,11 @@ public class ProefGebruiker extends AGebruiker {
     
     // Setters
     @Override
-    protected final void setTelefoonnummer(String _telefoonnummer){
-        if(_telefoonnummer == null || _telefoonnummer.isBlank())
+    protected final void setTelefoonnummer(String telefoonnummer){
+        if(telefoonnummer == null || telefoonnummer.isBlank())
             throw new IllegalArgumentException("Telefoonnummer mag geen lege waarde bevatten.");
-        if(! Pattern.compile("((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))").matcher(_telefoonnummer).matches())
+        if(! Pattern.compile("((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))").matcher(telefoonnummer).matches())
             throw new IllegalArgumentException("Ongeldig formaat voor telefoonnummer.");
-        this._telefoonnummer = _telefoonnummer;
+        this.telefoonnummer = telefoonnummer;
     }
 }

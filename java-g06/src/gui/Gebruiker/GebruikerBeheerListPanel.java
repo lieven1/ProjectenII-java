@@ -2,10 +2,10 @@ package gui.Gebruiker;
 
 import controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.Gebruiker;
+import domain.GebruikerModels.Gradatie;
 import domain.GebruikerModels.TypeGebruiker;
-import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -80,10 +80,6 @@ public class GebruikerBeheerListPanel extends VBox{
         cbProeflid.setLayoutX(77);
         cbProeflid.setLayoutY(135);
         cbProeflid.setSelected(true);
-        CheckBox cbBeheerder = new CheckBox("Beheerder");
-        cbBeheerder.setLayoutX(160);
-        cbBeheerder.setLayoutY(135);
-        cbBeheerder.setSelected(true);
         Button btnFilter = new Button("Filter");
         btnFilter.getStyleClass().addAll("lg", "info");
         btnFilter.setPrefWidth(290);
@@ -96,27 +92,27 @@ public class GebruikerBeheerListPanel extends VBox{
             String naam = txfNaamFilter.getText();
             String voornaam = txfVoornaamFilter.getText();
             
-            ObservableList<AGebruiker> _gebruikerList = gc.getFilteredList(gebruikersnaam, naam, voornaam, cbProeflid.selectedProperty().getValue(), cbLid.selectedProperty().getValue(), cbBeheerder.selectedProperty().getValue());
+            ObservableList<AGebruiker> _gebruikerList = gc.getFilteredList(gebruikersnaam, naam, voornaam, cbProeflid.selectedProperty().getValue(), cbLid.selectedProperty().getValue());
             
             gebruikerList.setItems(_gebruikerList);
         });
         
-        filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, cbBeheerder, btnFilter);
+        filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, btnFilter);
         return filterPane;
     }
     
     private TableView createGebruikerList(){
         gebruikerList = new TableView<AGebruiker>();
         gebruikerList.setEditable(false);
-        TableColumn usernameColumn = new TableColumn("Gebruikersnaam");
+        TableColumn graadColumn = new TableColumn("Graad");
         TableColumn firstNameColumn = new TableColumn("Voornaam");
         TableColumn lastNameColumn = new TableColumn("Achternaam");
         TableColumn typeColumn = new TableColumn("Type");
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("gebruikersnaam"));
+        graadColumn.setCellValueFactory(new PropertyValueFactory<Gebruiker, Gradatie>("graad"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, TypeGebruiker>("type"));
-        gebruikerList.getColumns().addAll(usernameColumn, firstNameColumn, lastNameColumn, typeColumn);
+        gebruikerList.getColumns().addAll(lastNameColumn, firstNameColumn, graadColumn, typeColumn);
         gebruikerList.setItems(gc.getObservableList());
         
          gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {

@@ -2,21 +2,21 @@ package domain.GebruikerModels;
 
 public class Lesformule {
     // Declarations
-    private final int _id;
-    private final String _titelText;
+    private final int id;
+    private final String titelText;
     
     // Constructors
     public Lesformule(int id, String titelText){
-        this._id = id;
-        this._titelText = titelText;
+        this.id = id;
+        this.titelText = titelText;
     }
     
     // Getters
     public int getId() {
-        return _id;
+        return id;
     }
 
     public String getTitelText() {
-        return _titelText;
+        return titelText;
     }
 }

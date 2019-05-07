@@ -42,20 +42,20 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
         // contentPane
         Pane pane = new ApplicatieStartPanel(dc);
         contentPane.getChildren().add(pane);
-        dc.setPane(pane, this.getHeight(), this.getWidth());
+        dc.getGuiController().setPane(pane, this.getHeight(), this.getWidth());
         
         // EventHandlers
         appMenuStart.setOnAction((ActionEvent t) -> {
-            dc.setPane(new ApplicatieStartPanel(dc), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new ApplicatieStartPanel(dc), this.getHeight(), this.getWidth());
         });
         appMenuStop.setOnAction((ActionEvent t) -> {
             // Voeg confirmationknop toe
             ((Stage)this.getScene().getWindow()).close();
         });
         gebMenuBeheer.setOnAction((ActionEvent t) -> {
-            dc.setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
-        this.dc.addPropertyChangeListener(this);
+        this.dc.getGuiController().addPropertyChangeListener(this);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         contentPane.getChildren().set(0, (Pane)evt.getNewValue());
-        this.resizeWidth(dc.getWidth());
-        this.resizeHeight(dc.getHeight());
+        this.resizeWidth(dc.getGuiController().getWidth());
+        this.resizeHeight(dc.getGuiController().getHeight());
     }
 }

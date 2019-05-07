@@ -54,10 +54,10 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         
         // Buttons
         createButton("Gebruikers", 0, 1).setOnAction((ActionEvent t) -> {
-            dc.setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         createButton("Overzicht", 1, 1).setOnAction((ActionEvent t) -> {
-            dc.setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         
         this.getChildren().addAll(logo, menuPanel);

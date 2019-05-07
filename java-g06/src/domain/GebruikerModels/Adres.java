@@ -13,22 +13,22 @@ public class Adres implements Serializable {
     // Declarations
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "AdresId")
-    private int _adresId;
+    private int adresId;
     @Column(name = "Land")
-    private String _land;
+    private String land;
     @Column(name = "Postcode")
-    private String _postcode;
+    private String postcode;
     @Column(name = "Stad")
-    private String _stad;
+    private String stad;
     @Column(name = "Straat")
-    private String _straat;
+    private String straat;
     @Column(name = "Nummer")
-    private String _nummer;
+    private String nummer;
 
     // Constructors
     public Adres(int adresId, String land, String postcode, String stad, String straat, String nummer){
         this(land, postcode, stad, straat, nummer);
-        _adresId = adresId;
+        this.adresId = adresId;
     }
     
     public Adres(String land, String postcode, String stad, String straat, String nummer){
@@ -42,27 +42,27 @@ public class Adres implements Serializable {
     
     // Getters
     public int getAdresId() {
-        return _adresId;
+        return adresId;
     }
 
     public String getLand() {
-        return _land;
+        return land;
     }
     
     public String getPostcode() {
-        return _postcode;
+        return postcode;
     }
 
     public String getStad() {
-        return _stad;
+        return stad;
     }
 
     public String getStraat() {
-        return _straat;
+        return straat;
     }
 
     public String getNummer() {
-        return _nummer;
+        return nummer;
     }
     
     // Setters
@@ -70,7 +70,7 @@ public class Adres implements Serializable {
         if(_land == null || _land.isBlank())
             throw new IllegalArgumentException("Land mag geen lege waarde bevatten.");
         
-        this._land = _land;
+        this.land = _land;
     }
     
     private void setPostcode(String _postcode) {
@@ -79,28 +79,28 @@ public class Adres implements Serializable {
         if(! Pattern.compile("^\\d{4}$").matcher(_postcode).matches())
             throw new IllegalArgumentException("Ongeldige waarde voor postcode.");
         
-        this._postcode = _postcode;
+        this.postcode = _postcode;
     }
 
     private void setStad(String _stad) {
         if(_stad == null || _stad.isBlank())
             throw new IllegalArgumentException("Stad mag geen lege waarde bevatten.");
         
-        this._stad = _stad;
+        this.stad = _stad;
     }
 
     private void setStraat(String _straat) {
         if(_straat == null || _straat.isBlank())
             throw new IllegalArgumentException("Straat mag geen lege waarde bevatten.");
         
-        this._straat = _straat;
+        this.straat = _straat;
     }
 
     private void setNummer(String _nummer) {
         if(_nummer == null || _nummer.isBlank())
             throw new IllegalArgumentException("Nummer mag geen lege waarde bevatten.");
         
-        this._nummer = _nummer;
+        this.nummer = _nummer;
     }
     
     // Methods

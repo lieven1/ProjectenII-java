@@ -6,11 +6,12 @@
 package controllers;
 
 import domain.Activiteit;
-import domain.ActiviteitenBeheerder;
+import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -26,7 +27,7 @@ public class ActiviteitenController {
 
     public ActiviteitenController(ActiviteitenBeheerder beheerder) {
         this.beheerder = beheerder;
-        activiteiten = new SimpleListProperty<>();
+        activiteiten = FXCollections.observableArrayList();
         
         activiteiten.addAll(beheerder.getAllActiviteiten().stream().map(act -> new SimpleObjectProperty<>(act)).collect(Collectors.toList()));
         activiteiten.forEach(actPropr -> actPropr.addListener(this::activiteitChanged));
@@ -55,5 +56,13 @@ public class ActiviteitenController {
     private void activiteitenListChanged(Change<? extends ObservableValue<Activiteit>> change){
         // nodig?
     }
+
+    public ObservableList<ObservableValue<Activiteit>> getActiviteiten() {
+        return activiteiten;
+    }
+    
+
+    
+    
         
 }

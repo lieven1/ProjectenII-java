@@ -1,6 +1,5 @@
-package Gebruiker;
+package domain.GebruikerModels;
 
-import domain.GebruikerModels.Adres;
 import org.junit.Assert;
 import org.junit.Test;
 

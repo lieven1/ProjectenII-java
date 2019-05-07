@@ -78,6 +78,9 @@ public final class Lesmateriaal {
     }
 
     public void setFotos(List<Foto> fotos) {
+        if(fotos == null)
+            fotos = new ArrayList<>();
+        
         this.fotos = fotos;
     }
 

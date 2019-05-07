@@ -1,14 +1,7 @@
-package Gebruiker;
+package domain.GebruikerModels;
 
-import domain.GebruikerModels.TypeGebruiker;
-import domain.GebruikerModels.Lesformule;
-import domain.GebruikerModels.Gradatie;
-import domain.GebruikerModels.Gebruiker;
-import domain.GebruikerModels.Geslacht;
-import domain.GebruikerModels.Adres;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;

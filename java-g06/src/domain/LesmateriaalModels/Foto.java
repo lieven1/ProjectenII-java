@@ -1,17 +1,14 @@
 package domain.LesmateriaalModels;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-
 public final class Foto {
     private int id;
     private String bestandsnaam;
     private String extensie;
     
-    public static Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+    /*public static Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
         "cloud_name", "dkbfdmful",
         "api_key", "863719494787761",
-        "api_secret", "DpGFihSrXeYjXljkQiaFcaqR14c"));
+        "api_secret", "DpGFihSrXeYjXljkQiaFcaqR14c"));*/
     
     public Foto(String bestandsnaam, String extensie){
         setBestandsnaam(bestandsnaam);

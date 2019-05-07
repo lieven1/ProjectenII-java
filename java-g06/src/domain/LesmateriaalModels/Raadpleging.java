@@ -22,7 +22,9 @@ public final class Raadpleging {
     public void setTijdstip(LocalTime tijdstip) {
         if(tijdstip == null)
             throw new IllegalArgumentException("Tijdstip kan geen lege waarde bevatten");
-            
+        if(tijdstip.isAfter(LocalTime.now()))
+            throw new IllegalArgumentException("Tijdstip kan niet in de toekomst liggen");
+        
         this.tijdstip = tijdstip;
     }
 

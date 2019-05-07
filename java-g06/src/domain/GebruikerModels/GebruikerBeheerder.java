@@ -1,70 +1,120 @@
 package domain.GebruikerModels;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import persistentie.GenericDao;
 import persistentie.GenericDaoJpa;
 
+/**
+ * @author Bono
+ */
 public class GebruikerBeheerder {
     private final GenericDao<AGebruiker> gebruikerRepo;
-    private final ObservableList<AGebruiker> gebruikerList;
-    private ObservableList<AGebruiker> filteredList;
+    
+    private ObservableList<AGebruiker> gebruikerList;
+    private FilteredList<AGebruiker> filteredList;
+    private SortedList<AGebruiker> sortedList;
+    
+    private AGebruiker currentGebruiker;
+    private TypeGebruiker currentTypeGebruiker;
+    private PropertyChangeSupport subject;
     
     public GebruikerBeheerder(){
         gebruikerRepo = new GenericDaoJpa<>(AGebruiker.class);
         gebruikerList = FXCollections.observableArrayList(gebruikerRepo.findAll());
-        filteredList = FXCollections.observableArrayList(gebruikerList);
+        filteredList = new FilteredList<>(gebruikerList, p -> true);
+        sortedList = new SortedList<>(filteredList, 
+                Comparator.comparing(AGebruiker::getNaam)
+                .thenComparing(AGebruiker::getVoornaam)
+                .thenComparing(g -> g.getType().equals(TypeGebruiker.Lid)? ((Gebruiker)g).getGraad() : null)
+        );
+        
+        subject = new PropertyChangeSupport(this);
     }
     
-    public ObservableList<AGebruiker> getAll(){
-        Comparator<AGebruiker> naamComparator = Comparator.comparing(AGebruiker::getNaam).thenComparing(AGebruiker::getVoornaam);
-        gebruikerList.sort(naamComparator);
-        return gebruikerList;
+    public ObservableList<AGebruiker> getGebruikerLijst(){
+        return sortedList;
     }
     
-    public ObservableList<AGebruiker> getFilteredList(String gebruikersnaam, String naam, String voornaam, boolean lid, boolean proefgebruiker){
-        filteredList = FXCollections.observableArrayList(this.getAll());
-            if(!lid)                
-                filteredList.removeAll(filteredList.stream().filter(g -> g.getType().equals(TypeGebruiker.Lid)).collect(Collectors.toList()));
-            if(!proefgebruiker)                
-                filteredList.removeAll(filteredList.stream().filter(g -> g.getType().equals(TypeGebruiker.Proefgebruiker)).collect(Collectors.toList()));
-            if(gebruikersnaam != null && !gebruikersnaam.isBlank())
-                filteredList.removeAll(filteredList.stream().filter(g -> !g.getGebruikersnaam().toUpperCase().contains(gebruikersnaam.toUpperCase())).collect(Collectors.toList()));
-            if(naam != null && !naam.isBlank())
-                filteredList.removeAll(filteredList.stream().filter(g -> !g.getNaam().toUpperCase().contains(naam.toUpperCase())).collect(Collectors.toList()));
-            if(voornaam != null && !voornaam.isBlank())
-                filteredList.removeAll(filteredList.stream().filter(g -> !g.getVoornaam().toUpperCase().contains(voornaam.toUpperCase())).collect(Collectors.toList()));
-        return filteredList;
+    public void veranderFilter(String naam, String voornaam, boolean lid, boolean proefgebruiker){
+        filteredList.setPredicate(g -> {
+            boolean naamLeeg = naam == null || naam.isBlank();
+            boolean voornaamLeeg = voornaam == null || voornaam.isBlank();
+            
+            if(naamLeeg && voornaamLeeg && lid && proefgebruiker){
+                return true;
+            }
+            
+            boolean naamFilter = naamLeeg ? true
+                    : (g.getNaam().toLowerCase().contains(naam.toLowerCase()));
+            boolean voornaamFilter = voornaamLeeg ? true
+                    : (g.getVoornaam().toLowerCase().contains(voornaam.toLowerCase()));
+            boolean lidFilter = lid ? true 
+                    : (g.getType().equals(TypeGebruiker.Lid));
+            boolean proefgebruikerFilter = proefgebruiker ? true 
+                    : (g.getType().equals(TypeGebruiker.Proefgebruiker));
+            
+            return (naamFilter && voornaamFilter && lidFilter && proefgebruikerFilter);
+        });
     }
     
-    public void create(AGebruiker gebruiker){
+    // CRUD
+    public void create(AGebruiker newGebruiker){
+        currentGebruiker = newGebruiker;
         GenericDaoJpa.startTransaction();
-        gebruikerRepo.insert(gebruiker);
+        gebruikerRepo.insert(currentGebruiker);
         GenericDaoJpa.commitTransaction();
-        gebruikerList.add(gebruiker);
-        filteredList.add(gebruiker);
+        gebruikerList.add(currentGebruiker);
     }
     
-    public void modify(AGebruiker oldGeb, AGebruiker gebruiker){
+    public void modify(AGebruiker modifiedGebruiker){
         GenericDaoJpa.startTransaction();
-        gebruikerRepo.delete(oldGeb);
+        gebruikerRepo.delete(currentGebruiker);
         GenericDaoJpa.commitTransaction();
         GenericDaoJpa.startTransaction();
-        gebruikerRepo.insert(gebruiker);
+        gebruikerRepo.insert(modifiedGebruiker);
         GenericDaoJpa.commitTransaction();
-        gebruikerList.set(gebruikerList.indexOf(oldGeb), gebruiker);
-        if(filteredList.contains(oldGeb))
-            filteredList.set(filteredList.indexOf(oldGeb), gebruiker);
+        gebruikerList.set(gebruikerList.indexOf(currentGebruiker), modifiedGebruiker);
+        currentGebruiker = modifiedGebruiker;
     }
     
-    public void delete(AGebruiker gebruiker){
+    public void delete(){
         GenericDaoJpa.startTransaction();
-        gebruikerRepo.delete(gebruiker);
+        gebruikerRepo.delete(currentGebruiker);
         GenericDaoJpa.commitTransaction();
-        gebruikerList.remove(gebruiker);
-        if(filteredList.contains(gebruiker))
-            filteredList.remove(gebruiker);
+        gebruikerList.remove(currentGebruiker);
+        currentGebruiker = null;
+    }
+    
+    // PropertyChangeListener
+    public AGebruiker getCurrentGebruiker() {
+        return currentGebruiker;
+    }
+
+    public TypeGebruiker getCurrentTypeGebruiker() {
+        return currentTypeGebruiker;
+    }
+    
+    public void setCurrentGebruiker(AGebruiker currentGebruiker) {
+        subject.firePropertyChange("currentGebruiker", this.currentGebruiker, currentGebruiker);
+        this.currentGebruiker = currentGebruiker;
+    }
+    
+    public void setCurrentTypeGebruiker(TypeGebruiker currentTypeGebruiker) {
+        subject.firePropertyChange("currentTypeGebruiker", this.currentTypeGebruiker, currentTypeGebruiker);
+        this.currentTypeGebruiker = currentTypeGebruiker;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        subject.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        subject.removePropertyChangeListener(pcl);
     }
 }

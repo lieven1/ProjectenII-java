@@ -2,6 +2,8 @@ package controllers;
 
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.GebruikerBeheerder;
+import domain.GebruikerModels.TypeGebruiker;
+import java.beans.PropertyChangeListener;
 import javafx.collections.ObservableList;
 
 public class GebruikerController {
@@ -11,23 +13,49 @@ public class GebruikerController {
         beheerder = new GebruikerBeheerder();
     }
     
-    public ObservableList<AGebruiker> getObservableList(){
-        return beheerder.getAll();
+    public ObservableList<AGebruiker> getGebruikerLijst(){
+        return beheerder.getGebruikerLijst();
     }
     
-    public ObservableList<AGebruiker> getFilteredList(String gebruikersnaam, String naam, String voornaam, boolean lid, boolean proefgebruiker){
-        return beheerder.getFilteredList(gebruikersnaam, naam, voornaam, lid, proefgebruiker);
+    public void veranderFilter(String naam, String voornaam, boolean lid, boolean proefgebruiker){
+        beheerder.veranderFilter(naam, voornaam, lid, proefgebruiker);
     }
     
+    // CRUD
     public void create(AGebruiker gebruiker){
         beheerder.create(gebruiker);
     }
     
-    public void modify(AGebruiker oldGebruiker, AGebruiker newGebruiker){
-        beheerder.modify(oldGebruiker, newGebruiker);
+    public void modify(AGebruiker gebruiker){
+        beheerder.modify(gebruiker);
     }
     
-    public void delete(AGebruiker gebruiker){
-        beheerder.delete(gebruiker);
+    public void delete(){
+        beheerder.delete();
+    }
+    
+    // PropertyChangeListeners
+    public AGebruiker getCurrentGebruiker() {
+        return beheerder.getCurrentGebruiker();
+    }
+
+    public TypeGebruiker getCurrentTypeGebruiker() {
+        return beheerder.getCurrentTypeGebruiker();
+    }
+    
+    public void setCurrentGebruiker(AGebruiker currentGebruiker) {
+        beheerder.setCurrentGebruiker(currentGebruiker);
+    }
+    
+    public void setCurrentTypeGebruiker(TypeGebruiker currentTypeGebruiker) {
+        beheerder.setCurrentTypeGebruiker(currentTypeGebruiker);
+    }
+    
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        beheerder.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        beheerder.removePropertyChangeListener(pcl);
     }
 }

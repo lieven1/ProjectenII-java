@@ -6,7 +6,6 @@ import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Gradatie;
 import domain.GebruikerModels.TypeGebruiker;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -22,13 +21,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class GebruikerBeheerListPanel extends VBox{
-    GebruikerBeheerPanelController c;
     GebruikerController gc;
     TableView gebruikerList;
     
-    public GebruikerBeheerListPanel(GebruikerBeheerPanelController c, GebruikerController gc){
+    public GebruikerBeheerListPanel(GebruikerController gc){
         this.gc = gc;
-        this.c = c;
         
         // VBox Constraints
         this.setPrefWidth(310);
@@ -51,19 +48,12 @@ public class GebruikerBeheerListPanel extends VBox{
         lblFilterTitle.setTextFill(Paint.valueOf("#393980"));
         lblFilterTitle.setLayoutX(10);
         lblFilterTitle.setLayoutY(10);
-        Label lblGebruikersnaamFilter = new Label("Gebruikersnaam");
-        lblGebruikersnaamFilter.setLayoutX(15);
-        lblGebruikersnaamFilter.setLayoutY(31);
         Label lblNaamFilter = new Label("Naam");
         lblNaamFilter.setLayoutX(15);
         lblNaamFilter.setLayoutY(80);
         Label lblVoornaamFilter = new Label("Voornaam");
         lblVoornaamFilter.setLayoutX(175);
         lblVoornaamFilter.setLayoutY(80);
-        TextField txfGebruikersnaamFilter = new TextField();
-        txfGebruikersnaamFilter.setLayoutX(10);
-        txfGebruikersnaamFilter.setLayoutY(50);
-        txfGebruikersnaamFilter.setPrefSize(290, 25);
         TextField txfNaamFilter = new TextField();
         txfNaamFilter.setLayoutX(10);
         txfNaamFilter.setLayoutY(99);
@@ -88,16 +78,13 @@ public class GebruikerBeheerListPanel extends VBox{
         
         // Use the filter
         btnFilter.setOnAction((ActionEvent t) -> {
-            String gebruikersnaam = txfGebruikersnaamFilter.getText();
             String naam = txfNaamFilter.getText();
             String voornaam = txfVoornaamFilter.getText();
             
-            ObservableList<AGebruiker> _gebruikerList = gc.getFilteredList(gebruikersnaam, naam, voornaam, cbProeflid.selectedProperty().getValue(), cbLid.selectedProperty().getValue());
-            
-            gebruikerList.setItems(_gebruikerList);
+            gc.veranderFilter(naam, voornaam, cbProeflid.selectedProperty().getValue(), cbLid.selectedProperty().getValue());
         });
         
-        filterPane.getChildren().addAll(lblFilterTitle, lblGebruikersnaamFilter, lblNaamFilter, lblVoornaamFilter, txfGebruikersnaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, btnFilter);
+        filterPane.getChildren().addAll(lblFilterTitle, lblNaamFilter, lblVoornaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, btnFilter);
         return filterPane;
     }
     
@@ -113,11 +100,12 @@ public class GebruikerBeheerListPanel extends VBox{
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, TypeGebruiker>("type"));
         gebruikerList.getColumns().addAll(lastNameColumn, firstNameColumn, graadColumn, typeColumn);
-        gebruikerList.setItems(gc.getObservableList());
+        gebruikerList.setItems(gc.getGebruikerLijst());
         
          gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
-             c.loadGebruiker(((AGebruiker)gebruikerList.getSelectionModel().getSelectedItem()).getType(), (AGebruiker)gebruikerList.getSelectionModel().getSelectedItem());
-        });
+             gc.setCurrentTypeGebruiker(((AGebruiker)newValue).getType());
+             gc.setCurrentGebruiker((AGebruiker)newValue);
+         });
         
         return gebruikerList;
     }

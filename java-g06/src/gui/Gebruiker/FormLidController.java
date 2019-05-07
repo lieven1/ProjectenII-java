@@ -30,7 +30,6 @@ import javafx.scene.control.TextField;
 
 public class FormLidController extends GebruikerForm {
     private GebruikerController gc;
-    private AGebruiker oldGeb;
     
     @FXML
     TextField txfGebruikersnaam, txfNaam, txfVoornaam, txfRijksregisternummer, txfGeboorteplaats, txfLand, txfPostcode, txfStad, txfStraat, txfHuisnummer, txfTelefoonnummer, txfGsmnummer, txfEmail, txfEmailOuders;
@@ -45,7 +44,7 @@ public class FormLidController extends GebruikerForm {
     @FXML
     Label lblFout;
     
-    public FormLidController(GebruikerBeheerPanelController c, GebruikerController gc){
+    public FormLidController(GebruikerController gc){
         this.gc = gc;
         FXMLLoader loader = 
             new FXMLLoader(getClass().getResource("FormLid.fxml"));
@@ -73,10 +72,13 @@ public class FormLidController extends GebruikerForm {
         
         // Buttons
         nieuwProefLid.setOnAction((ActionEvent t) -> {
-            c.createForm(TypeGebruiker.Proefgebruiker);
+            gc.setCurrentGebruiker(null);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Proefgebruiker);
         });
         nieuwLid.setOnAction((ActionEvent t) -> {
-            c.createForm(TypeGebruiker.Lid);
+            gc.setCurrentGebruiker(null);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Proefgebruiker);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
         });
         btnOpslaan.setOnAction((ActionEvent t) -> {
             this.saveGebruiker();
@@ -89,17 +91,13 @@ public class FormLidController extends GebruikerForm {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                this.deleteGebruiker();
-                c.createForm(TypeGebruiker.Lid);
+                gc.delete();
+                gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
             }
         });
         
         cbTypeGebruiker.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
-            if(oldGeb == null){
-                c.createForm((TypeGebruiker) cbTypeGebruiker.getValue());
-            }else{
-                c.loadGebruiker((TypeGebruiker) cbTypeGebruiker.getValue(), oldGeb);
-            }
+            gc.setCurrentTypeGebruiker((TypeGebruiker) cbTypeGebruiker.getValue());
         });
     }
 
@@ -107,7 +105,6 @@ public class FormLidController extends GebruikerForm {
     public void loadGebruiker(AGebruiker gebruiker) {
         txfGebruikersnaam.setDisable(true);
         btnOpslaan.setText("Bijwerken");
-        oldGeb = gebruiker;
         btnVerwijder.setDisable(false);
         switch(gebruiker.getType()){
             case Proefgebruiker:
@@ -119,10 +116,7 @@ public class FormLidController extends GebruikerForm {
                 txfTelefoonnummer.setText(tempGeb.getTelefoonnummer());
                 txfEmail.setText(tempGeb.getEmail());
                 break;
-            case Beheerder:
-                // Beheerder logic
-                break;
-            default:
+            case Lid:
                 Gebruiker g = (Gebruiker)gebruiker;
                 txfGebruikersnaam.setText(g.getGebruikersnaam());
                 txfNaam.setText(g.getNaam());
@@ -167,22 +161,15 @@ public class FormLidController extends GebruikerForm {
                     null
             );
         
-            if(oldGeb == null){
+            if(gc.getCurrentGebruiker() == null){
                 gc.create(geb);
-                oldGeb = geb;
                 btnVerwijder.setDisable(false);
             }else{
-                gc.modify(oldGeb, geb);
-                oldGeb = geb;
+                gc.modify(geb);
             }
             lblFout.setText("");
         }catch(Exception e){
             lblFout.setText(e.getMessage());
-            lblFout.setVisible(true);
         }
-    }
-
-    public void deleteGebruiker() {
-        gc.delete(oldGeb);
     }
 }

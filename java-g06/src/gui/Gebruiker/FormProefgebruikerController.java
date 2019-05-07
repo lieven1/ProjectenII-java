@@ -27,7 +27,6 @@ import javafx.scene.control.TextField;
 
 public class FormProefgebruikerController extends GebruikerForm {
     private GebruikerController gc;
-    private AGebruiker oldGeb;
     
     @FXML
     TextField txfGebruikersnaam, txfNaam, txfVoornaam, txfTelefoonnummer, txfEmail;
@@ -42,7 +41,7 @@ public class FormProefgebruikerController extends GebruikerForm {
     @FXML
     Label lblFout;
     
-    public FormProefgebruikerController(GebruikerBeheerPanelController c, GebruikerController gc){
+    public FormProefgebruikerController(GebruikerController gc){
         this.gc = gc;
         FXMLLoader loader = 
             new FXMLLoader(getClass().getResource("FormProefgebruiker.fxml"));
@@ -67,10 +66,13 @@ public class FormProefgebruikerController extends GebruikerForm {
         
         // Buttons
         nieuwProefLid.setOnAction((ActionEvent t) -> {
-            c.createForm(TypeGebruiker.Proefgebruiker);
+            gc.setCurrentGebruiker(null);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Proefgebruiker);
         });
         nieuwLid.setOnAction((ActionEvent t) -> {
-            c.createForm(TypeGebruiker.Lid);
+            gc.setCurrentGebruiker(null);
+            gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
         });
         btnOpslaan.setOnAction((ActionEvent t) -> {
             this.saveGebruiker();
@@ -83,16 +85,12 @@ public class FormProefgebruikerController extends GebruikerForm {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                this.deleteGebruiker();
-                c.createForm(TypeGebruiker.Lid);
+                gc.delete();
+                gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
             }
         });
         cbTypeGebruiker.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
-            if(oldGeb == null){
-                c.createForm((TypeGebruiker) cbTypeGebruiker.getValue());
-            }else{
-                c.loadGebruiker((TypeGebruiker) cbTypeGebruiker.getValue(), oldGeb);
-            }
+            gc.setCurrentTypeGebruiker((TypeGebruiker) cbTypeGebruiker.getValue());
         });
     }
 
@@ -100,7 +98,6 @@ public class FormProefgebruikerController extends GebruikerForm {
     public void loadGebruiker(AGebruiker gebruiker) {
         txfGebruikersnaam.setDisable(true);
         btnOpslaan.setText("Bijwerken");
-        oldGeb = gebruiker;
         btnVerwijder.setDisable(false);
         switch(gebruiker.getType()){
             case Proefgebruiker:
@@ -112,10 +109,7 @@ public class FormProefgebruikerController extends GebruikerForm {
                 txfTelefoonnummer.setText(tempGeb.getTelefoonnummer());
                 txfEmail.setText(tempGeb.getEmail());
                 break;
-            case Beheerder:
-                // Beheerder logic
-                break;
-            default:
+            case Lid:
                 Gebruiker g = (Gebruiker)gebruiker;
                 txfGebruikersnaam.setText(g.getGebruikersnaam());
                 txfNaam.setText(g.getNaam());
@@ -138,21 +132,15 @@ public class FormProefgebruikerController extends GebruikerForm {
                         txfEmail.getText()
                 );
 
-            if(oldGeb == null){
+            if(gc.getCurrentGebruiker() == null){
                 gc.create(geb);
-                oldGeb = geb;
                 btnVerwijder.setDisable(false);
             }else{
-                gc.modify(oldGeb, geb);
-                oldGeb = geb;
+                gc.modify(geb);
             }
             lblFout.setText("");
         }catch(Exception e){
             lblFout.setText(e.getMessage());
         }
-    }
-
-    public void deleteGebruiker() {
-        gc.delete(oldGeb);
     }
 }

@@ -4,13 +4,13 @@ import controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.TypeGebruiker;
 import gui.Panel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-public class GebruikerBeheerPanelController extends HBox implements Panel {
+public class GebruikerBeheerPanelController extends HBox implements Panel, PropertyChangeListener {
     private GebruikerBeheerListPanel listPanel;
     private GebruikerForm gegevensPanel;
-    VBox gegevensPanelcontainer;
     
     private GebruikerController gc;
     
@@ -18,32 +18,46 @@ public class GebruikerBeheerPanelController extends HBox implements Panel {
         this.gc = gc;
         
         // Panels
-        listPanel = new GebruikerBeheerListPanel(this, gc);
-        gegevensPanel = new FormLidController(this, gc);
+        listPanel = new GebruikerBeheerListPanel(gc);
+        gegevensPanel = new FormLidController(gc);
+        gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
+        
+        gc.addPropertyChangeListener(this);
         this.getChildren().addAll(listPanel, gegevensPanel);
     }
     
     public void createForm(TypeGebruiker type){
         switch(type){
             case Lid:
-                gegevensPanel = new FormLidController(this, gc);
+                gegevensPanel = new FormLidController(gc);
                 this.getChildren().set(1, gegevensPanel);
                 break;
             case Proefgebruiker:
-                gegevensPanel = new FormProefgebruikerController(this, gc);
+                gegevensPanel = new FormProefgebruikerController(gc);
                 this.getChildren().set(1, gegevensPanel);
                 break;
         }
     }
     
-    public void loadGebruiker(TypeGebruiker type, AGebruiker gebruiker){
-        createForm(type);
-        gegevensPanel.loadGebruiker(gebruiker);
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch(evt.getPropertyName()){
+            case "currentGebruiker":
+                if(evt.getNewValue() != null)
+                    gegevensPanel.loadGebruiker((AGebruiker)evt.getNewValue());
+                break;
+            case "currentTypeGebruiker":
+                createForm((TypeGebruiker)evt.getNewValue());
+                if(gc.getCurrentGebruiker() != null)
+                    gegevensPanel.loadGebruiker(gc.getCurrentGebruiker());
+                break;
+        }
     }
     
     @Override
     public void resizeWidth(double width) {
-        gegevensPanel.setPrefWidth(width-300);
+        listPanel.setPrefWidth(width*0.3);
+        gegevensPanel.setPrefWidth(width*0.7);
     }
 
     @Override

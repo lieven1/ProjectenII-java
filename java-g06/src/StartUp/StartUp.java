@@ -5,6 +5,7 @@ import gui.Panel;
 import gui.Start.ApplicatieFrameController;
 import java.io.File;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,10 +21,7 @@ public class StartUp extends Application {
         scene.getStylesheets().add((new File("src/resources/bootstrap-3.css")).toURI().toURL().toExternalForm());
         stage.setScene(scene);
         stage.setOnShown((WindowEvent t) -> {
-            stage.setMinWidth(1024);
-            stage.setWidth(1280);
-            stage.setMinHeight(768);
-            stage.setHeight(800);
+           stage.setMaximized(true);
         });
         
         // ResizeListeners to children

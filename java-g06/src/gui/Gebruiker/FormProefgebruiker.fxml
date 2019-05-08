@@ -12,75 +12,80 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="914.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1590.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <AnchorPane prefHeight="623.0" prefWidth="907.0">
+      <AnchorPane prefHeight="1080.0" prefWidth="1590.0">
          <children>
-            <MenuButton id="btnNieuw" fx:id="btnNieuw" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="883.0" text="Nieuwe gebruiker toevoegen">
+            <MenuButton id="btnNieuw" fx:id="btnNieuw" layoutX="20.0" layoutY="267.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="253.0" text="Nieuwe gebruiker">
                <styleClass>
                   <String fx:value="primary" />
                   <String fx:value="lg" />
                </styleClass>
             </MenuButton>
-            <Button id="btnOpslaan" fx:id="btnOpslaan" layoutX="483.0" layoutY="558.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Opslaan">
+            <Button id="btnOpslaan" fx:id="btnOpslaan" layoutX="723.0" layoutY="267.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Opslaan">
                <styleClass>
                   <String fx:value="info" />
                   <String fx:value="lg" />
                </styleClass>
             </Button>
-            <Button id="btnVerwijder" fx:id="btnVerwijder" layoutX="261.0" layoutY="558.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Verwijder">
+            <Button id="btnVerwijder" fx:id="btnVerwijder" layoutX="287.0" layoutY="267.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Verwijder">
                <styleClass>
                   <String fx:value="danger" />
                   <String fx:value="lg" />
                </styleClass>
             </Button>
-            <Label layoutX="21.0" layoutY="117.0" text="Naam">
+            <Label layoutX="20.0" layoutY="117.0" text="Naam">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="23.0" layoutY="154.0" text="Voornaam">
+            <Label layoutX="20.0" layoutY="154.0" text="Voornaam">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <TextField id="txfVoornaam" fx:id="txfVoornaam" layoutX="209.0" layoutY="151.0" prefWidth="230.0" promptText="Voornaam" />
             <TextField id="txfNaam" fx:id="txfNaam" layoutX="209.0" layoutY="114.0" prefWidth="230.0" promptText="Naam" />
-            <Label layoutX="18.0" layoutY="80.0" text="Gebruikersnaam">
+            <Label layoutX="20.0" layoutY="80.0" text="Gebruikersnaam">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <TextField id="txfGebruikersnaam" fx:id="txfGebruikersnaam" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Gebruikersnaam" />
-            <TextField id="txfEmail" fx:id="txfEmail" layoutX="669.0" layoutY="114.0" prefWidth="230.0" promptText="gebruiker@gmail.com" />
-            <Label layoutX="481.0" layoutY="78.0" text="Telefoonnummer">
+            <TextField id="txfEmail" fx:id="txfEmail" layoutX="670.0" layoutY="114.0" prefWidth="230.0" promptText="gebruiker@gmail.com" />
+            <Label layoutX="480.0" layoutY="78.0" text="Telefoonnummer">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txfTelefoonnummer" fx:id="txfTelefoonnummer" layoutX="667.0" layoutY="75.0" prefWidth="230.0" promptText="052525252" />
-            <Label layoutX="483.0" layoutY="116.0" text="Primair email">
+            <TextField id="txfTelefoonnummer" fx:id="txfTelefoonnummer" layoutX="670.0" layoutY="75.0" prefWidth="230.0" promptText="052525252" />
+            <Label layoutX="480.0" layoutY="116.0" text="Primair email">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="483.0" layoutY="154.0" text="Inschrijvingsdatum">
+            <Label layoutX="480.0" layoutY="154.0" text="Inschrijvingsdatum">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker id="dpInschrijvingsdatum" fx:id="dpInschrijvingsdatum" layoutX="671.0" layoutY="151.0" prefWidth="231.0" />
-            <Separator layoutX="456.0" layoutY="64.0" orientation="VERTICAL" prefHeight="473.0" prefWidth="10.0" />
-            <Label layoutX="481.0" layoutY="505.0" text="Type Gebruiker">
+            <DatePicker id="dpInschrijvingsdatum" fx:id="dpInschrijvingsdatum" layoutX="670.0" layoutY="151.0" prefHeight="25.0" prefWidth="230.0" />
+            <Separator layoutX="461.0" layoutY="71.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="9.0" />
+            <Label layoutX="480.0" layoutY="192.0" text="Type Gebruiker">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ChoiceBox id="cbTypeGebruiker" fx:id="cbTypeGebruiker" layoutX="669.0" layoutY="502.0" prefWidth="230.0" />
+            <ChoiceBox id="cbTypeGebruiker" fx:id="cbTypeGebruiker" layoutX="669.0" layoutY="192.0" prefWidth="230.0" />
             <Separator layoutX="-2.0" layoutY="63.0" prefHeight="13.0" prefWidth="905.0" />
-            <Label fx:id="lblFout" layoutX="29.0" layoutY="615.0" text="Fout" textFill="#cf0e0e">
+            <Label fx:id="lblFout" layoutX="20.0" layoutY="196.0" prefHeight="64.0" prefWidth="440.0" text="Fout" textFill="#cf0e0e">
                <font>
                   <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="21.0" text="Detailoverzicht Proefgebruiker">
+               <font>
+                  <Font size="24.0" />
                </font>
             </Label>
          </children>

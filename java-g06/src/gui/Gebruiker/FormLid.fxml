@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="1080.0" fitWidth="1580" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/resources/background.jpg" />
+                  <Image url="@/resources/BackgroundImg.jpg" />
                </image>
             </ImageView>
             <MenuButton id="btnNieuw" fx:id="btnNieuw" layoutX="19.0" layoutY="558.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="253.0" text="Nieuwe gebruiker">

@@ -61,8 +61,8 @@ public class GebruikerBeheerPanelController extends HBox implements Panel, Prope
     
     @Override
     public void resizeWidth(double width) {
-        listPanel.setPrefWidth(width*0.17);
-        gegevensPanel.setPrefWidth(width*0.83);
+        listPanel.setPrefWidth(width*0.2);
+        gegevensPanel.setPrefWidth(width*0.8);
     }
 
     @Override

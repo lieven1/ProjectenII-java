@@ -8,34 +8,52 @@ package controllers;
 import domain.Activiteit;
 import domain.Activiteit;
 import java.util.List;
-import persistentie.ActiviteitenRepository;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import persistentie.ActiviteitenDao;
+import persistentie.GenericDaoJpa;
 
 /**
  *
  * @author Steve
  */
 public class ActiviteitenBeheerder {
-    
-    private ActiviteitenRepository repository;
-    
-    public ActiviteitenBeheerder(){
+
+    private ActiviteitenDao repository;
+    private ObservableList<Activiteit> activiteiten;
+
+    public ActiviteitenBeheerder() {
+        repository = new ActiviteitenDao();
+        activiteiten = FXCollections.observableArrayList();
+        activiteiten.addAll(getAllActiviteiten());
+        activiteiten.addListener((ListChangeListener<Activiteit>)this::activiteitenListChanged);
+
+    }
+
+    private void activiteitenListChanged(ListChangeListener.Change<? extends Activiteit> change){
+        // nodig?
     }
     
-    public List<Activiteit> getAllActiviteiten(){
-        return repository.getAll();
+    public ObservableList<Activiteit> getActiviteiten(){
+        return activiteiten;
+    }
+
+    private List<Activiteit> getAllActiviteiten() {
+        return repository.findAll();
     }
 
     public void createActiviteit(Activiteit act) {
-        repository.add(act);
+        repository.insert(act);
     }
 
-    public void modifyActiviteit(Activiteit oldValue, Activiteit newValue) {
-        repository.modify(oldValue, newValue);
+    public void modifyActiviteit(Activiteit newValue) {
+        repository.update(newValue);
     }
 
     public void remove(Activiteit act) {
-        repository.remove(act);
+        repository.delete(act);
     }
 
-    
 }

@@ -6,20 +6,48 @@
 package domain;
 
 import domain.GebruikerModels.Gebruiker;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Steve
  */
+@Entity(name = "Activiteit")
 public class Activiteit {
 
+    @Id
+    @Column(name = "ActiviteitId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(name = "Naam")
     private String titel;
+    @Column(name = "Type")
     private String type;
+    @Column(name = "StartDatum")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar startDatum;
+    @Column(name = "EindDatum")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar eindDatum;
+    @Column(name = "MaxAantalDeelnemers")
     private int maxAantalDeelnemers;
+    @OneToMany(mappedBy = "Activiteit")
+    private List<ActiviteitDeelnemer> activiteitDeelnemers;
+    @OneToMany(mappedBy = "Activiteit")
+    private List<ActiviteitBegeleider> activiteitBegeleiders;
+
     private List<Gebruiker> deelnemers;
     private List<Gebruiker> begeleiders;
 
@@ -29,12 +57,20 @@ public class Activiteit {
         setStartDatum(startDatum);
         setEindDatum(eindDatum);
         setMaxAantalDeelnemers(maxAantalDeelnemers);
+
         setDeelnemers(deelnemers);
         setBegeleiders(begeleiders);
+
+        activiteitDeelnemers = new ArrayList<>();
+        activiteitBegeleiders = new ArrayList<>();
+    }
+
+    public Activiteit() {
+
     }
 
     public boolean isVolzet() {
-        return deelnemers.size() == maxAantalDeelnemers;
+        return activiteitDeelnemers.size() == maxAantalDeelnemers;
     }
 
     public void addDeelnemer(Gebruiker deelnemer) {
@@ -114,9 +150,11 @@ public class Activiteit {
         if (maxAantalDeelnemers < 1) {
             throw new IllegalArgumentException("Het maximum aantal deelnemers moet minstens 0 zijn.");
         }
+        /*
         if (deelnemers != null && maxAantalDeelnemers < deelnemers.size()) {
-            throw new IllegalArgumentException("Het maximum aantal deelnemers kan niet lager liggen dan het aantal werkelijke deelnemers");        
+            throw new IllegalArgumentException("Het maximum aantal deelnemers kan niet lager liggen dan het aantal werkelijke deelnemers");
         }
+         */
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
@@ -136,10 +174,36 @@ public class Activiteit {
     }
 
     public void setBegeleiders(List<Gebruiker> begeleiders) {
+        /*
         if (begeleiders.size() < 1) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
+        */
         this.begeleiders = begeleiders;
+    }
+
+    public List<ActiviteitDeelnemer> getActiviteitDeelnemers() {
+        return activiteitDeelnemers;
+    }
+
+    public void setActiviteitDeelnemers(List<ActiviteitDeelnemer> activiteitDeelnemers) {
+        this.activiteitDeelnemers = activiteitDeelnemers;
+    }
+
+    public List<ActiviteitBegeleider> getActiviteitBegeleiders() {
+        return activiteitBegeleiders;
+    }
+
+    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
+        this.activiteitBegeleiders = activiteitBegeleiders;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

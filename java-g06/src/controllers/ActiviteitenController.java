@@ -23,46 +23,26 @@ import javafx.collections.ObservableList;
 public class ActiviteitenController {
     
     private ActiviteitenBeheerder beheerder;
-    private ObservableList<ObservableValue<Activiteit>> activiteiten;
 
     public ActiviteitenController(ActiviteitenBeheerder beheerder) {
-        this.beheerder = beheerder;
-        activiteiten = FXCollections.observableArrayList();
-        
-        activiteiten.addAll(beheerder.getAllActiviteiten().stream().map(act -> new SimpleObjectProperty<>(act)).collect(Collectors.toList()));
-        activiteiten.forEach(actPropr -> actPropr.addListener(this::activiteitChanged));
-        
-        activiteiten.addListener((ListChangeListener<ObservableValue<Activiteit>>)this::activiteitenListChanged);
+        this.beheerder = beheerder;           
+    }
+    
+    public ObservableList<Activiteit> getActiviteiten(){
+        return beheerder.getActiviteiten();
     }
     
     public void create(Activiteit act){
         beheerder.createActiviteit(act);
-        activiteiten.add(new SimpleObjectProperty<>(act)); 
     }   
     
     public void modify(Activiteit act){
-        // 
+        beheerder.modifyActiviteit(act);
     }
     
     public void delete(ObservableValue<Activiteit> act){
         beheerder.remove(act.getValue());
-        activiteiten.remove(act);
-    }
-    
-    private void activiteitChanged(ObservableValue<? extends Activiteit> observable, Activiteit oldValue, Activiteit newValue){
-        beheerder.modifyActiviteit(oldValue, newValue);
-    }
-    
-    private void activiteitenListChanged(Change<? extends ObservableValue<Activiteit>> change){
-        // nodig?
-    }
-
-    public ObservableList<ObservableValue<Activiteit>> getActiviteiten() {
-        return activiteiten;
-    }
-    
-
-    
+    }   
     
         
 }

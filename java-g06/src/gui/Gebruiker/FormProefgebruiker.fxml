@@ -17,8 +17,8 @@
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1590.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="1080.0" prefWidth="1590.0">
-         <children>
-              <ImageView fitHeight="1080.0" fitWidth="1590.0" pickOnBounds="true" preserveRatio="true">
+         <children>            
+            <ImageView fitHeight="1080.0" fitWidth="1590.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/resources/BackgroundImg.jpg" />
                </image>
@@ -51,21 +51,16 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txfVoornaam" fx:id="txfVoornaam" layoutX="209.0" layoutY="151.0" prefWidth="230.0" promptText="Voornaam" />
-            <TextField id="txfNaam" fx:id="txfNaam" layoutX="209.0" layoutY="114.0" prefWidth="230.0" promptText="Naam" />
             <Label layoutX="20.0" layoutY="80.0" text="Gebruikersnaam">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txfGebruikersnaam" fx:id="txfGebruikersnaam" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Gebruikersnaam" />
-            <TextField id="txfEmail" fx:id="txfEmail" layoutX="670.0" layoutY="114.0" prefWidth="230.0" promptText="gebruiker@gmail.com" />
             <Label layoutX="480.0" layoutY="78.0" text="Telefoonnummer">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txfTelefoonnummer" fx:id="txfTelefoonnummer" layoutX="670.0" layoutY="75.0" prefWidth="230.0" promptText="052525252" />
             <Label layoutX="480.0" layoutY="116.0" text="Primair email">
                <font>
                   <Font size="16.0" />
@@ -76,14 +71,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <DatePicker id="dpInschrijvingsdatum" fx:id="dpInschrijvingsdatum" layoutX="670.0" layoutY="151.0" prefHeight="25.0" prefWidth="230.0" />
             <Separator layoutX="461.0" layoutY="71.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="9.0" />
             <Label layoutX="480.0" layoutY="192.0" text="Type Gebruiker">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ChoiceBox id="cbTypeGebruiker" fx:id="cbTypeGebruiker" layoutX="669.0" layoutY="192.0" prefWidth="230.0" />
             <Separator layoutX="-2.0" layoutY="63.0" prefHeight="13.0" prefWidth="905.0" />
             <Label fx:id="lblFout" layoutX="20.0" layoutY="196.0" prefHeight="64.0" prefWidth="440.0" text="Fout" textFill="#cf0e0e">
                <font>
@@ -95,6 +88,14 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <TextField id="txfGebruikersnaam" fx:id="txfGebruikersnaam" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Gebruikersnaam" />
+            <TextField id="txfNaam" fx:id="txfNaam" layoutX="209.0" layoutY="114.0" prefWidth="230.0" promptText="Naam" />
+            <TextField id="txfVoornaam" fx:id="txfVoornaam" layoutX="209.0" layoutY="151.0" prefWidth="230.0" promptText="Voornaam" />
+            <TextField id="txfTelefoonnummer" fx:id="txfTelefoonnummer" layoutX="670.0" layoutY="75.0" prefWidth="230.0" promptText="052525252" />
+            <TextField id="txfEmail" fx:id="txfEmail" layoutX="670.0" layoutY="114.0" prefWidth="230.0" promptText="gebruiker@gmail.com" />
+            <DatePicker id="dpInschrijvingsdatum" fx:id="dpInschrijvingsdatum" layoutX="670.0" layoutY="151.0" prefHeight="25.0" prefWidth="230.0" />
+            <ChoiceBox id="cbTypeGebruiker" fx:id="cbTypeGebruiker" layoutX="669.0" layoutY="192.0" prefWidth="230.0" />
+            
          </children>
       </AnchorPane>
    </content>

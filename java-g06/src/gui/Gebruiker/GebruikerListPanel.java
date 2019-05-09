@@ -104,7 +104,9 @@ public class GebruikerListPanel extends VBox {
         btnVerwFilter.setOnAction((ActionEvent t) -> {
             txfNaamFilter.setText("");
             txfVoornaamFilter.setText("");
-            gebruikerList.setItems(gc.getGebruikerLijst());
+            cbProeflid.selectedProperty().setValue(true);
+            cbLid.selectedProperty().setValue(true);
+            gc.veranderFilter("", "", true, true);
         });
 
         filterPane.getChildren().addAll(lblFilterTitle, lblNaamFilter, lblVoornaamFilter, txfNaamFilter, txfVoornaamFilter, cbLid, cbProeflid, btnFilter, btnVerwFilter, imgLogo);

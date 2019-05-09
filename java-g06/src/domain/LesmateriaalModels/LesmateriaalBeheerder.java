@@ -17,12 +17,12 @@ import persistentie.GenericDaoJpa;
 public final class LesmateriaalBeheerder {
     private final GenericDao<Lesmateriaal> lesmateriaalRepo;
     
-    private ObservableList<Lesmateriaal> lesmateriaalList;
-    private FilteredList<Lesmateriaal> filteredList;
-    private SortedList<Lesmateriaal> sortedList;
+    private final ObservableList<Lesmateriaal> lesmateriaalList;
+    private final FilteredList<Lesmateriaal> filteredList;
+    private final SortedList<Lesmateriaal> sortedList;
     
     private Lesmateriaal currentLesmateriaal;
-    private PropertyChangeSupport subject;
+    private final PropertyChangeSupport subject;
     
     public LesmateriaalBeheerder(){
         lesmateriaalRepo = new GenericDaoJpa<>(Lesmateriaal.class);

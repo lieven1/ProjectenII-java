@@ -1,6 +1,9 @@
 package controllers;
 
 // Collection van controllers
+
+import gui.GuiController;
+
 public class DomeinController {
     private static GebruikerController gebruikerController;
     private static ActiviteitenController activiteitenController;

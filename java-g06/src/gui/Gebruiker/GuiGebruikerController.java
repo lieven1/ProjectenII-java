@@ -6,24 +6,20 @@ import domain.GebruikerModels.TypeGebruiker;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.net.MalformedURLException;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class GebruikerBeheerPanelController extends HBox implements Panel, PropertyChangeListener {
-    private GebruikerBeheerListPanel listPanel;
+public class GuiGebruikerController extends HBox implements Panel, PropertyChangeListener {
+    private final GebruikerListPanel listPanel;
     private GebruikerForm gegevensPanel;
     
-    private GebruikerController gc;
+    private final GebruikerController gc;
     
-    public GebruikerBeheerPanelController(GebruikerController gc){
+    public GuiGebruikerController(GebruikerController gc){
         this.gc = gc;
         
         // Panels
-        listPanel = new GebruikerBeheerListPanel(gc);
-        gegevensPanel = new FormLidController(gc);
+        listPanel = new GebruikerListPanel(gc);
+        gegevensPanel = new FormLid(gc);
         gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
         
         gc.addPropertyChangeListener(this);
@@ -34,11 +30,11 @@ public class GebruikerBeheerPanelController extends HBox implements Panel, Prope
         
         switch(type){
             case Lid:
-                gegevensPanel = new FormLidController(gc);
+                gegevensPanel = new FormLid(gc);
                 this.getChildren().set(1, gegevensPanel);
                 break;
             case Proefgebruiker:
-                gegevensPanel = new FormProefgebruikerController(gc);
+                gegevensPanel = new FormProefgebruiker(gc);
                 this.getChildren().set(1, gegevensPanel);
                 break;
         }

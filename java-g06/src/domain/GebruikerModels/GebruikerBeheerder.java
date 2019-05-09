@@ -16,13 +16,13 @@ import persistentie.GenericDaoJpa;
 public class GebruikerBeheerder {
     private final GenericDao<AGebruiker> gebruikerRepo;
     
-    private ObservableList<AGebruiker> gebruikerList;
-    private FilteredList<AGebruiker> filteredList;
-    private SortedList<AGebruiker> sortedList;
+    private final ObservableList<AGebruiker> gebruikerList;
+    private final FilteredList<AGebruiker> filteredList;
+    private final SortedList<AGebruiker> sortedList;
     
     private AGebruiker currentGebruiker;
     private TypeGebruiker currentTypeGebruiker;
-    private PropertyChangeSupport subject;
+    private final PropertyChangeSupport subject;
     
     public GebruikerBeheerder(){
         gebruikerRepo = new GenericDaoJpa<>(AGebruiker.class);

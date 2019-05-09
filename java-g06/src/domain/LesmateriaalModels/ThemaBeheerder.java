@@ -15,8 +15,8 @@ import persistentie.GenericDaoJpa;
 public final class ThemaBeheerder {
     private final GenericDao<Thema> themaRepo;
     
-    private ObservableList<Thema> themaList;
-    private SortedList<Thema> sortedList;
+    private final ObservableList<Thema> themaList;
+    private final SortedList<Thema> sortedList;
     
     private Thema currentThema;
     private PropertyChangeSupport subject;

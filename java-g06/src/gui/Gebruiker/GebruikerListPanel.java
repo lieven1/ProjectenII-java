@@ -6,10 +6,8 @@ import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Gradatie;
 import domain.GebruikerModels.TypeGebruiker;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -26,12 +24,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class GebruikerBeheerListPanel extends VBox {
+public class GebruikerListPanel extends VBox {
 
-    GebruikerController gc;
-    TableView gebruikerList;
+    private final GebruikerController gc;
+    private TableView gebruikerList;
 
-    public GebruikerBeheerListPanel(GebruikerController gc) {
+    public GebruikerListPanel(GebruikerController gc) {
         this.gc = gc;
 
         // VBox Constraints

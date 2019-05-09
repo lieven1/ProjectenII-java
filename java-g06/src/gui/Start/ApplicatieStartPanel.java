@@ -1,7 +1,7 @@
 package gui.Start;
 
 import gui.Panel;
-import gui.Gebruiker.GebruikerBeheerPanelController;
+import gui.Gebruiker.GuiGebruikerController;
 import controllers.DomeinController;
 import gui.activiteit.BeheerActiviteitenGUIController;
 import gui.activiteit.BeheerActiviteitenPane;
@@ -56,10 +56,10 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         
         // Buttons
         createButton("Gebruikers", 0, 1).setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         createButton("Overzicht", 1, 1).setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         
         this.getChildren().addAll(logo, menuPanel);

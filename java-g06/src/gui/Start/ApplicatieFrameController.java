@@ -1,7 +1,7 @@
 package gui.Start;
 
 import controllers.ActiviteitenBeheerder;
-import gui.Gebruiker.GebruikerBeheerPanelController;
+import gui.Gebruiker.GuiGebruikerController;
 import gui.Panel;
 import controllers.DomeinController;
 import domain.Activiteit;
@@ -65,7 +65,7 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
             ((Stage) this.getScene().getWindow()).close();
         });
         gebMenuBeheer.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new GebruikerBeheerPanelController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         this.dc.getGuiController().addPropertyChangeListener(this);
     }

@@ -6,6 +6,10 @@ import domain.GebruikerModels.TypeGebruiker;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.net.MalformedURLException;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class GebruikerBeheerPanelController extends HBox implements Panel, PropertyChangeListener {
@@ -27,6 +31,7 @@ public class GebruikerBeheerPanelController extends HBox implements Panel, Prope
     }
     
     public void createForm(TypeGebruiker type){
+        
         switch(type){
             case Lid:
                 gegevensPanel = new FormLidController(gc);
@@ -56,12 +61,12 @@ public class GebruikerBeheerPanelController extends HBox implements Panel, Prope
     
     @Override
     public void resizeWidth(double width) {
-        listPanel.setPrefWidth(width*0.3);
-        gegevensPanel.setPrefWidth(width*0.7);
+        listPanel.setPrefWidth(width*0.2);
+        gegevensPanel.setPrefWidth(width*0.8);
     }
 
     @Override
     public void resizeHeight(double height) {
-        gegevensPanel.setPrefHeight(2*height);
+        gegevensPanel.setPrefHeight(height*2.25);
     }
 }

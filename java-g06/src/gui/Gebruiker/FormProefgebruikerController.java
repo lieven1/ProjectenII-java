@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 
 public class FormProefgebruikerController extends GebruikerForm {
     private GebruikerController gc;
+    private AGebruiker oldGeb;
     
     @FXML
     TextField txfGebruikersnaam, txfNaam, txfVoornaam, txfTelefoonnummer, txfEmail;
@@ -57,7 +58,7 @@ public class FormProefgebruikerController extends GebruikerForm {
         cbTypeGebruiker.setValue(TypeGebruiker.Proefgebruiker);
         btnOpslaan.setText("Toevoegen");
         MenuItem nieuwProefLid = new MenuItem("Proeflid");
-        MenuItem nieuwLid = new MenuItem("Lid");
+        MenuItem nieuwLid = new MenuItem("Gebruiker");
         btnNieuw.getItems().addAll(nieuwProefLid, nieuwLid);
         
         btnVerwijder.setDisable(true);
@@ -98,6 +99,7 @@ public class FormProefgebruikerController extends GebruikerForm {
     public void loadGebruiker(AGebruiker gebruiker) {
         txfGebruikersnaam.setDisable(true);
         btnOpslaan.setText("Bijwerken");
+        oldGeb = gebruiker;
         btnVerwijder.setDisable(false);
         switch(gebruiker.getType()){
             case Proefgebruiker:
@@ -109,7 +111,10 @@ public class FormProefgebruikerController extends GebruikerForm {
                 txfTelefoonnummer.setText(tempGeb.getTelefoonnummer());
                 txfEmail.setText(tempGeb.getEmail());
                 break;
-            case Lid:
+            case Beheerder:
+                // Beheerder logic
+                break;
+            default:
                 Gebruiker g = (Gebruiker)gebruiker;
                 txfGebruikersnaam.setText(g.getGebruikersnaam());
                 txfNaam.setText(g.getNaam());
@@ -132,15 +137,21 @@ public class FormProefgebruikerController extends GebruikerForm {
                         txfEmail.getText()
                 );
 
-            if(gc.getCurrentGebruiker() == null){
+            if(oldGeb == null){
                 gc.create(geb);
+                oldGeb = geb;
                 btnVerwijder.setDisable(false);
             }else{
-                gc.modify(geb);
+                gc.modify(oldGeb);
+                oldGeb = geb;
             }
             lblFout.setText("");
         }catch(Exception e){
             lblFout.setText(e.getMessage());
         }
+    }
+
+    public void deleteGebruiker() {
+        gc.delete();
     }
 }

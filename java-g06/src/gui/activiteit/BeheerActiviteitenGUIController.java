@@ -7,6 +7,7 @@ package gui.activiteit;
 
 import controllers.ActiviteitenController;
 import domain.Activiteit;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,14 +24,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -39,6 +46,24 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class BeheerActiviteitenGUIController implements Initializable {
 
+    @FXML
+    private ListView leftListView;
+    @FXML
+    private ListView rightListView;
+    @FXML
+    private DatePicker startDatumPicker;
+    @FXML
+    private DatePicker eindDatumPicker;
+    @FXML
+    private Button deelnemersButton;
+    @FXML
+    private Button begeleidersButton;
+    @FXML
+    private Button toevoegenButton;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Button filterButton;
     @FXML
     private Button clearButton;
     @FXML
@@ -54,23 +79,23 @@ public class BeheerActiviteitenGUIController implements Initializable {
     @FXML
     private Button deleteButton;
     @FXML
-    private TableView<ObservableValue<Activiteit>> tableView;
+    private TableView<Activiteit> tableView;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, String> checkColumn;
+    private TableColumn<Activiteit, String> checkColumn;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, String> naamColumn;
+    private TableColumn<Activiteit, String> naamColumn;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, String> typeColumn;
+    private TableColumn<Activiteit, String> typeColumn;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, Integer> aantalDeelnemersColumn;
+    private TableColumn<Activiteit, Integer> aantalDeelnemersColumn;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, LocalDate> startDateColumn;
+    private TableColumn<Activiteit, LocalDate> startDateColumn;
     @FXML
-    private TableColumn<ObservableValue<Activiteit>, LocalDate> eindDateColumn;
+    private TableColumn<Activiteit, LocalDate> eindDateColumn;
 
     private ActiviteitenController controller;
 
-    private ObservableList<ObservableValue<Activiteit>> activiteiten;
+    private ObservableList<Activiteit> activiteiten;
 
     /**
      * Initializes the controller class.
@@ -78,45 +103,44 @@ public class BeheerActiviteitenGUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tableView.setItems(activiteiten);
-        
-        naamColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getTitel()));
-        typeColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getType()));
-        aantalDeelnemersColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getDeelnemers().size()));
-        startDateColumn.setCellValueFactory(p -> new SimpleObjectProperty(calendarToLocalDate(p.getValue().getValue().getStartDatum())));
-        eindDateColumn.setCellValueFactory(p -> new SimpleObjectProperty(calendarToLocalDate(p.getValue().getValue().getEindDatum())));
+
+        naamColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        aantalDeelnemersColumn.setCellValueFactory(new PropertyValueFactory<>("maxAantalDeelnemers"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
+        eindDateColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
     }
 
     public void setController(ActiviteitenController ac) {
         controller = ac;
         activiteiten = controller.getActiviteiten();
     }
+    
+    public void filter(){
+        
+    }
 
     public void clear() {
-        filterTextField.clear();
-        fromDatePicker.setValue(null);
-        untilDatePicker.setValue(null);
-        activiteiten = controller.getActiviteiten();
+        
     }
 
     public void search() {
-        activiteiten = controller.getActiviteiten();
-        filterText();
-        filterFrom();
-        filterUntil();
-    }
-
-    public void checkUncheckAll() {
-
+        
     }
 
     public void create() {
 
+    }
+    
+    public void save(){
+        
     }
 
     public void delete() {
 
     }
 
+    /*
     private void filterText() {
         activiteiten = activiteiten.stream().filter(obsObj -> obsObj.getValue().getTitel().contains(filterTextField.getText()) || obsObj.getValue().getType().contains(filterTextField.getText())).collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
@@ -132,6 +156,7 @@ public class BeheerActiviteitenGUIController implements Initializable {
             activiteiten = activiteiten.stream().filter(obsObj -> calendarToLocalDate(obsObj.getValue().getStartDatum()).isBefore(untilDatePicker.getValue())).collect(Collectors.toCollection(FXCollections::observableArrayList));
         }
     }
+*/
 
     private LocalDate calendarToLocalDate(Calendar calendar) {
         if (calendar == null) {

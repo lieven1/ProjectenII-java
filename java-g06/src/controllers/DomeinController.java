@@ -19,4 +19,10 @@ public class DomeinController {
             gebruikerController = new GebruikerController();
         return gebruikerController;
     }
+    
+    public ActiviteitenController getActiviteitenController(){
+        if(activiteitenController == null)
+            activiteitenController = new ActiviteitenController(new ActiviteitenBeheerder());
+        return activiteitenController;
+    }
 }

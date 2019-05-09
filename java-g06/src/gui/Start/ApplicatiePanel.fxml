@@ -18,7 +18,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Gebruiker">
           <items>
-            <MenuItem fx:id="gebMenuBeheer" mnemonicParsing="false" text="Beheren" />
+            <MenuItem fx:id="gebMenuBeheer" mnemonicParsing="false" text="Gebruiker beheren" />
           </items>
         </Menu>
       </menus>

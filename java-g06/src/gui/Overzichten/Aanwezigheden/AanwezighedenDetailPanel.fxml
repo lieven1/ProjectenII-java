@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1590.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="1080.0" prefWidth="1590.0">
+         <children>
+            <ImageView fitHeight="1080.0" fitWidth="1590.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/resources/BackgroundImg.jpg"  />
+               </image>
+            </ImageView>
+            <Label layoutX="21.0" layoutY="22.0" prefHeight="35.0" prefWidth="558.0" text="Aanwezigheden lesmoment">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TableView layoutX="21.0" layoutY="83.0" prefHeight="900.0" prefWidth="700.0">
+              <columns>
+                <TableColumn fx:id="naamGebruiker" editable="false" prefWidth="200.0" text="Naam" />
+                <TableColumn fx:id="VoornaamGebruiker" editable="false" prefWidth="200.0" text="Voornaam" />
+                  <TableColumn fx:id="AanwezigGebruiker" editable="false" prefWidth="100.0" text="Aanwezig" />
+                  <TableColumn fx:id="Ingeschreven" editable="false" prefWidth="100.0" text="Ingeschreven" />
+                  <TableColumn fx:id="LesformuleGebruiker" editable="false" prefWidth="100.0" text="Lesformule" />
+              </columns>
+            </TableView>
+            <Separator layoutX="14.0" layoutY="64.0" prefWidth="1562.0" />
+            <Label fx:id="detailGebruikerNaam" layoutX="781.0" layoutY="77.0" prefHeight="27.0" prefWidth="500.0" text="Boris De Torck">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="781.0" layoutY="108.0" prefWidth="400.0" />
+            <Label fx:id="detailTelefoonLabel" layoutX="781.0" layoutY="121.0" text="Telefoon: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailTelefoonValue" layoutX="920.0" layoutY="121.0" prefHeight="20.0" prefWidth="271.0" text="temp0479076258">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailEmailLabel" layoutX="781.0" layoutY="141.0" text="email: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailEmailValue" layoutX="920.0" layoutY="141.0" prefHeight="20.0" prefWidth="271.0" text="temp@temp.com">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailGradatieLabel" layoutX="781.0" layoutY="161.0" text="Gradatie">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailTelefoonValue" layoutX="920.0" layoutY="161.0" prefHeight="20.0" prefWidth="271.0" text="tempPro">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailPuntenLabel" layoutX="781.0" layoutY="181.0" text="Punten:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailPuntenValue" layoutX="920.0" layoutY="181.0" prefHeight="20.0" prefWidth="271.0" text="Temppunten 50">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </content>
+</fx:root>

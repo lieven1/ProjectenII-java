@@ -56,7 +56,7 @@ public class GebruikerListPanel extends VBox {
         }
         imgLogo.setLayoutX(10);
         imgLogo.setLayoutY(10);
-        Label lblFilterTitle = new Label("Filter");
+        Label lblFilterTitle = new Label("Filter gebruikers");
         lblFilterTitle.setFont(new Font("Arial Black", 16.0));
         lblFilterTitle.setTextFill(Paint.valueOf("#393980"));
         lblFilterTitle.setLayoutX(10);

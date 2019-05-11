@@ -5,6 +5,7 @@
  */
 package gui.Overzichten;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -13,6 +14,6 @@ import javafx.scene.layout.Pane;
  *
  * @author boris
  */
-public abstract class DetailPanel extends Pane{
-   
+public abstract class DetailPanel extends ScrollPane {
+
 }

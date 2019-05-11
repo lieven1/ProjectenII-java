@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.Overzichten;
+package gui.Overzichten.Aanwezigheden;
 
 import controllers.OverzichtController;
 import domain.GebruikerModels.AGebruiker;
@@ -11,6 +11,8 @@ import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Gradatie;
 import domain.GebruikerModels.TypeGebruiker;
 import domain.Overzicht.Lesmoment;
+import gui.Overzichten.OverzichtListPanel;
+import gui.Overzichten.OverzichtListPanel;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
@@ -50,7 +52,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
     private TableView lesmomentList;
     private final DateFormat dateFormat = new SimpleDateFormat("EEE, dd-MM-yyyy hh:mm", new Locale("nl", "BE"));
 
-    AanwezighedenListPanel(OverzichtController oc) {
+    public AanwezighedenListPanel(OverzichtController oc) {
         this.oc = oc;
 
         // VBox Constraints
@@ -80,7 +82,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         imgLogo.setLayoutX(10);
         imgLogo.setLayoutY(10);
         //title
-        Label lblFilterTitle = new Label("Filter");
+        Label lblFilterTitle = new Label("Filter lesmomenten");
         lblFilterTitle.setFont(new Font("Arial Black", 16.0));
         lblFilterTitle.setTextFill(Paint.valueOf("#393980"));
         lblFilterTitle.setLayoutX(10);

@@ -5,6 +5,8 @@
  */
 package gui.Overzichten;
 
+import gui.Overzichten.Aanwezigheden.AanwezighedenListPanel;
+import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanel;
 import controllers.OverzichtController;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;

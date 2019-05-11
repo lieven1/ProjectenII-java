@@ -6,6 +6,7 @@
 package controllers;
 
 import domain.Overzicht.Lesmoment;
+import domain.Overzicht.LesmomentLeden;
 import domain.Overzicht.OverzichtBeheerder;
 import gui.Overzichten.OverzichtPanelController;
 import java.beans.PropertyChangeListener;
@@ -33,6 +34,10 @@ public class OverzichtController {
 
     public ObservableList<Lesmoment> getLesomentList() {
         return beheerder.getLesomentList();
+    }
+    
+    public List<LesmomentLeden> getLesmomentLeden(){
+        return beheerder.getLesmomentLeden();
     }
 
     public Lesmoment getCurrentLesmoment() {

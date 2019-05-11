@@ -33,28 +33,40 @@ import persistentie.GenericDaoJpa;
 public class OverzichtBeheerder {
 
     private final GenericDao<Lesmoment> lesmomentRepo;
+    private final GenericDao<LesmomentLeden> lesmomentLedenRepo;
 
     private ObservableList<Lesmoment> lesmomentList;
     private FilteredList<Lesmoment> filteredList;
     private SortedList<Lesmoment> sortedList;
+
+    private List<LesmomentLeden> lesmomentLedenList;
 
     private Lesmoment currentLesmoment;
 
     private PropertyChangeSupport subject;
 
     public OverzichtBeheerder() {
-        this.lesmomentRepo = new GenericDaoJpa<>(Lesmoment.class);
+        //repo's
+        lesmomentRepo = new GenericDaoJpa<>(Lesmoment.class);
+        lesmomentLedenRepo = new GenericDaoJpa<>(LesmomentLeden.class);
+        //lesmoment lists
         lesmomentList = FXCollections.observableArrayList(lesmomentRepo.findAll());
         filteredList = new FilteredList<>(lesmomentList);
         sortedList = new SortedList<>(filteredList,
                 Comparator.comparing(Lesmoment::getStartTijd)
         );
-
+        //lesmomentleden lists
+        lesmomentLedenList = lesmomentLedenRepo.findAll();
+        
         subject = new PropertyChangeSupport(this);
     }
 
     public ObservableList<Lesmoment> getLesomentList() {
         return sortedList;
+    }
+
+    public List<LesmomentLeden> getLesmomentLeden() {
+        return lesmomentLedenList;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -84,6 +96,7 @@ public class OverzichtBeheerder {
     }
 
     public void setCurrentLesmoment(Lesmoment currentLesmoment) {
+        subject.firePropertyChange("currentLesmoment", this.currentLesmoment, currentLesmoment);
         this.currentLesmoment = currentLesmoment;
     }
 

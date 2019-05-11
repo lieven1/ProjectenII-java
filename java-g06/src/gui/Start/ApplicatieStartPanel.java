@@ -1,8 +1,8 @@
 package gui.Start;
 
 import gui.Panel;
-import gui.Gebruiker.GuiGebruikerController;
 import controllers.DomeinController;
+import gui.Gebruiker.GuiGebruikerController;
 import gui.activiteit.BeheerActiviteitenGUIController;
 import gui.activiteit.BeheerActiviteitenPane;
 import java.io.File;

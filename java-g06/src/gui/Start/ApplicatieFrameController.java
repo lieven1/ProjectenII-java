@@ -7,6 +7,9 @@ import controllers.DomeinController;
 import domain.Activiteit;
 import domain.GebruikerModels.GebruikerBeheerder;
 import domain.GebruikerModels.ProefGebruiker;
+import gui.Gebruiker.GuiGebruikerController;
+import gui.Overzichten.OverzichtPanelController;
+import gui.activiteit.BeheerActiviteitenGUIController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -36,6 +39,15 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
     private MenuItem appMenuStop;
     @FXML
     private MenuItem gebMenuBeheer;
+    @FXML
+    private MenuItem actMenuBeheer;
+    @FXML
+    private MenuItem overzichtAanwezigheden;
+    @FXML
+    private MenuItem overzichtActiviteiten;
+    @FXML
+    private MenuItem overzichtKampioenschap;
+    
     @FXML
     private AnchorPane contentPane;
 
@@ -67,6 +79,16 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
         gebMenuBeheer.setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
+        overzichtAanwezigheden.setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 0), this.getHeight(), this.getWidth());
+        });
+        overzichtActiviteiten.setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 1), this.getHeight(), this.getWidth());
+        });
+        overzichtKampioenschap.setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 2), this.getHeight(), this.getWidth());
+        });
+          
         this.dc.getGuiController().addPropertyChangeListener(this);
     }
 

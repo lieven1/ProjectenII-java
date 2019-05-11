@@ -7,22 +7,34 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root prefHeight="400.0" prefWidth="640.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Applicatie">
-          <items>
-            <MenuItem fx:id="appMenuStart" mnemonicParsing="false" text="Startpagina" />
-            <MenuItem fx:id="appMenuStop" mnemonicParsing="false" text="Afsluiten" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Gebruiker">
-          <items>
-            <MenuItem fx:id="gebMenuBeheer" mnemonicParsing="false" text="Gebruiker beheren" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane fx:id="contentPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="397.0" prefWidth="640.0" VBox.vgrow="ALWAYS" />
-  </children>
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Applicatie">
+                    <items>
+                        <MenuItem fx:id="appMenuStart" mnemonicParsing="false" text="Startpagina" />
+                        <MenuItem fx:id="appMenuStop" mnemonicParsing="false" text="Afsluiten" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gebruiker">
+                    <items>
+                        <MenuItem fx:id="gebMenuBeheer" mnemonicParsing="false" text="Gebruiker beheren" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Activiteit">
+                    <items>
+                        <MenuItem fx:id="actMenuBeheer" mnemonicParsing="false" text="Activiteit beheren" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Overzicht">
+                    <items>
+                        <MenuItem fx:id="overzichtAanwezigheden" mnemonicParsing="false" text="Aanwezigheden" />
+                        <MenuItem fx:id="overzichtActiviteiten" mnemonicParsing="false" text="Activiteiten" />
+                        <MenuItem fx:id="overzichtKampioenschap" mnemonicParsing="false" text="Kampioenschap" />
+                       </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane fx:id="contentPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="397.0" prefWidth="640.0" VBox.vgrow="ALWAYS" />
+    </children>
 </fx:root>

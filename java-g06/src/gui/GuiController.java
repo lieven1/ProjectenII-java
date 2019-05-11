@@ -1,4 +1,4 @@
-package gui;
+package controllers;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -9,8 +9,8 @@ import javafx.scene.layout.Pane;
 
 public class GuiController {
     private Pane contentPane;
-    private final Map<String, Double> dimensions;
-    private final PropertyChangeSupport subject;
+    private Map<String, Double> dimensions;
+    private PropertyChangeSupport subject;
     
     public GuiController(){
         subject = new PropertyChangeSupport(this);

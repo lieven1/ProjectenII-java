@@ -2,11 +2,13 @@ package controllers;
 
 // Collection van controllers
 
-import gui.GuiController;
+import domain.Overzicht.OverzichtBeheerder;
+
 
 public class DomeinController {
     private static GebruikerController gebruikerController;
     private static ActiviteitenController activiteitenController;
+    private static OverzichtController overzichtController;
     private static GuiController guiController;
     
     public DomeinController(){
@@ -27,5 +29,11 @@ public class DomeinController {
         if(activiteitenController == null)
             activiteitenController = new ActiviteitenController(new ActiviteitenBeheerder());
         return activiteitenController;
+    }
+
+    public OverzichtController getOverzichtController() {
+       if(overzichtController == null)
+            overzichtController = new OverzichtController();
+        return overzichtController;
     }
 }

@@ -5,9 +5,11 @@
  */
 package gui.Overzichten;
 
+import controllers.GebruikerController;
 import gui.Overzichten.Aanwezigheden.AanwezighedenListPanel;
 import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanel;
 import controllers.OverzichtController;
+import domain.Overzicht.Lesmoment;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,7 +28,7 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
 
     //meerdere ctor per type overzicht --> in framecontroller wordt juist ctor aangeroepen bij constructie
     //default ctor --> aanwezigheden
-    public OverzichtPanelController(OverzichtController oc, int typeOverzicht) {
+    public OverzichtPanelController(OverzichtController oc, GebruikerController gc , int typeOverzicht) {
         this.oc = oc;
 
         // Panels
@@ -38,7 +40,7 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
             gegevensPanel = new ActiviteitenDetailPanel(oc);
         } else {
             listPanel = new AanwezighedenListPanel(oc);
-            gegevensPanel = new AanwezighedenDetailPanel(oc);
+            gegevensPanel = new AanwezighedenDetailPanel(oc, gc);
         }
 
         oc.addPropertyChangeListener(this);
@@ -47,7 +49,7 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //wanneer item uit lijst geselecteerd word --> pas detailpanel aan
+        gegevensPanel.loadItems(evt.getNewValue());
     }
 
     @Override

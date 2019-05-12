@@ -27,6 +27,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -103,8 +104,6 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         dpTotFilter.setLayoutX(170);
         dpTotFilter.setLayoutY(130);
         dpTotFilter.setPrefSize(130, 25);
-        
-        //sportjaar
 
         //buttons
         Button btnFilter = new Button("Filter");

@@ -47,7 +47,7 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
     private MenuItem overzichtActiviteiten;
     @FXML
     private MenuItem overzichtKampioenschap;
-    
+
     @FXML
     private AnchorPane contentPane;
 
@@ -80,15 +80,15 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
             dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         overzichtAanwezigheden.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 0), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 0), this.getHeight(), this.getWidth());
         });
         overzichtActiviteiten.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 1), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 1), this.getHeight(), this.getWidth());
         });
         overzichtKampioenschap.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), 2), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 2), this.getHeight(), this.getWidth());
         });
-          
+
         this.dc.getGuiController().addPropertyChangeListener(this);
     }
 

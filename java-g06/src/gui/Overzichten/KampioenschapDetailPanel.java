@@ -16,5 +16,10 @@ public class KampioenschapDetailPanel extends DetailPanel{
     KampioenschapDetailPanel(OverzichtController oc) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void loadItems(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

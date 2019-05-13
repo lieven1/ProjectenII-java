@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import beheerders.ActiviteitenBeheerder;
 import domain.Activiteit;
 import java.time.LocalDate;
 import java.util.List;

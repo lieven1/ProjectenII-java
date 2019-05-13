@@ -1,15 +1,14 @@
 package gui.Start;
 
-import controllers.ActiviteitenBeheerder;
+import beheerders.ActiviteitenBeheerder;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Panel;
 import controllers.DomeinController;
 import domain.Activiteit;
-import domain.GebruikerModels.GebruikerBeheerder;
+import beheerders.GebruikerBeheerder;
 import domain.GebruikerModels.ProefGebruiker;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Overzichten.OverzichtPanelController;
-import gui.activiteit.BeheerActiviteitenGUIController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;

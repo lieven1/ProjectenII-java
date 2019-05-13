@@ -3,8 +3,6 @@ package gui.Start;
 import gui.Panel;
 import controllers.DomeinController;
 import gui.Gebruiker.GuiGebruikerController;
-import gui.activiteit.BeheerActiviteitenGUIController;
-import gui.activiteit.BeheerActiviteitenPane;
 import java.io.File;
 import java.net.MalformedURLException;
 import javafx.event.ActionEvent;

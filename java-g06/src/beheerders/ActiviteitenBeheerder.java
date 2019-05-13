@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package beheerders;
 
 import domain.Activiteit;
 import domain.Activiteit;
@@ -57,12 +57,12 @@ public class ActiviteitenBeheerder {
         repository.delete(act);
     }
 
-    void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
+    public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
-    void setCurrentActiviteit(Activiteit activiteit) {
+    public void setCurrentActiviteit(Activiteit activiteit) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

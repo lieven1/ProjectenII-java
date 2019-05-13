@@ -2,6 +2,7 @@ package controllers;
 
 // Collection van controllers
 
+import beheerders.ActiviteitenBeheerder;
 import domain.Overzicht.OverzichtBeheerder;
 
 

@@ -1,5 +1,8 @@
-package domain.GebruikerModels;
+package beheerders;
 
+import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.Gebruiker;
+import domain.GebruikerModels.TypeGebruiker;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Comparator;

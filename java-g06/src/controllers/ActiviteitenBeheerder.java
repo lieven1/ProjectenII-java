@@ -7,6 +7,7 @@ package controllers;
 
 import domain.Activiteit;
 import domain.Activiteit;
+import java.time.LocalDate;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,15 +29,15 @@ public class ActiviteitenBeheerder {
         repository = new ActiviteitenDao();
         activiteiten = FXCollections.observableArrayList();
         activiteiten.addAll(getAllActiviteiten());
-        activiteiten.addListener((ListChangeListener<Activiteit>)this::activiteitenListChanged);
+        activiteiten.addListener((ListChangeListener<Activiteit>) this::activiteitenListChanged);
 
     }
 
-    private void activiteitenListChanged(ListChangeListener.Change<? extends Activiteit> change){
+    private void activiteitenListChanged(ListChangeListener.Change<? extends Activiteit> change) {
         // nodig?
     }
-    
-    public ObservableList<Activiteit> getActiviteiten(){
+
+    public ObservableList<Activiteit> getActiviteiten() {
         return activiteiten;
     }
 
@@ -54,6 +55,15 @@ public class ActiviteitenBeheerder {
 
     public void remove(Activiteit act) {
         repository.delete(act);
+    }
+
+    void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+
+    void setCurrentActiviteit(Activiteit activiteit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

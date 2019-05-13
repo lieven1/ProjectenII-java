@@ -6,6 +6,7 @@
 package controllers;
 
 import domain.Activiteit;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleListProperty;
@@ -21,28 +22,36 @@ import javafx.collections.ObservableList;
  * @author Steve
  */
 public class ActiviteitenController {
-    
+
     private ActiviteitenBeheerder beheerder;
 
     public ActiviteitenController(ActiviteitenBeheerder beheerder) {
-        this.beheerder = beheerder;           
+        this.beheerder = beheerder;
     }
-    
-    public ObservableList<Activiteit> getActiviteiten(){
+
+    public ObservableList<Activiteit> getActiviteiten() {
         return beheerder.getActiviteiten();
     }
-    
-    public void create(Activiteit act){
+
+    public void create(Activiteit act) {
         beheerder.createActiviteit(act);
-    }   
-    
-    public void modify(Activiteit act){
+    }
+
+    public void modify(Activiteit act) {
         beheerder.modifyActiviteit(act);
     }
-    
-    public void delete(ObservableValue<Activiteit> act){
+
+    public void delete(ObservableValue<Activiteit> act) {
         beheerder.remove(act.getValue());
-    }   
-    
-        
+    }
+
+    public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
+        beheerder.veranderFilter(naam, type, from, until);
+    }
+
+    public void setCurrentActiviteit(Activiteit activiteit) {
+        beheerder.setCurrentActiviteit(activiteit);
+    }
 }
+
+

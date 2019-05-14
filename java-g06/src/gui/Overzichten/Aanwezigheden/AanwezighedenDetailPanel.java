@@ -5,8 +5,8 @@
  */
 package gui.Overzichten.Aanwezigheden;
 
-import controllers.GebruikerController;
-import controllers.OverzichtController;
+import domain.controllers.GebruikerController;
+import domain.controllers.OverzichtController;
 import domain.Overzicht.Lesmoment;
 import domain.Overzicht.LesmomentLeden;
 import gui.Overzichten.DetailPanel;

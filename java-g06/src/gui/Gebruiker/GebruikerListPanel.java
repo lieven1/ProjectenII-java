@@ -1,6 +1,6 @@
 package gui.Gebruiker;
 
-import controllers.GebruikerController;
+import domain.controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Gradatie;
@@ -126,7 +126,7 @@ public class GebruikerListPanel extends VBox {
         typeColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, TypeGebruiker>("type"));
         gebruikerList.getColumns().addAll(lastNameColumn, firstNameColumn, graadColumn, typeColumn);
         gebruikerList.setItems(gc.getGebruikerLijst());
-        gebruikerList.setPrefHeight(1080);
+        gebruikerList.setPrefHeight(680);
 
         gebruikerList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
             gc.setCurrentTypeGebruiker(((AGebruiker) newValue).getType());

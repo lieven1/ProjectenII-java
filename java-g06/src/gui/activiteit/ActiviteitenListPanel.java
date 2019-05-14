@@ -5,8 +5,8 @@
  */
 package gui.activiteit;
 
-import controllers.ActiviteitenController;
-import controllers.GebruikerController;
+import domain.controllers.ActiviteitenController;
+import domain.controllers.GebruikerController;
 import domain.Activiteit;
 import domain.GebruikerModels.AGebruiker;
 import gui.PanelGenerator;

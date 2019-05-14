@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package domain.controllers;
 
 import domain.Overzicht.Lesmoment;
 import domain.Overzicht.LesmomentLeden;
-import domain.Overzicht.OverzichtBeheerder;
+import domain.beheerders.OverzichtBeheerder;
 import gui.Overzichten.OverzichtPanelController;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;

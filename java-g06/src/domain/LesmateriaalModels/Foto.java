@@ -1,8 +1,20 @@
 package domain.LesmateriaalModels;
 
-public final class Foto {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Foto implements Serializable {
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id;
+    @Column(name = "Bestandsnaam")
     private String bestandsnaam;
+    @Column(name = "Extensie")
     private String extensie;
     
     /*public static Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
@@ -14,6 +26,8 @@ public final class Foto {
         setBestandsnaam(bestandsnaam);
         setExtensie(extensie);
     }
+    
+    public Foto(){}
 
     public String getBestandsnaam() {
         return bestandsnaam;

@@ -1,11 +1,11 @@
 package gui.Start;
 
-import beheerders.ActiviteitenBeheerder;
+import domain.beheerders.ActiviteitenBeheerder;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Panel;
-import controllers.DomeinController;
+import domain.controllers.DomeinController;
 import domain.Activiteit;
-import beheerders.GebruikerBeheerder;
+import domain.beheerders.GebruikerBeheerder;
 import domain.GebruikerModels.ProefGebruiker;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Overzichten.OverzichtPanelController;

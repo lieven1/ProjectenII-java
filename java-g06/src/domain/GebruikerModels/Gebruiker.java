@@ -1,8 +1,6 @@
 package domain.GebruikerModels;
 
-import domain.Activiteit;
 import java.util.Calendar;
-import java.util.List;
 import java.util.regex.Pattern;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;

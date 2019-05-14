@@ -46,7 +46,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="txfGebruikersnaam" fx:id="txfGebruikersnaam" editable="false" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Gebruikersnaam" />
+            <TextField id="txfGebruikersnaam" fx:id="txfGebruikersnaam" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Gebruikersnaam" />
             <Label layoutX="21.0" layoutY="117.0" text="Naam">
                <font>
                   <Font size="16.0" />

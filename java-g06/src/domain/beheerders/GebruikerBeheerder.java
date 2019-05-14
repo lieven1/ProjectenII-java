@@ -1,4 +1,4 @@
-package beheerders;
+package domain.beheerders;
 
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;

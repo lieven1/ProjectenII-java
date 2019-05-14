@@ -1,8 +1,9 @@
 package gui.Start;
 
 import gui.Panel;
-import controllers.DomeinController;
+import domain.controllers.DomeinController;
 import gui.Gebruiker.GuiGebruikerController;
+import gui.Lesmateriaal.GuiLesmateriaalController;
 import java.io.File;
 import java.net.MalformedURLException;
 import javafx.event.ActionEvent;
@@ -56,8 +57,8 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         createButton("Gebruikers", 0, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
-        createButton("Overzicht", 1, 1).setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
+        createButton("Lesmateriaal", 1, 1).setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new GuiLesmateriaalController(dc.getLesmateriaalController()), this.getHeight(), this.getWidth());
         });
         
         this.getChildren().addAll(logo, menuPanel);

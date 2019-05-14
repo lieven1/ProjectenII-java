@@ -5,41 +5,28 @@
  */
 package gui.Overzichten.Aanwezigheden;
 
-import controllers.OverzichtController;
-import domain.GebruikerModels.AGebruiker;
-import domain.GebruikerModels.Gebruiker;
-import domain.GebruikerModels.Gradatie;
-import domain.GebruikerModels.TypeGebruiker;
+import domain.controllers.OverzichtController;
 import domain.Overzicht.Lesmoment;
-import gui.Overzichten.OverzichtListPanel;
 import gui.Overzichten.OverzichtListPanel;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 

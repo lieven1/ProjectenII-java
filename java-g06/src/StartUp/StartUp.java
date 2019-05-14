@@ -1,6 +1,6 @@
 package StartUp;
 
-import controllers.DomeinController;
+import domain.controllers.DomeinController;
 import gui.Panel;
 import gui.Start.ApplicatieFrameController;
 import java.io.File;

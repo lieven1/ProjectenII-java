@@ -5,10 +5,10 @@
  */
 package gui.Overzichten;
 
-import controllers.GebruikerController;
+import domain.controllers.GebruikerController;
 import gui.Overzichten.Aanwezigheden.AanwezighedenListPanel;
 import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanel;
-import controllers.OverzichtController;
+import domain.controllers.OverzichtController;
 import domain.Overzicht.Lesmoment;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;

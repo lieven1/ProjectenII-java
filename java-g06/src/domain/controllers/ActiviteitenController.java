@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package domain.controllers;
 
-import beheerders.ActiviteitenBeheerder;
+import domain.beheerders.ActiviteitenBeheerder;
 import domain.Activiteit;
 import java.time.LocalDate;
 import java.util.List;

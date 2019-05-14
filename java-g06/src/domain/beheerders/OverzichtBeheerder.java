@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain.Overzicht;
+package domain.beheerders;
 
 import domain.GebruikerModels.AGebruiker;
+import domain.Overzicht.Lesmoment;
+import domain.Overzicht.LesmomentLeden;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.DateFormat;

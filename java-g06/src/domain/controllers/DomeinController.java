@@ -1,13 +1,14 @@
-package controllers;
+package domain.controllers;
 
 // Collection van controllers
 
-import beheerders.ActiviteitenBeheerder;
-import domain.Overzicht.OverzichtBeheerder;
+import controllers.GuiController;
+import domain.beheerders.ActiviteitenBeheerder;
 
 
 public class DomeinController {
     private static GebruikerController gebruikerController;
+    private static LesmateriaalController lesmateriaalController;
     private static ActiviteitenController activiteitenController;
     private static OverzichtController overzichtController;
     private static GuiController guiController;
@@ -24,6 +25,12 @@ public class DomeinController {
         if(gebruikerController == null)
             gebruikerController = new GebruikerController();
         return gebruikerController;
+    }
+    
+    public LesmateriaalController getLesmateriaalController(){
+        if(lesmateriaalController == null)
+            lesmateriaalController = new LesmateriaalController();
+        return lesmateriaalController;
     }
     
     public ActiviteitenController getActiviteitenController(){

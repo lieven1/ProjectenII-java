@@ -5,7 +5,7 @@
  */
 package gui.Overzichten;
 
-import controllers.OverzichtController;
+import domain.controllers.OverzichtController;
 
 /**
  *

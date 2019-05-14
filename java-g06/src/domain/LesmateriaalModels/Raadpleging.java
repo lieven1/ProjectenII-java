@@ -2,11 +2,28 @@ package domain.LesmateriaalModels;
 
 import domain.GebruikerModels.AGebruiker;
 import java.time.LocalTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-public final class Raadpleging {
+@Entity
+public class Raadpleging {
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "RaadplegingId")
     private int id;
+    @Column(name = "Tijdstip")
     private LocalTime tijdstip;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Gebruikersnaam")
     private AGebruiker gebruiker;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LesmateriaalId")
     private Lesmateriaal lesmateriaal;
 
     public Raadpleging(LocalTime tijdstip, AGebruiker gebruiker, Lesmateriaal lesmateriaal) {
@@ -14,6 +31,8 @@ public final class Raadpleging {
         setGebruiker(gebruiker);
         setLesmateriaal(lesmateriaal);
     }
+    
+    public Raadpleging(){}
     
     public LocalTime getTijdstip() {
         return tijdstip;

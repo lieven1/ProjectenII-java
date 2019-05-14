@@ -1,6 +1,6 @@
 package gui.Gebruiker;
 
-import controllers.GebruikerController;
+import domain.controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.TypeGebruiker;
 import gui.Panel;

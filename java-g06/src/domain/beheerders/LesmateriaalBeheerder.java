@@ -1,6 +1,8 @@
-package domain.LesmateriaalModels;
+package domain.beheerders;
 
 import domain.GebruikerModels.Gradatie;
+import domain.LesmateriaalModels.Lesmateriaal;
+import domain.LesmateriaalModels.Thema;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Comparator;
@@ -62,11 +64,12 @@ public final class LesmateriaalBeheerder {
     }
     
     // CRUD
-    public void create(){
+    public void create(Lesmateriaal lesmateriaal){
+        currentLesmateriaal = lesmateriaal;
         GenericDaoJpa.startTransaction();
-        lesmateriaalRepo.insert(currentLesmateriaal);
+        lesmateriaalRepo.insert(lesmateriaal);
         GenericDaoJpa.commitTransaction();
-        lesmateriaalList.add(currentLesmateriaal);
+        lesmateriaalList.add(lesmateriaal);
     }
     
     public void modify(){
@@ -80,12 +83,17 @@ public final class LesmateriaalBeheerder {
         lesmateriaalRepo.delete(currentLesmateriaal);
         GenericDaoJpa.commitTransaction();
         lesmateriaalList.remove(currentLesmateriaal);
+        currentLesmateriaal = null;
     }
     
     // PropertyChangeListener
     public void setCurrentLesmateriaal(Lesmateriaal currentLesmateriaal) {
         subject.firePropertyChange("currentLesmateriaal", this.currentLesmateriaal, currentLesmateriaal);
         this.currentLesmateriaal = currentLesmateriaal;
+    }
+    
+    public Lesmateriaal getCurrentLesmateriaal() {
+        return this.currentLesmateriaal;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {

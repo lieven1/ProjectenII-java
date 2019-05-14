@@ -5,7 +5,7 @@
  */
 package gui.Overzichten;
 
-import controllers.OverzichtController;
+import domain.controllers.OverzichtController;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;

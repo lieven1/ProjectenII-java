@@ -1,7 +1,7 @@
-package controllers;
+package domain.controllers;
 
 import domain.GebruikerModels.AGebruiker;
-import beheerders.GebruikerBeheerder;
+import domain.beheerders.GebruikerBeheerder;
 import domain.GebruikerModels.TypeGebruiker;
 import java.beans.PropertyChangeListener;
 import javafx.collections.ObservableList;

@@ -76,6 +76,7 @@ public final class LesmateriaalBeheerder {
         GenericDaoJpa.startTransaction();
         lesmateriaalRepo.update(currentLesmateriaal);
         GenericDaoJpa.commitTransaction();
+        lesmateriaalList.set(lesmateriaalList.indexOf(currentLesmateriaal), currentLesmateriaal);
     }
     
     public void delete(){

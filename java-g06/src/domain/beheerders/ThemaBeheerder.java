@@ -20,7 +20,6 @@ public final class ThemaBeheerder {
     private final SortedList<Thema> sortedList;
     
     private Thema currentThema;
-    private PropertyChangeSupport subject;
     
     public ThemaBeheerder() {
         themaRepo = new GenericDaoJpa<>(Thema.class);
@@ -57,15 +56,9 @@ public final class ThemaBeheerder {
     
     // PropertyChangeListener
     public void setCurrentThema(Thema currentThema) {
-        subject.firePropertyChange("currentThema", this.currentThema, currentThema);
         this.currentThema = currentThema;
     }
-
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        subject.addPropertyChangeListener(pcl);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        subject.removePropertyChangeListener(pcl);
+    public Thema getCurrentThema() {
+        return this.currentThema;
     }
 }

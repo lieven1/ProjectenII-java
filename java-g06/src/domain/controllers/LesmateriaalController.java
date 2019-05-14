@@ -30,6 +30,16 @@ public class LesmateriaalController {
     }
     
     // CRUD
+    public void create(Thema thema){
+        themaBeheerder.setCurrentThema(thema);
+        themaBeheerder.create();
+    }
+    
+    public void modify(String naam){
+        themaBeheerder.getCurrentThema().setNaam(naam);
+        themaBeheerder.modify();
+    }
+    
     public void create(Lesmateriaal lesmateriaal){
         beheerder.create(lesmateriaal);
     }
@@ -49,6 +59,10 @@ public class LesmateriaalController {
     
     public void setCurrentLesmateriaal(Lesmateriaal currentLesmateriaal) {
         beheerder.setCurrentLesmateriaal(currentLesmateriaal);
+    }
+    
+    public void setCurrentThema(Thema currentThema) {
+        themaBeheerder.setCurrentThema(currentThema);
     }
     
     public void addPropertyChangeListener(PropertyChangeListener pcl) {

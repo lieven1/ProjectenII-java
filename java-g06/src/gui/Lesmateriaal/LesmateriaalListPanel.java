@@ -42,7 +42,7 @@ public class LesmateriaalListPanel extends VBox {
         lblLesmateriaalTitle.setTextFill(Paint.valueOf("#393980"));
         lblLesmateriaalTitle.setStyle("-fx-label-padding: 0 0 0 10");
         createLesmateriaalList();
-
+        
         this.getChildren().addAll(createFilterPane(), new Separator(), lblLesmateriaalTitle, lesmateriaalList);
     }
 

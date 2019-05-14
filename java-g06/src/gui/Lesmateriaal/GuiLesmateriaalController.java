@@ -1,33 +1,21 @@
 package gui.Lesmateriaal;
 
-import domain.GebruikerModels.TypeGebruiker;
 import domain.controllers.LesmateriaalController;
 import gui.Panel;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import javafx.scene.layout.HBox;
 
-public class GuiLesmateriaalController extends HBox implements Panel, PropertyChangeListener {
+public class GuiLesmateriaalController extends HBox implements Panel {
     private final LesmateriaalListPanel listPanel;
-    
-    private final LesmateriaalController lc;
+    private final FormLesmateriaal detailPanel;
     
     public GuiLesmateriaalController(LesmateriaalController lc){
-        this.lc = lc;
-        
         // Panels
         listPanel = new LesmateriaalListPanel(lc);
+        detailPanel = new FormLesmateriaal(lc);
         
-        lc.addPropertyChangeListener(this);
-        this.getChildren().addAll(listPanel);
+        this.getChildren().addAll(listPanel, detailPanel);
     }
     
-    public void createForm(TypeGebruiker type){
-    }
-    
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-    }
     
     @Override
     public void resizeWidth(double width) {

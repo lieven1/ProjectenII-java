@@ -50,4 +50,9 @@ public class Foto implements Serializable {
         
         this.extensie = extensie;
     }
+    
+    @Override
+    public String toString() {
+        return bestandsnaam.concat(".".concat(extensie));
+    }
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1590" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="1080.0" prefWidth="1580">
+         <children>
+            <ImageView fitHeight="1080.0" fitWidth="1580" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/resources/BackgroundImg.jpg" />
+               </image>
+            </ImageView>
+            <Button id="btnOpslaan" fx:id="btnNieuw" layoutX="20.0" layoutY="474.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="253.0" text="Nieuw lesmateriaal">
+               <styleClass>
+                  <String fx:value="primary" />
+                  <String fx:value="lg" />
+               </styleClass>
+            </Button>
+            <Button id="btnOpslaan" fx:id="btnOpslaan" layoutX="286.0" layoutY="474.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Opslaan">
+               <styleClass>
+                  <String fx:value="info" />
+                  <String fx:value="lg" />
+               </styleClass>
+            </Button>
+            <Button id="btnVerwijder" fx:id="btnVerwijder" layoutX="719.0" layoutY="474.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="178.0" text="Verwijder">
+               <styleClass>
+                  <String fx:value="danger" />
+                  <String fx:value="lg" />
+               </styleClass>
+            </Button>
+            <Label layoutX="22.0" layoutY="80.0" text="Naam">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+
+            <TextField fx:id="txfNaam" layoutX="209.0" layoutY="77.0" prefWidth="230.0" promptText="Naam" />
+            <ChoiceBox fx:id="cbGraad" layoutX="209.0" layoutY="115.0" prefWidth="230.0" />
+            <Button fx:id="btnFotoToevoegen" layoutX="22.0" layoutY="373.0" minHeight="29.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="193.0" styleClass="primary" text="+ Toevoegen" />
+            <Button fx:id="btnFotoVerwijderen" layoutX="228.0" layoutY="373.0" minHeight="29.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="193.0" styleClass="danger" text="Verwijder" />
+            <TextArea fx:id="txaBeschrijving" layoutX="469.0" layoutY="195.0" prefHeight="185.0" prefWidth="436.0" />
+
+            <Label layoutX="21.0" layoutY="117.0" text="Graad">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="468.0" layoutY="80.0" text="Thema">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Separator layoutX="20.0" layoutY="151.0" prefHeight="14.0" prefWidth="436.0" />
+            <Separator layoutX="451.0" layoutY="64.0" orientation="VERTICAL" prefHeight="402.0" prefWidth="15.0" />
+            <Separator layoutX="456.0" layoutY="151.0" prefHeight="14.0" prefWidth="462.0" />
+            <Label layoutX="22.0" layoutY="165.0" text="Foto's">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Separator layoutX="-2.0" layoutY="63.0" prefHeight="13.0" prefWidth="925.0" />
+            <Label fx:id="lblFout" alignment="TOP_LEFT" layoutX="468.0" layoutY="409.0" prefHeight="57.0" prefWidth="417.0" text="Fout" textFill="#cf0e0e">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="21.0" prefHeight="35.0" prefWidth="322.0" text="Detailoverzicht lesmateriaal">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listFoto" layoutX="23.0" layoutY="197.0" prefHeight="165.0" prefWidth="190.0" />
+            <ImageView fx:id="imgFoto" fitHeight="165.0" fitWidth="220.0" layoutX="219.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="474.0" layoutY="165.0" text="Beschrijving">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="cbThema" layoutX="674.0" layoutY="77.0" prefWidth="230.0" />
+         </children>
+      </AnchorPane>
+   </content>
+</fx:root>

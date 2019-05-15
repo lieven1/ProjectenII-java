@@ -53,8 +53,8 @@ public class ActiviteitenBeheerder {
         repository.update(newValue);
     }
 
-    public void remove(Activiteit act) {
-        repository.delete(act);
+    public void delete() {
+        //repository.delete(act);
     }
 
     public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {

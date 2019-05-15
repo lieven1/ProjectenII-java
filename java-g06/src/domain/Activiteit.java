@@ -205,5 +205,9 @@ public class Activiteit {
     public void setId(int id) {
         this.id = id;
     }
+    
+    public int getAantalDeelnemers(){
+        return 0;
+    }
 
 }

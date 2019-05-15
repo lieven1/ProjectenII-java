@@ -26,8 +26,8 @@ public class ActiviteitenController {
 
     private ActiviteitenBeheerder beheerder;
 
-    public ActiviteitenController(ActiviteitenBeheerder beheerder) {
-        this.beheerder = beheerder;
+    public ActiviteitenController() {
+        this.beheerder = new ActiviteitenBeheerder();
     }
 
     public ObservableList<Activiteit> getActiviteiten() {
@@ -42,8 +42,8 @@ public class ActiviteitenController {
         beheerder.modifyActiviteit(act);
     }
 
-    public void delete(ObservableValue<Activiteit> act) {
-        beheerder.remove(act.getValue());
+    public void delete() {
+        beheerder.delete();
     }
 
     public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {

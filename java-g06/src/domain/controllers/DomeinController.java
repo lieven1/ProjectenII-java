@@ -35,7 +35,7 @@ public class DomeinController {
     
     public ActiviteitenController getActiviteitenController(){
         if(activiteitenController == null)
-            activiteitenController = new ActiviteitenController(new ActiviteitenBeheerder());
+            activiteitenController = new ActiviteitenController();
         return activiteitenController;
     }
 

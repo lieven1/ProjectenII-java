@@ -4,6 +4,7 @@ import gui.Panel;
 import domain.controllers.DomeinController;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Lesmateriaal.GuiLesmateriaalController;
+import gui.activiteit.GuiActiviteitController;
 import java.io.File;
 import java.net.MalformedURLException;
 import javafx.event.ActionEvent;
@@ -59,6 +60,9 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         });
         createButton("Lesmateriaal", 1, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiLesmateriaalController(dc.getLesmateriaalController()), this.getHeight(), this.getWidth());
+        });
+        createButton("Activiteit", 2, 1).setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
         });
         
         this.getChildren().addAll(logo, menuPanel);

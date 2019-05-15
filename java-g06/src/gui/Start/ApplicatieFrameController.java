@@ -9,6 +9,7 @@ import domain.beheerders.GebruikerBeheerder;
 import domain.GebruikerModels.ProefGebruiker;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Overzichten.OverzichtPanelController;
+import gui.activiteit.GuiActiviteitController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -86,6 +87,9 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
         });
         overzichtKampioenschap.setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 2), this.getHeight(), this.getWidth());
+        });
+        actMenuBeheer.setOnAction((t) -> {
+           dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
         });
 
         this.dc.getGuiController().addPropertyChangeListener(this);

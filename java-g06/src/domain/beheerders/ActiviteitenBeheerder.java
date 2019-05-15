@@ -13,7 +13,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import persistentie.ActiviteitenDao;
 import persistentie.GenericDaoJpa;
 
 /**
@@ -22,11 +21,11 @@ import persistentie.GenericDaoJpa;
  */
 public class ActiviteitenBeheerder {
 
-    private ActiviteitenDao repository;
+    private GenericDaoJpa<Activiteit> repository;
     private ObservableList<Activiteit> activiteiten;
 
     public ActiviteitenBeheerder() {
-        repository = new ActiviteitenDao();
+        repository = new GenericDaoJpa<>(Activiteit.class);
         activiteiten = FXCollections.observableArrayList();
         activiteiten.addAll(getAllActiviteiten());
         activiteiten.addListener((ListChangeListener<Activiteit>) this::activiteitenListChanged);

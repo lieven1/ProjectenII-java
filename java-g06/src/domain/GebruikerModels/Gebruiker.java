@@ -1,6 +1,9 @@
 package domain.GebruikerModels;
 
+import domain.ActiviteitBegeleider;
+import domain.ActiviteitDeelnemer;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +11,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
@@ -39,6 +44,13 @@ public class Gebruiker extends AGebruiker {
     private Gradatie graad;
     @Transient
     private Lesformule lesformule;
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="Gebruikersnaam")
+    private List<ActiviteitBegeleider> activiteitBegeleiders;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="Gebruikersnaam")
+    private List<ActiviteitDeelnemer> activiteitDeelnemers;
 
     
     // Constructors
@@ -164,6 +176,24 @@ public class Gebruiker extends AGebruiker {
         
         this.graad = _graad;
     }
+
+    public List<ActiviteitBegeleider> getActiviteitBegeleiders() {
+        return activiteitBegeleiders;
+    }
+
+    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
+        this.activiteitBegeleiders = activiteitBegeleiders;
+    }
+
+    public List<ActiviteitDeelnemer> getActiviteitDeelnemers() {
+        return activiteitDeelnemers;
+    }
+
+    public void setActiviteitDeelnemers(List<ActiviteitDeelnemer> activiteitDeelnemers) {
+        this.activiteitDeelnemers = activiteitDeelnemers;
+    }
+    
+    
 
     @Override
     protected void setType(TypeGebruiker _type) {

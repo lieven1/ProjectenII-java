@@ -8,26 +8,32 @@ package domain;
 import domain.GebruikerModels.Gebruiker;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Steve
  */
 @Entity(name="ActiviteitDeelnemer")
+@Table(name="ActiviteitDeelnemer")
 public class ActiviteitDeelnemer {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ActiviteitDeelnemerId")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ActiviteitId")
     private Activiteit activiteit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Gebruikersnaam")
     private Gebruiker gebruiker;
 

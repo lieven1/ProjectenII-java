@@ -12,6 +12,9 @@
     <class>domain.LesmateriaalModels.Raadpleging</class>
     <class>domain.LesmateriaalModels.Lesmateriaal</class>
     <class>domain.LesmateriaalModels.Foto</class>
+    <class>domain.Activiteit</class>
+    <class>domain.ActiviteitBegeleider</class> 
+    <class>domain.ActiviteitDeelnemer</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://sql6007.site4now.net;database=DB_A486C0_Taijitan;user=DB_A486C0_Taijitan_admin;password=HogentSQL1;encrypt=true;trustServerCertificate=true;loginTimeout=30;"/>
       <property name="javax.persistence.jdbc.user" value="DB_A486C0_Taijitan_admin"/>

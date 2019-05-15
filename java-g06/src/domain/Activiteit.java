@@ -12,9 +12,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,7 +31,7 @@ public class Activiteit {
 
     @Id
     @Column(name = "ActiviteitId")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Naam")
     private String titel;
@@ -43,9 +45,11 @@ public class Activiteit {
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
     private int maxAantalDeelnemers;
-    @OneToMany(mappedBy = "Activiteit")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitDeelnemer> activiteitDeelnemers;
-    @OneToMany(mappedBy = "Activiteit")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
     private List<Gebruiker> deelnemers;
@@ -178,7 +182,7 @@ public class Activiteit {
         if (begeleiders.size() < 1) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
-        */
+         */
         this.begeleiders = begeleiders;
     }
 
@@ -205,8 +209,8 @@ public class Activiteit {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public int getAantalDeelnemers(){
+
+    public int getAantalDeelnemers() {
         return 0;
     }
 

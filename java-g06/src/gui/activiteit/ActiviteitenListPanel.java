@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -52,18 +53,23 @@ public class ActiviteitenListPanel extends VBox {
     private VBox createFilterPane() {
 
         VBox filterPane = generator.createEmptyFilterPane();
+        filterPane.setPadding(new Insets(10));
+        filterPane.setSpacing(10);
 
         TextField naamField = generator.createTextField("Naam");
         TextField typeField = generator.createTextField("Type");
         HBox textFieldBox = new HBox(naamField, typeField);
+        textFieldBox.setSpacing(30);
 
         DatePicker fromPicker = generator.createDatePicker("Van...");
         DatePicker untilPicker = generator.createDatePicker("Tot...");
         HBox datePickerBox = new HBox(fromPicker, untilPicker);
+        datePickerBox.setSpacing(30);
 
         Button filterButton = generator.createFilterButton();
         Button clearButton = generator.createClearButton();
         HBox buttonBox = new HBox(clearButton, filterButton);
+        buttonBox.setSpacing(30);
 
         // Use the filter
         filterButton.setOnAction((ActionEvent t) -> {
@@ -76,6 +82,7 @@ public class ActiviteitenListPanel extends VBox {
             fromPicker.setValue(null);
             untilPicker.setValue(null);
             activiteitenTableView.setItems(controller.getActiviteiten());
+            controller.veranderFilter(naamField.getText(), typeField.getText(), fromPicker.getValue(), untilPicker.getValue());
         });
 
         filterPane.getChildren().addAll(textFieldBox, datePickerBox, buttonBox);

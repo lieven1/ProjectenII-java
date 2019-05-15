@@ -6,15 +6,14 @@
 package gui.activiteit;
 
 import domain.Activiteit;
-import domain.LesmateriaalModels.Lesmateriaal;
 import domain.controllers.ActiviteitenController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -30,7 +29,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
 /**
@@ -57,13 +55,9 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private TextField txfMaxAantalDeelnemers;
     @FXML
-    private Button deelnemersButton;
-    @FXML
     private TextField txfAantalDeelnemers;
     @FXML
     private ListView<?> alleGebruikersListView;
-    @FXML
-    private Button begeleidersButton;
     @FXML
     private ListView<?> gekozenGebruikersListView;
     @FXML
@@ -73,6 +67,9 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     private ActiviteitenController controller;
     private Activiteit currentActiviteit;
+
+    private boolean deelnemersBewerken;
+    private boolean begeleidersBewerken;
 
     public FormActiviteiten(ActiviteitenController contr) {
         controller = contr;
@@ -86,15 +83,34 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
             throw new RuntimeException(ex);
         }
 
+        deelnemersBewerken = true;
+        begeleidersBewerken = false;
+
+        controller.addPropertyChangeListener(this);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnVerwijder.setDisable(true);
+        lblFout.setVisible(false);
     }
 
     @FXML
     private void slaActiviteitOp(ActionEvent event) {
+        try {
+            Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), localDateToCalendar(dpStartdatum.getValue()), localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()), new ArrayList<>(), new ArrayList<>());
+            if (controller.getCurrentActiviteit()
+                    != null) {
+                controller.modify(act);
+            } else {
+                controller.setCurrentActiviteit(act);
+                controller.create(act);
+            }
+        } catch (Exception ex) {
+            lblFout.setVisible(true);
+            lblFout.setText(ex.getMessage());
+        }
+
     }
 
     @FXML
@@ -108,11 +124,30 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         if (result.get() == ButtonType.OK) {
             controller.delete();
             controller.setCurrentActiviteit(null);
+            btnVerwijder.setDisable(true);
+            lblFout.setVisible(false);
         }
     }
 
     @FXML
     private void nieuweActiviteit(ActionEvent event) {
+        btnVerwijder.setDisable(true);
+        lblFout.setVisible(false);
+        btnOpslaan.setText("Toevoegen");
+        controller.setCurrentActiviteit(null);
+        setDetailData("", "", null, null, "0", "0");
+    }
+
+    @FXML
+    private void pasDeelnemersAan(ActionEvent event) {
+        deelnemersBewerken = true;
+        begeleidersBewerken = false;
+    }
+
+    @FXML
+    private void pasBegeleidersAan(ActionEvent event) {
+        begeleidersBewerken = true;
+        deelnemersBewerken = false;
     }
 
     @FXML
@@ -121,6 +156,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     @FXML
     private void removeGebruiker(ActionEvent event) {
+
     }
 
     private void loadActiviteit(Activiteit act) {
@@ -145,6 +181,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("currentActiviteit") && evt.getNewValue() != null) {
             this.loadActiviteit((Activiteit) evt.getNewValue());
+            lblFout.setVisible(false);
         }
     }
 
@@ -155,6 +192,12 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         TimeZone tz = calendar.getTimeZone();
         ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
         return LocalDate.ofInstant(calendar.toInstant(), zid);
+    }
+
+    private Calendar localDateToCalendar(LocalDate localDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+        return calendar;
     }
 
 }

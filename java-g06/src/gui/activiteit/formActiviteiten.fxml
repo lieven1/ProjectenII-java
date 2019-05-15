@@ -64,16 +64,13 @@
                </font>
             </Label>
             <Button id="btnNieuw" layoutX="29.0" layoutY="559.0" mnemonicParsing="false" onAction="#nieuweActiviteit" prefHeight="44.0" prefWidth="199.0" text="Nieuwe activiteit">
-               <font>
-                  <Font size="18.0" />
-               </font>
                <styleClass>
-                  <String fx:value="danger" />
+                  <String fx:value="primary" />
                   <String fx:value="lg" />
                </styleClass></Button>
             <DatePicker id="dpGeboortedatum" fx:id="dpEinddatum" layoutX="208.0" layoutY="188.0" prefWidth="231.0" promptText="Einddatum" />
             <DatePicker id="dpGeboortedatum" fx:id="dpStartdatum" layoutX="208.0" layoutY="151.0" prefWidth="231.0" promptText="Startdatum" />
-            <Button id="btnOpslaan" fx:id="deelnemersButton" layoutX="483.0" layoutY="79.0" minHeight="37.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="124.0" text="deelnemers">
+            <Button id="btnOpslaan" layoutX="483.0" layoutY="79.0" minHeight="37.0" mnemonicParsing="false" onAction="#pasDeelnemersAan" prefHeight="37.0" prefWidth="124.0" text="deelnemers">
                <styleClass>
                   <String fx:value="info" />
                   <String fx:value="lg" />
@@ -89,7 +86,7 @@
             </Label>
             <TextField fx:id="txfAantalDeelnemers" editable="false" layoutX="237.0" layoutY="267.0" text="0" />
             <ListView fx:id="alleGebruikersListView" layoutX="466.0" layoutY="131.0" prefHeight="175.0" prefWidth="403.0" />
-            <Button id="btnOpslaan" fx:id="begeleidersButton" layoutX="639.0" layoutY="79.0" minHeight="33.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="134.0" text="begeleiders">
+            <Button id="btnOpslaan" layoutX="639.0" layoutY="79.0" minHeight="33.0" mnemonicParsing="false" onAction="#pasBegeleidersAan" prefHeight="38.0" prefWidth="134.0" text="begeleiders">
                <styleClass>
                   <String fx:value="info" />
                   <String fx:value="lg" />
@@ -99,9 +96,9 @@
                </font>
             </Button>
             <ListView fx:id="gekozenGebruikersListView" layoutX="466.0" layoutY="362.0" prefHeight="175.0" prefWidth="403.0" />
-            <Button fx:id="addGebruikerButton" layoutX="607.0" layoutY="309.0" mnemonicParsing="false" onAction="#addGebruiker" prefHeight="46.0" prefWidth="30.0" />
+            <Button fx:id="addGebruikerButton" layoutX="607.0" layoutY="309.0" mnemonicParsing="false" onAction="#addGebruiker" prefHeight="46.0" prefWidth="30.0" styleClass="lg" />
             <Line endX="-100.0" endY="31.4000244140625" layoutX="722.0" layoutY="314.0" startX="-100.0" />
-            <Button fx:id="removeGebruikerButton" layoutX="676.0" layoutY="308.0" mnemonicParsing="false" onAction="#removeGebruiker" prefHeight="46.0" prefWidth="30.0" />
+            <Button fx:id="removeGebruikerButton" layoutX="676.0" layoutY="308.0" mnemonicParsing="false" onAction="#removeGebruiker" prefHeight="46.0" prefWidth="30.0" styleClass="lg" />
             <Line endX="-105.5" endY="30.9000244140625" layoutX="728.0" layoutY="315.0" startX="-94.0" startY="17.20001220703125" />
             <Line endX="-115.5" endY="20.9000244140625" layoutX="738.0" layoutY="325.0" startX="-128.0" startY="7.20001220703125" />
             <Line endX="-100.0" endY="31.4000244140625" layoutX="791.0" layoutY="314.0" startX="-100.0" />

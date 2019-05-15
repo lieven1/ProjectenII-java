@@ -6,13 +6,14 @@
 package domain.beheerders;
 
 import domain.Activiteit;
-import domain.Activiteit;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
-import java.util.List;
-import javafx.beans.value.ObservableValue;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import persistentie.GenericDaoJpa;
 
 /**
@@ -23,46 +24,93 @@ public class ActiviteitenBeheerder {
 
     private GenericDaoJpa<Activiteit> repository;
     private ObservableList<Activiteit> activiteiten;
+    private final FilteredList<Activiteit> filteredList;
+    private final SortedList<Activiteit> sortedList;
+
+    private Activiteit currentActiviteit;
+    private final PropertyChangeSupport subject;
 
     public ActiviteitenBeheerder() {
         repository = new GenericDaoJpa<>(Activiteit.class);
-        activiteiten = FXCollections.observableArrayList();
-        activiteiten.addAll(getAllActiviteiten());
-        activiteiten.addListener((ListChangeListener<Activiteit>) this::activiteitenListChanged);
+        activiteiten = FXCollections.observableArrayList(repository.findAll());
+        filteredList = new FilteredList<>(activiteiten, p -> true);
+        sortedList = new SortedList<>(filteredList,
+                Comparator.comparing(Activiteit::getStartDatum)
+                        .thenComparing(Activiteit::getTitel)
+        );
 
+        subject = new PropertyChangeSupport(this);
     }
 
-    private void activiteitenListChanged(ListChangeListener.Change<? extends Activiteit> change) {
-        // nodig?
+    public void veranderFilter(String titel, String type, LocalDate from, LocalDate until) {
+        filteredList.setPredicate(act -> {
+            boolean titelLeeg = titel == null || titel.isBlank();
+            boolean typeLeeg = type == null;
+            boolean fromLeeg = from == null;
+            boolean untilLeeg = until == null;
+
+            if (titelLeeg && typeLeeg && fromLeeg && untilLeeg) {
+                return true;
+            }
+
+            boolean titelFilter = titelLeeg ? true
+                    : (act.getTitel().toLowerCase().contains(titel));
+            boolean typeFilter = typeLeeg ? true
+                    : (act.getType().toLowerCase().contains(type));
+            boolean fromFilter = fromLeeg ? true
+                    : act.getStartDatum().after(from);
+            boolean untilFilter = untilLeeg ? true
+                    : act.getEindDatum().before(until);
+
+            return titelFilter && typeFilter && fromFilter && untilFilter;
+        });
     }
 
-    public ObservableList<Activiteit> getActiviteiten() {
-        return activiteiten;
+    // CRUD
+    public void create(Activiteit activiteit) {
+        currentActiviteit = activiteit;
+        GenericDaoJpa.startTransaction();
+        repository.insert(activiteit);
+        GenericDaoJpa.commitTransaction();
+        activiteiten.add(activiteit);
     }
 
-    private List<Activiteit> getAllActiviteiten() {
-        return repository.findAll();
-    }
-
-    public void createActiviteit(Activiteit act) {
-        repository.insert(act);
-    }
-
-    public void modifyActiviteit(Activiteit newValue) {
-        repository.update(newValue);
+    public void modify(Activiteit activiteit) {
+        activiteit.setId(currentActiviteit.getId());
+        GenericDaoJpa.startTransaction();
+        repository.update(activiteit);
+        GenericDaoJpa.commitTransaction();
+        activiteiten.set(activiteiten.indexOf(currentActiviteit), activiteit);        
+        activiteiten.notifyAll();
     }
 
     public void delete() {
-        //repository.delete(act);
+        GenericDaoJpa.startTransaction();
+        repository.delete(currentActiviteit);
+        GenericDaoJpa.commitTransaction();
+        activiteiten.remove(currentActiviteit);
+        currentActiviteit = null;
     }
 
-    public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+    // PropertyChangeListener
+    public void setCurrentActiviteit(Activiteit currentActiviteit) {
+        subject.firePropertyChange("currentActiviteit", this.currentActiviteit, currentActiviteit);
+        this.currentActiviteit = currentActiviteit;
     }
 
-    public void setCurrentActiviteit(Activiteit activiteit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ObservableList<Activiteit> getActiviteitenLijst() {
+        return sortedList;
     }
 
+    public Activiteit getCurrentActiviteit() {
+        return this.currentActiviteit;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        subject.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        subject.removePropertyChangeListener(pcl);
+    }
 }

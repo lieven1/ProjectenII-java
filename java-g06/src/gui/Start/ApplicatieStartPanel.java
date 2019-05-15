@@ -41,7 +41,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         
         // MenuPanel
         menuPanel = new GridPane();
-        menuPanel.setPrefWidth(400);
+        menuPanel.setPrefWidth(800);
         menuPanel.setLayoutY(230);
         menuPanel.getColumnConstraints().add(new ColumnConstraints(200));
         

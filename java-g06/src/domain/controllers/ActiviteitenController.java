@@ -7,6 +7,9 @@ package domain.controllers;
 
 import domain.beheerders.ActiviteitenBeheerder;
 import domain.Activiteit;
+import domain.LesmateriaalModels.Lesmateriaal;
+import domain.LesmateriaalModels.Thema;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,19 +34,24 @@ public class ActiviteitenController {
     }
 
     public ObservableList<Activiteit> getActiviteiten() {
-        return beheerder.getActiviteiten();
+        return beheerder.getActiviteitenLijst();
     }
 
-    public void create(Activiteit act) {
-        beheerder.createActiviteit(act);
+    public void create(Activiteit activiteit) {
+        beheerder.setCurrentActiviteit(activiteit);
+        beheerder.create(activiteit);
     }
 
-    public void modify(Activiteit act) {
-        beheerder.modifyActiviteit(act);
+    public void modify(Activiteit activiteit) {
+        beheerder.modify(activiteit);
     }
 
     public void delete() {
         beheerder.delete();
+    }
+
+    public Activiteit getCurrentActiviteit() {
+        return beheerder.getCurrentActiviteit();
     }
 
     public void veranderFilter(String naam, String type, LocalDate from, LocalDate until) {
@@ -53,6 +61,12 @@ public class ActiviteitenController {
     public void setCurrentActiviteit(Activiteit activiteit) {
         beheerder.setCurrentActiviteit(activiteit);
     }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        beheerder.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        beheerder.removePropertyChangeListener(pcl);
+    }
 }
-
-

@@ -5,6 +5,7 @@
  */
 package domain;
 
+import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,9 +36,9 @@ public class ActiviteitBegeleider {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Gebruikersnaam")
-    private Gebruiker gebruiker;
+    private AGebruiker gebruiker;
 
-    public ActiviteitBegeleider(int id, Activiteit activiteit, Gebruiker gebruiker) {
+    public ActiviteitBegeleider(int id, Activiteit activiteit, AGebruiker gebruiker) {
         this.id = id;
         this.activiteit = activiteit;
         this.gebruiker = gebruiker;
@@ -62,11 +63,11 @@ public class ActiviteitBegeleider {
         this.activiteit = activiteit;
     }
 
-    public Gebruiker getGebruiker() {
+    public AGebruiker getGebruiker() {
         return gebruiker;
     }
 
-    public void setGebruiker(Gebruiker gebruiker) {
+    public void setGebruiker(AGebruiker gebruiker) {
         this.gebruiker = gebruiker;
     }
 

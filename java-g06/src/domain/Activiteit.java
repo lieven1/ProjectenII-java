@@ -25,7 +25,7 @@ import javax.persistence.Temporal;
  * @author Steve
  */
 @Entity(name = "Activiteit")
-@Table(name="Activiteit")
+@Table(name = "Activiteit")
 public class Activiteit {
 
     @Id
@@ -43,12 +43,12 @@ public class Activiteit {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
-    private int maxAantalDeelnemers;    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")   
-    private List<ActiviteitDeelnemer> activiteitDeelnemers;    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")    
+    private int maxAantalDeelnemers;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ActiviteitId")
+    private List<ActiviteitDeelnemer> activiteitDeelnemers;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
     public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<Gebruiker> deelnemers, List<Gebruiker> begeleiders) {
@@ -77,23 +77,24 @@ public class Activiteit {
         if (isVolzet()) {
             throw new IllegalArgumentException("De activiteit is al volzet.");
         }
+        activiteitDeelnemers.add(new ActiviteitDeelnemer(this, deelnemer));
     }
 
     public void deleteDeelnemer(Gebruiker deelnemer) {
-        //deelnemers.remove(deelnemer);
+        ActiviteitDeelnemer actd = activiteitDeelnemers.stream().filter(ad -> ad.getActiviteit().getId() == this.id && ad.getGebruiker().getGebruikersnaam().equals(deelnemer.getGebruikersnaam())).findFirst().orElse(null);
+        activiteitDeelnemers.remove(actd);
     }
 
     public void addBegeleider(Gebruiker begeleider) {
-       // begeleiders.add(begeleider);
+        activiteitBegeleiders.add(new ActiviteitBegeleider(this, begeleider));
     }
 
     public void deleteBegeleider(Gebruiker begeleider) {
-        /*
-        if (begeleiders.size() < 2) {
+        if (activiteitBegeleiders.size() < 2) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
-        begeleiders.remove(begeleider);
-        */
+        ActiviteitBegeleider actb = activiteitBegeleiders.stream().filter(ab -> ab.getActiviteit().getId() == this.id && ab.getGebruiker().getGebruikersnaam().equals(begeleider.getGebruikersnaam())).findFirst().orElse(null);
+        activiteitBegeleiders.remove(actb);
     }
 
     /*
@@ -163,21 +164,19 @@ public class Activiteit {
     public List<Gebruiker> getDeelnemers() {
         return deelnemers;
     }
-    */
-
+     */
     public void setDeelnemers(List<Gebruiker> deelnemers) {
         if (deelnemers.size() > maxAantalDeelnemers) {
             throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
         }
-       // this.deelnemers = deelnemers;
+        // this.deelnemers = deelnemers;
     }
 
     /*
     public List<Gebruiker> getBegeleiders() {
         return begeleiders;
     }
-    */
-
+     */
     public void setBegeleiders(List<Gebruiker> begeleiders) {
         /*
         if (begeleiders.size() < 1) {
@@ -214,7 +213,5 @@ public class Activiteit {
     public int getAantalDeelnemers() {
         return 0;
     }
-    
-    
 
 }

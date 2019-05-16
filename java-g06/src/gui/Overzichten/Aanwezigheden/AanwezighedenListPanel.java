@@ -142,6 +142,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
 
         lesmomentList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
             oc.setCurrentLesmoment((Lesmoment) newValue);
+            
         });
 
         return lesmomentList;

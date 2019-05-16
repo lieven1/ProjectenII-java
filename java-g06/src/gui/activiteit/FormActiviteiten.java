@@ -106,9 +106,11 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
                 controller.setCurrentActiviteit(act);
                 controller.create(act);
             }
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException ex) {
             lblFout.setVisible(true);
             lblFout.setText(ex.getMessage());
+        } catch (Exception ex){
+            
         }
 
     }

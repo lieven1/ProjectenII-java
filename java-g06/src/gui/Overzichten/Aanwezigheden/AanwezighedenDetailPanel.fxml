@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="1080.0" fitWidth="1590.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/resources/BackgroundImg.jpg" />
+                  <Image url="@../proj2.0/GitHubProjJAva/java-g06/build/classes/resources/BackgroundImg.jpg" />
                </image>
             </ImageView>
             <Label fx:id="titelLabel" layoutX="21.0" layoutY="22.0" prefHeight="35.0" prefWidth="558.0" text="Aanwezigheden lesmoment">
@@ -66,6 +66,16 @@
                </font>
             </Label>
             <Label fx:id="detailGradatieValue" layoutX="920.0" layoutY="161.0" prefHeight="20.0" prefWidth="271.0" text="tempPro">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailPuntenLabel" layoutX="781.0" layoutY="181.0" text="Punten:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="detailPuntenValue" layoutX="920.0" layoutY="181.0" prefHeight="20.0" prefWidth="271.0" text="Temppunten 50">
                <font>
                   <Font size="14.0" />
                </font>

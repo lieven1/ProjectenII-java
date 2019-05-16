@@ -94,7 +94,7 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetDeelnemersTeVeelThrowsIllegalArgumentException() {
-        List<Gebruiker> deelnemers = new ArrayList<Gebruiker>();
+        List<Gebruiker> deelnemers = new ArrayList<>();
         for (int i = 0; i < validActiviteit.getMaxAantalDeelnemers() + 1; i++) {
             deelnemers.add(new Gebruiker());
         }
@@ -103,7 +103,7 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddDeelnemerTeVeelThrowsIllegalArgumentException() {
-        List<Gebruiker> deelnemers = new ArrayList<Gebruiker>();
+        List<Gebruiker> deelnemers = new ArrayList<>();
         for (int i = 0; i < validMaxAantalDeelnemers; i++) {
             deelnemers.add(new Gebruiker());
         }

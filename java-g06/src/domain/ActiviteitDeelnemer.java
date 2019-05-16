@@ -44,11 +44,6 @@ public class ActiviteitDeelnemer {
         this.gebruiker = gebruiker;
     }
 
-    public ActiviteitDeelnemer(Activiteit activiteit, AGebruiker gebruiker) {
-        this.activiteit = activiteit;
-        this.gebruiker = gebruiker;
-    }   
-    
     public ActiviteitDeelnemer() {
     }
 

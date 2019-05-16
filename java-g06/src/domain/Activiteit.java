@@ -43,16 +43,13 @@ public class Activiteit {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
-    private int maxAantalDeelnemers;
+    private int maxAantalDeelnemers;    
     @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")
-    private List<ActiviteitDeelnemer> activiteitDeelnemers;
+    @JoinColumn(name = "ActiviteitId")   
+    private List<ActiviteitDeelnemer> activiteitDeelnemers;    
     @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")
+    @JoinColumn(name = "ActiviteitId")    
     private List<ActiviteitBegeleider> activiteitBegeleiders;
-
-    private List<Gebruiker> deelnemers;
-    private List<Gebruiker> begeleiders;
 
     public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<Gebruiker> deelnemers, List<Gebruiker> begeleiders) {
         setTitel(titel);
@@ -80,22 +77,23 @@ public class Activiteit {
         if (isVolzet()) {
             throw new IllegalArgumentException("De activiteit is al volzet.");
         }
-        deelnemers.add(deelnemer);
     }
 
     public void deleteDeelnemer(Gebruiker deelnemer) {
-        deelnemers.remove(deelnemer);
+        //deelnemers.remove(deelnemer);
     }
 
     public void addBegeleider(Gebruiker begeleider) {
-        begeleiders.add(begeleider);
+       // begeleiders.add(begeleider);
     }
 
     public void deleteBegeleider(Gebruiker begeleider) {
+        /*
         if (begeleiders.size() < 2) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
         begeleiders.remove(begeleider);
+        */
     }
 
     /*
@@ -161,20 +159,24 @@ public class Activiteit {
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
+    /*
     public List<Gebruiker> getDeelnemers() {
         return deelnemers;
     }
+    */
 
     public void setDeelnemers(List<Gebruiker> deelnemers) {
         if (deelnemers.size() > maxAantalDeelnemers) {
             throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
         }
-        this.deelnemers = deelnemers;
+       // this.deelnemers = deelnemers;
     }
 
+    /*
     public List<Gebruiker> getBegeleiders() {
         return begeleiders;
     }
+    */
 
     public void setBegeleiders(List<Gebruiker> begeleiders) {
         /*
@@ -182,7 +184,7 @@ public class Activiteit {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
         }
          */
-        this.begeleiders = begeleiders;
+        //this.begeleiders = begeleiders;
     }
 
     public List<ActiviteitDeelnemer> getActiviteitDeelnemers() {
@@ -212,5 +214,7 @@ public class Activiteit {
     public int getAantalDeelnemers() {
         return 0;
     }
+    
+    
 
 }

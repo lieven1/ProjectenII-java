@@ -84,7 +84,7 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetMaxAantalDeelnemersLagerDanDeelnemersThrowsIllegalArgumentException() {
-        validActiviteit.setMaxAantalDeelnemers(validActiviteit.getDeelnemers().size() - 1);
+        validActiviteit.setMaxAantalDeelnemers(validActiviteit.getActiviteitDeelnemers().size() - 1);
     }
 
     @Test(expected = IllegalArgumentException.class)

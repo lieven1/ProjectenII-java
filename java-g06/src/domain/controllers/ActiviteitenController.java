@@ -7,18 +7,8 @@ package domain.controllers;
 
 import domain.beheerders.ActiviteitenBeheerder;
 import domain.Activiteit;
-import domain.LesmateriaalModels.Lesmateriaal;
-import domain.LesmateriaalModels.Thema;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 
 /**

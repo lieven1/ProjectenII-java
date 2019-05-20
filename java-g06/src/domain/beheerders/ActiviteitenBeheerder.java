@@ -6,13 +6,11 @@
 package domain.beheerders;
 
 import domain.Activiteit;
+import domain.DateConverter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -61,9 +59,9 @@ public class ActiviteitenBeheerder {
             boolean typeFilter = typeLeeg ? true
                     : (act.getType().toLowerCase().contains(type));
             boolean fromFilter = fromLeeg ? true
-                    : (calendarToLocalDate(act.getStartDatum()).isAfter(from) || calendarToLocalDate(act.getStartDatum()).isEqual(from));
+                    : (DateConverter.calendarToLocalDate(act.getStartDatum()).isAfter(from) || DateConverter.calendarToLocalDate(act.getStartDatum()).isEqual(from));
             boolean untilFilter = untilLeeg ? true
-                    : (calendarToLocalDate(act.getEindDatum()).isBefore(until) || calendarToLocalDate(act.getEindDatum()).isEqual(until));
+                    : (DateConverter.calendarToLocalDate(act.getEindDatum()).isBefore(until) || DateConverter.calendarToLocalDate(act.getEindDatum()).isEqual(until));
 
             return titelFilter && typeFilter && fromFilter && untilFilter;
         });
@@ -117,12 +115,4 @@ public class ActiviteitenBeheerder {
         subject.removePropertyChangeListener(pcl);
     }
 
-    private LocalDate calendarToLocalDate(Calendar calendar) {
-        if (calendar == null) {
-            return null;
-        }
-        TimeZone tz = calendar.getTimeZone();
-        ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
-        return LocalDate.ofInstant(calendar.toInstant(), zid);
-    }
 }

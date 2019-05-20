@@ -6,6 +6,7 @@
 package gui.activiteit;
 
 import domain.Activiteit;
+import domain.DateConverter;
 import domain.controllers.ActiviteitenController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -98,7 +99,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private void slaActiviteitOp(ActionEvent event) {
         try {
-            Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), localDateToCalendar(dpStartdatum.getValue()), localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()), new ArrayList<>(), new ArrayList<>());
+            Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), DateConverter.localDateToCalendar(dpStartdatum.getValue()), DateConverter.localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()), new ArrayList<>(), new ArrayList<>());
             if (controller.getCurrentActiviteit()
                     != null) {
                 controller.modify(act);
@@ -194,12 +195,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         TimeZone tz = calendar.getTimeZone();
         ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
         return LocalDate.ofInstant(calendar.toInstant(), zid);
-    }
-
-    private Calendar localDateToCalendar(LocalDate localDate) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
-        return calendar;
     }
 
 }

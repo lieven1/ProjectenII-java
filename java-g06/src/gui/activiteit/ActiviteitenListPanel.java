@@ -6,22 +6,14 @@
 package gui.activiteit;
 
 import domain.controllers.ActiviteitenController;
-import domain.controllers.GebruikerController;
 import domain.Activiteit;
-import domain.GebruikerModels.AGebruiker;
 import gui.PanelGenerator;
 import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -30,8 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 
 /**
  *

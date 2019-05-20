@@ -43,6 +43,11 @@ public class ActiviteitBegeleider {
         this.activiteit = activiteit;
         this.gebruiker = gebruiker;
     }
+    
+    public ActiviteitBegeleider(Activiteit activiteit, AGebruiker gebruiker){
+        this.activiteit = activiteit;
+        this.gebruiker = gebruiker;
+    }
 
     public ActiviteitBegeleider() {
     }

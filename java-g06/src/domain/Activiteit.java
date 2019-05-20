@@ -5,6 +5,7 @@
  */
 package domain;
 
+import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import javax.persistence.Temporal;
  * @author Steve
  */
 @Entity(name = "Activiteit")
-@Table(name="Activiteit")
+@Table(name = "Activiteit")
 public class Activiteit {
 
     @Id
@@ -43,26 +44,22 @@ public class Activiteit {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
-    private int maxAantalDeelnemers;    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")   
-    private List<ActiviteitDeelnemer> activiteitDeelnemers;    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ActiviteitId")    
+    private int maxAantalDeelnemers;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ActiviteitId")
+    private List<ActiviteitDeelnemer> activiteitDeelnemers;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
-    public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<Gebruiker> deelnemers, List<Gebruiker> begeleiders) {
+    public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<ActiviteitDeelnemer> deelnemers, List<ActiviteitBegeleider> begeleiders) {
         setTitel(titel);
         setType(type);
         setStartDatum(startDatum);
         setEindDatum(eindDatum);
         setMaxAantalDeelnemers(maxAantalDeelnemers);
-
-        setDeelnemers(deelnemers);
-        setBegeleiders(begeleiders);
-
-        activiteitDeelnemers = new ArrayList<>();
-        activiteitBegeleiders = new ArrayList<>();
+        setActiviteitDeelnemers(deelnemers);
+        setActiviteitBegeleiders(begeleiders);
     }
 
     public Activiteit() {
@@ -73,27 +70,31 @@ public class Activiteit {
         return activiteitDeelnemers.size() == maxAantalDeelnemers;
     }
 
-    public void addDeelnemer(Gebruiker deelnemer) {
+    public void addDeelnemer(AGebruiker deelnemer) {
         if (isVolzet()) {
             throw new IllegalArgumentException("De activiteit is al volzet.");
         }
+        activiteitDeelnemers.add(new ActiviteitDeelnemer(this, deelnemer));
     }
 
-    public void deleteDeelnemer(Gebruiker deelnemer) {
-        //deelnemers.remove(deelnemer);
-    }
-
-    public void addBegeleider(Gebruiker begeleider) {
-       // begeleiders.add(begeleider);
-    }
-
-    public void deleteBegeleider(Gebruiker begeleider) {
-        /*
-        if (begeleiders.size() < 2) {
-            throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
+    public void deleteDeelnemer(AGebruiker deelnemer) {
+        for (ActiviteitDeelnemer acd : activiteitDeelnemers) {
+            if (acd.getGebruiker().getGebruikersnaam().equals(deelnemer.getGebruikersnaam()) && acd.getActiviteit().getId() == this.id) {
+                activiteitDeelnemers.remove(acd);
+            }
         }
-        begeleiders.remove(begeleider);
-        */
+    }
+
+    public void addBegeleider(AGebruiker begeleider) {
+        activiteitBegeleiders.add(new ActiviteitBegeleider(this, begeleider));
+    }
+
+    public void deleteBegeleider(AGebruiker begeleider) {
+        for (ActiviteitBegeleider acb : activiteitBegeleiders) {
+            if (acb.getGebruiker().getGebruikersnaam().equals(begeleider.getGebruikersnaam()) && acb.getActiviteit().getId() == this.id) {
+                activiteitBegeleiders.remove(acb);
+            }
+        }
     }
 
     /*
@@ -159,39 +160,16 @@ public class Activiteit {
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
-    /*
-    public List<Gebruiker> getDeelnemers() {
-        return deelnemers;
-    }
-    */
-
-    public void setDeelnemers(List<Gebruiker> deelnemers) {
-        if (deelnemers.size() > maxAantalDeelnemers) {
-            throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
-        }
-       // this.deelnemers = deelnemers;
-    }
-
-    /*
-    public List<Gebruiker> getBegeleiders() {
-        return begeleiders;
-    }
-    */
-
-    public void setBegeleiders(List<Gebruiker> begeleiders) {
-        /*
-        if (begeleiders.size() < 1) {
-            throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
-        }
-         */
-        //this.begeleiders = begeleiders;
-    }
-
     public List<ActiviteitDeelnemer> getActiviteitDeelnemers() {
         return activiteitDeelnemers;
     }
 
     public void setActiviteitDeelnemers(List<ActiviteitDeelnemer> activiteitDeelnemers) {
+        /*
+        if (deelnemers.size() > maxAantalDeelnemers) {
+            throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
+        }
+         */
         this.activiteitDeelnemers = activiteitDeelnemers;
     }
 
@@ -200,6 +178,11 @@ public class Activiteit {
     }
 
     public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
+        /*
+        if (begeleiders.size() < 1) {
+            throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
+        }
+         */
         this.activiteitBegeleiders = activiteitBegeleiders;
     }
 
@@ -214,7 +197,5 @@ public class Activiteit {
     public int getAantalDeelnemers() {
         return 0;
     }
-    
-    
 
 }

@@ -47,6 +47,11 @@ public class ActiviteitDeelnemer {
     public ActiviteitDeelnemer() {
     }
 
+    ActiviteitDeelnemer(Activiteit activiteit, AGebruiker gebruiker) {
+        this.activiteit = activiteit;
+        this.gebruiker = gebruiker;
+    }
+
     public int getId() {
         return id;
     }

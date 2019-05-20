@@ -9,7 +9,10 @@ import domain.Activiteit;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -58,9 +61,9 @@ public class ActiviteitenBeheerder {
             boolean typeFilter = typeLeeg ? true
                     : (act.getType().toLowerCase().contains(type));
             boolean fromFilter = fromLeeg ? true
-                    : act.getStartDatum().after(from);
+                    : (calendarToLocalDate(act.getStartDatum()).isAfter(from) || calendarToLocalDate(act.getStartDatum()).isEqual(from));
             boolean untilFilter = untilLeeg ? true
-                    : act.getEindDatum().before(until);
+                    : (calendarToLocalDate(act.getEindDatum()).isBefore(until) || calendarToLocalDate(act.getEindDatum()).isEqual(until));
 
             return titelFilter && typeFilter && fromFilter && untilFilter;
         });
@@ -80,7 +83,7 @@ public class ActiviteitenBeheerder {
         GenericDaoJpa.startTransaction();
         repository.update(activiteit);
         GenericDaoJpa.commitTransaction();
-        activiteiten.set(activiteiten.indexOf(currentActiviteit), activiteit);        
+        activiteiten.set(activiteiten.indexOf(currentActiviteit), activiteit);
         activiteiten.notifyAll();
     }
 
@@ -112,5 +115,14 @@ public class ActiviteitenBeheerder {
 
     public void removePropertyChangeListener(PropertyChangeListener pcl) {
         subject.removePropertyChangeListener(pcl);
+    }
+
+    private LocalDate calendarToLocalDate(Calendar calendar) {
+        if (calendar == null) {
+            return null;
+        }
+        TimeZone tz = calendar.getTimeZone();
+        ZoneId zid = tz == null ? ZoneId.systemDefault() : tz.toZoneId();
+        return LocalDate.ofInstant(calendar.toInstant(), zid);
     }
 }

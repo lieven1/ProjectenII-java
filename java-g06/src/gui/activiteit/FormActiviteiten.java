@@ -26,11 +26,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -40,23 +42,23 @@ import javafx.scene.control.TextField;
 public class FormActiviteiten extends ScrollPane implements PropertyChangeListener, Initializable {
 
     @FXML
-    private Button btnOpslaan;
-    @FXML
-    private Button btnVerwijder;
+    private TextField txfTitel;
     @FXML
     private TextField txfType;
     @FXML
-    private TextField txfTitel;
-    @FXML
-    private Label lblFout;
+    private DatePicker dpStartdatum;
     @FXML
     private DatePicker dpEinddatum;
-    @FXML
-    private DatePicker dpStartdatum;
     @FXML
     private TextField txfMaxAantalDeelnemers;
     @FXML
     private TextField txfAantalDeelnemers;
+    @FXML
+    private Button btnOpslaan;
+    @FXML
+    private Button btnVerwijder;
+    @FXML
+    private Label lblFout;
     @FXML
     private ListView<?> alleGebruikersListView;
     @FXML
@@ -65,6 +67,27 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     private Button addGebruikerButton;
     @FXML
     private Button removeGebruikerButton;
+    @FXML
+    private CheckBox contactgegevensToggle;
+    @FXML
+    private AnchorPane contactgegevensPanel;
+    @FXML
+    private TextField contactPersoonTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private TextField telefoonnummerTextField;
+    @FXML
+    private TextField landTextField;
+    @FXML
+    private TextField postcodeTextField;
+    @FXML
+    private TextField stadTextField;
+    @FXML
+    private TextField straatTextField;
+    @FXML
+    private TextField huisnummerTextField;
+    
 
     private ActiviteitenController controller;
     private Activiteit currentActiviteit;
@@ -151,6 +174,11 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     private void pasBegeleidersAan(ActionEvent event) {
         begeleidersBewerken = true;
         deelnemersBewerken = false;
+    }
+    
+    @FXML
+    private void toggleContactgegevens(ActionEvent event){
+        contactgegevensPanel.setVisible(contactgegevensToggle.selectedProperty().getValue());
     }
 
     @FXML

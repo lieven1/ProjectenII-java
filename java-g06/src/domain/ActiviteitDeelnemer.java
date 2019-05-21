@@ -48,7 +48,7 @@ public class ActiviteitDeelnemer {
     public ActiviteitDeelnemer() {
     }
 
-    ActiviteitDeelnemer(Activiteit activiteit, AGebruiker gebruiker) {
+    public ActiviteitDeelnemer(Activiteit activiteit, AGebruiker gebruiker) {
         this.activiteit = activiteit;
         this.gebruiker = gebruiker;
     }

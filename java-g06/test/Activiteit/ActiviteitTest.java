@@ -7,6 +7,13 @@ package Activiteit;
 
 import domain.GebruikerModels.Gebruiker;
 import domain.Activiteit;
+import domain.ActiviteitBegeleider;
+import domain.ActiviteitDeelnemer;
+import domain.DateConverter;
+import domain.GebruikerModels.Gradatie;
+import domain.GebruikerModels.Lesformule;
+import domain.GebruikerModels.TypeGebruiker;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -26,8 +33,9 @@ public class ActiviteitTest {
     private final Calendar validStartDatum;
     private final Calendar validEindDatum;
     private final int validMaxAantalDeelnemers;
-    private final List<Gebruiker> validDeelnemers;
-    private final List<Gebruiker> validBegeleiders;
+    private final Gebruiker validGebruiker;
+    private final List<ActiviteitDeelnemer> validDeelnemers;
+    private final List<ActiviteitBegeleider> validBegeleiders;
     private Activiteit validActiviteit;
 
     public ActiviteitTest() {
@@ -37,8 +45,9 @@ public class ActiviteitTest {
         validEindDatum = new GregorianCalendar();
         validEindDatum.add(Calendar.DAY_OF_MONTH, 5);
         validMaxAantalDeelnemers = 10;
-        validDeelnemers = Arrays.asList(new Gebruiker(), new Gebruiker(), new Gebruiker());
-        validBegeleiders = Arrays.asList(new Gebruiker(), new Gebruiker());
+        validGebruiker = new Gebruiker("testnaam", "11111111111", Calendar.getInstance(), "Naam", "Voornaam", domain.GebruikerModels.Geslacht.Man, new GregorianCalendar(2002, 3, 12), "Gent", "092432004", "0476585152", "gebruiker1@taijitan.be", "gebruiker11@taijitan.be", "België", "9000", "Gent", "Voskenslaan", "102", Gradatie.GoDan, TypeGebruiker.Lid, new Lesformule(1, "Woensdag"));
+        validDeelnemers = Arrays.asList(new ActiviteitDeelnemer(validActiviteit, new Gebruiker()), new ActiviteitDeelnemer(validActiviteit, new Gebruiker()), new ActiviteitDeelnemer(validActiviteit, new Gebruiker()));
+        validBegeleiders = Arrays.asList(new ActiviteitBegeleider(validActiviteit, new Gebruiker()), new ActiviteitBegeleider(validActiviteit, new Gebruiker()));
         validActiviteit = new Activiteit(validTitel, validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, validDeelnemers, validBegeleiders);
     }
 
@@ -47,7 +56,7 @@ public class ActiviteitTest {
         validActiviteit = new Activiteit(validTitel, validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, validDeelnemers, validBegeleiders);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testInitLegeTitelThrowsIllegalArgumentException() {
         Activiteit instance = new Activiteit("", validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, validDeelnemers, validBegeleiders);
     }
@@ -77,7 +86,7 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetStartDatumNaEindDatumThrowsIllegalArgumentException() {
-        Calendar start = (GregorianCalendar)validActiviteit.getEindDatum().clone();
+        Calendar start = (GregorianCalendar) validActiviteit.getEindDatum().clone();
         start.add(Calendar.DAY_OF_MONTH, 1);
         validActiviteit.setStartDatum(start);
     }
@@ -94,18 +103,18 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSetDeelnemersTeVeelThrowsIllegalArgumentException() {
-        List<Gebruiker> deelnemers = new ArrayList<>();
+        List<ActiviteitDeelnemer> deelnemers = new ArrayList<>();
         for (int i = 0; i < validActiviteit.getMaxAantalDeelnemers() + 1; i++) {
-            deelnemers.add(new Gebruiker());
+            deelnemers.add(new ActiviteitDeelnemer(validActiviteit, new Gebruiker()));
         }
-        validActiviteit.setDeelnemers(deelnemers);
+        validActiviteit.setActiviteitDeelnemers(deelnemers);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddDeelnemerTeVeelThrowsIllegalArgumentException() {
-        List<Gebruiker> deelnemers = new ArrayList<>();
+        List<ActiviteitDeelnemer> deelnemers = new ArrayList<>();
         for (int i = 0; i < validMaxAantalDeelnemers; i++) {
-            deelnemers.add(new Gebruiker());
+            deelnemers.add(new ActiviteitDeelnemer(validActiviteit, new Gebruiker()));
         }
         Activiteit instance = new Activiteit(validTitel, validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, deelnemers, validBegeleiders);
         instance.addDeelnemer(new Gebruiker());
@@ -113,9 +122,8 @@ public class ActiviteitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testVerwijderEnigeBegeleiderThrowsIllegalArgumentException() {
-        Gebruiker begeleider = new Gebruiker();
-        Activiteit instance = new Activiteit(validTitel, validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, validDeelnemers, Arrays.asList(begeleider));
-        instance.deleteBegeleider(begeleider);        
+        Activiteit instance = new Activiteit(validTitel, validType, validStartDatum, validEindDatum, validMaxAantalDeelnemers, validDeelnemers, Arrays.asList(new ActiviteitBegeleider(validActiviteit, validGebruiker)));
+        instance.deleteBegeleider(validGebruiker);
     }
 
 }

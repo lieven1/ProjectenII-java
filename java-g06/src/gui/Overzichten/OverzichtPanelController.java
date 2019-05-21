@@ -8,10 +8,14 @@ package gui.Overzichten;
 import gui.Overzichten.Activiteiten.ActiviteitenListPanel;
 import domain.controllers.ActiviteitenController;
 import domain.controllers.GebruikerController;
+import domain.controllers.LesmateriaalController;
 import gui.Overzichten.Aanwezigheden.AanwezighedenListPanel;
 import domain.controllers.OverzichtController;
+import domain.controllers.RaadplegingController;
 import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanelController;
 import gui.Overzichten.Activiteiten.ActiviteitenDetailPanelController;
+import gui.Overzichten.Raadplegingen.RaadplegingDetailPanelController;
+import gui.Overzichten.Raadplegingen.RaadplegingListPanel;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -30,11 +34,15 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
 
     //meerdere ctor per type overzicht --> in framecontroller wordt juist ctor aangeroepen bij constructie
     //default ctor --> aanwezigheden
-    public OverzichtPanelController(OverzichtController oc, GebruikerController gc, ActiviteitenController ac, int typeOverzicht) {
+    public OverzichtPanelController(OverzichtController oc, GebruikerController gc, ActiviteitenController ac, RaadplegingController rc, LesmateriaalController lc, int typeOverzicht) {
         this.oc = oc;
 
         // Panels
-        if (typeOverzicht == 2) {
+        if (typeOverzicht == 3) {
+            listPanel = new RaadplegingListPanel(rc, lc);
+            gegevensPanel = new RaadplegingDetailPanelController(gc);
+            rc.addPropertyChangeListener(this);
+        } else if (typeOverzicht == 2) {
             listPanel = new KampioenschapListPanel(oc);
             gegevensPanel = new KampioenschapDetailPanel(oc);
         } else if (typeOverzicht == 1) {

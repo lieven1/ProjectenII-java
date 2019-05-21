@@ -13,7 +13,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +27,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -160,19 +158,25 @@ public class FormLesmateriaal extends ScrollPane implements PropertyChangeListen
     }
 
     public void saveLesmateriaal() {
-        Lesmateriaal lesm = gc.getCurrentLesmateriaal();
-        if(lesm == null){
-            lesm = new Lesmateriaal();
+        try {
+            Lesmateriaal lesm = gc.getCurrentLesmateriaal();
+            if(lesm == null){
+                lesm = new Lesmateriaal();
+            }
+            lesm.setNaam(txfNaam.getText());
+            lesm.setGraad((Gradatie) cbGraad.getValue());
+            lesm.setFotos(listFoto.getItems());
+            lesm.setThema((Thema) cbThema.getValue());
+            lesm.setBeschrijving(txaBeschrijving.getText());
+            if(gc.getCurrentLesmateriaal() != null)
+                gc.modify();
+            else
+                gc.create(lesm);
+            lblFout.setText("");
+        } catch (Exception e) {
+            lblFout.setText(e.getMessage());
+            lblFout.setVisible(true);
         }
-        lesm.setNaam(txfNaam.getText());
-        lesm.setGraad((Gradatie) cbGraad.getValue());
-        lesm.setFotos(listFoto.getItems());
-        lesm.setThema((Thema) cbThema.getValue());
-        lesm.setBeschrijving(txaBeschrijving.getText());
-        if(gc.getCurrentLesmateriaal() != null)
-            gc.modify();
-        else
-            gc.create(lesm);
     }
 
     public void deleteLesmateriaal() {

@@ -24,6 +24,7 @@ public class GuiGebruikerController extends HBox implements Panel, PropertyChang
         
         gc.addPropertyChangeListener(this);
         this.getChildren().addAll(listPanel, gegevensPanel);
+        this.gc.veranderFilter("", "", true, true);
     }
     
     public void createForm(TypeGebruiker type){

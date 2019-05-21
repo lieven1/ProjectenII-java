@@ -2,7 +2,6 @@ package gui.Gebruiker;
 
 import domain.controllers.GebruikerController;
 import domain.GebruikerModels.AGebruiker;
-import domain.GebruikerModels.Adres;
 import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.Geslacht;
 import domain.GebruikerModels.Gradatie;
@@ -11,6 +10,7 @@ import domain.GebruikerModels.TypeGebruiker;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import javafx.collections.FXCollections;
@@ -29,9 +29,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 public class FormLid extends GebruikerForm {
+
     private GebruikerController gc;
     private AGebruiker oldGeb;
-    
+
     @FXML
     TextField txfGebruikersnaam, txfNaam, txfVoornaam, txfRijksregisternummer, txfGeboorteplaats, txfLand, txfPostcode, txfStad, txfStraat, txfHuisnummer, txfTelefoonnummer, txfGsmnummer, txfEmail, txfEmailOuders;
     @FXML
@@ -44,19 +45,19 @@ public class FormLid extends GebruikerForm {
     MenuButton btnNieuw;
     @FXML
     Label lblFout;
-    
-    public FormLid(GebruikerController gc){
+
+    public FormLid(GebruikerController gc) {
         this.gc = gc;
-        FXMLLoader loader = 
-            new FXMLLoader(getClass().getResource("FormLid.fxml"));
+        FXMLLoader loader
+                = new FXMLLoader(getClass().getResource("FormLid.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try{
+        try {
             loader.load();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         cbGeslacht.setItems(FXCollections.observableArrayList(Geslacht.values()));
         cbGraad.setItems(FXCollections.observableArrayList(Gradatie.values()));
         cbTypeGebruiker.setItems(FXCollections.observableArrayList(TypeGebruiker.Lid, TypeGebruiker.Proefgebruiker));
@@ -65,12 +66,13 @@ public class FormLid extends GebruikerForm {
         MenuItem nieuwProefLid = new MenuItem("Proeflid");
         MenuItem nieuwLid = new MenuItem("Gebruiker");
         btnNieuw.getItems().addAll(nieuwProefLid, nieuwLid);
-        
+
         btnVerwijder.setDisable(true);
         lblFout.setText("");
         dpInschrijvingsdatum.setValue(LocalDate.now());
-        dpGeboortedatum.setValue(LocalDate.now());
-        
+        dpGeboortedatum.setValue(LocalDate.now().minusYears(6));
+        dpGeboortedatum.setEditable(false);
+
         // Buttons
         nieuwProefLid.setOnAction((ActionEvent t) -> {
             gc.setCurrentGebruiker(null);
@@ -91,14 +93,31 @@ public class FormLid extends GebruikerForm {
             alert.setContentText("Bent u zeker dat u deze gebruiker wenst te verwijderen?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
+            if (result.get() == ButtonType.OK) {
                 gc.delete();
                 gc.setCurrentTypeGebruiker(TypeGebruiker.Lid);
             }
         });
-        
+
         cbTypeGebruiker.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
             gc.setCurrentTypeGebruiker((TypeGebruiker) cbTypeGebruiker.getValue());
+        });
+        
+        txfRijksregisternummer.textProperty().addListener((arg0, oldValue, newValue) -> {
+            if(newValue.matches("^\\d{11}$")){
+                switch(Integer.valueOf(txfRijksregisternummer.getText().substring(6, 9))%2){
+                    case 1: cbGeslacht.setValue(Geslacht.Vrouw);
+                    case 2: cbGeslacht.setValue(Geslacht.Man);
+                }
+                int year = Integer.valueOf(txfRijksregisternummer.getText().substring(0, 2));
+                if (year + 2000 > Calendar.getInstance().get(Calendar.YEAR) -5) {
+                    year = year + 1900;
+                }
+                else {
+                    year = year + 2000;
+                }
+                dpGeboortedatum.setValue(LocalDate.of(year, Integer.valueOf(txfRijksregisternummer.getText().substring(2, 4)), Integer.valueOf(txfRijksregisternummer.getText().substring(4, 6))));
+            }
         });
     }
 
@@ -108,9 +127,9 @@ public class FormLid extends GebruikerForm {
         btnOpslaan.setText("Bijwerken");
         oldGeb = gebruiker;
         btnVerwijder.setDisable(false);
-        switch(gebruiker.getType()){
+        switch (gebruiker.getType()) {
             case Proefgebruiker:
-                ProefGebruiker tempGeb = (ProefGebruiker)gebruiker;
+                ProefGebruiker tempGeb = (ProefGebruiker) gebruiker;
                 txfGebruikersnaam.setText(tempGeb.getGebruikersnaam());
                 dpInschrijvingsdatum.setValue(LocalDate.ofInstant(tempGeb.getInschrijvingsDatum().toInstant(), ZoneId.systemDefault()));
                 txfNaam.setText(tempGeb.getNaam());
@@ -122,7 +141,7 @@ public class FormLid extends GebruikerForm {
                 // Beheerder logic
                 break;
             default:
-                Gebruiker g = (Gebruiker)gebruiker;
+                Gebruiker g = (Gebruiker) gebruiker;
                 txfGebruikersnaam.setText(g.getGebruikersnaam());
                 txfNaam.setText(g.getNaam());
                 txfVoornaam.setText(g.getVoornaam());
@@ -146,36 +165,36 @@ public class FormLid extends GebruikerForm {
     }
 
     public void saveGebruiker() {
-        try{
+        try {
             Gebruiker geb = new Gebruiker(
                     txfGebruikersnaam.getText(),
                     txfRijksregisternummer.getText(),
-                    new GregorianCalendar(dpInschrijvingsdatum.getValue().getYear(), dpInschrijvingsdatum.getValue().getMonthValue()-1, dpInschrijvingsdatum.getValue().getDayOfMonth()),
+                    new GregorianCalendar(dpInschrijvingsdatum.getValue().getYear(), dpInschrijvingsdatum.getValue().getMonthValue() - 1, dpInschrijvingsdatum.getValue().getDayOfMonth()),
                     txfNaam.getText(),
                     txfVoornaam.getText(),
-                    (Geslacht)cbGeslacht.getValue(),
-                    new GregorianCalendar(dpGeboortedatum.getValue().getYear(), dpGeboortedatum.getValue().getMonthValue()-1, dpGeboortedatum.getValue().getDayOfMonth()),
+                    (Geslacht) cbGeslacht.getValue(),
+                    new GregorianCalendar(dpGeboortedatum.getValue().getYear(), dpGeboortedatum.getValue().getMonthValue() - 1, dpGeboortedatum.getValue().getDayOfMonth()),
                     txfGeboorteplaats.getText(),
                     txfTelefoonnummer.getText(),
                     txfGsmnummer.getText(),
                     txfEmail.getText(),
                     txfEmailOuders.getText(),
-                    new Adres(txfLand.getText(), txfPostcode.getText(), txfStad.getText(), txfStraat.getText(), txfHuisnummer.getText()),
-                    (Gradatie)cbGraad.getValue(),
+                    txfLand.getText(), txfPostcode.getText(), txfStad.getText(), txfStraat.getText(), txfHuisnummer.getText(),
+                    (Gradatie) cbGraad.getValue(),
                     TypeGebruiker.Lid,
                     null
             );
-        
-            if(oldGeb == null){
+
+            if (oldGeb == null) {
                 gc.create(geb);
                 oldGeb = geb;
                 btnVerwijder.setDisable(false);
-            }else{
+            } else {
                 gc.modify(geb);
                 oldGeb = geb;
             }
             lblFout.setText("");
-        }catch(Exception e){
+        } catch (Exception e) {
             lblFout.setText(e.getMessage());
             lblFout.setVisible(true);
         }

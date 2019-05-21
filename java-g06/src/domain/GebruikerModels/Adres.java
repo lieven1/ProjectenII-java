@@ -76,7 +76,7 @@ public class Adres implements Serializable {
     private void setPostcode(String _postcode) {
         if(_postcode == null || _postcode.isBlank())
             throw new IllegalArgumentException("Postcode mag geen lege waarde bevatten.");
-        if(! Pattern.compile("^\\d{4}$").matcher(_postcode).matches())
+        if(! Pattern.compile("^\\d{4}[A-Z]?$").matcher(_postcode).matches())
             throw new IllegalArgumentException("Ongeldige waarde voor postcode.");
         
         this.postcode = _postcode;
@@ -85,6 +85,8 @@ public class Adres implements Serializable {
     private void setStad(String _stad) {
         if(_stad == null || _stad.isBlank())
             throw new IllegalArgumentException("Stad mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^[a-z A-Z]+$").matcher(_stad).matches())
+            throw new IllegalArgumentException("Ongeldige waarde voor stad.");
         
         this.stad = _stad;
     }
@@ -92,6 +94,8 @@ public class Adres implements Serializable {
     private void setStraat(String _straat) {
         if(_straat == null || _straat.isBlank())
             throw new IllegalArgumentException("Straat mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^[a-z A-Z]+$").matcher(_straat).matches())
+            throw new IllegalArgumentException("Ongeldige waarde voor straat.");
         
         this.straat = _straat;
     }
@@ -99,6 +103,8 @@ public class Adres implements Serializable {
     private void setNummer(String _nummer) {
         if(_nummer == null || _nummer.isBlank())
             throw new IllegalArgumentException("Nummer mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^[0-9]+([\\/][a-zA-Z0-9])?[a-zA-Z]?$").matcher(_nummer).matches())
+            throw new IllegalArgumentException("Ongeldige waarde voor nummer.");
         
         this.nummer = _nummer;
     }

@@ -14,6 +14,7 @@ public class GuiLesmateriaalController extends HBox implements Panel {
         detailPanel = new FormLesmateriaal(lc);
         
         this.getChildren().addAll(listPanel, detailPanel);
+        lc.veranderFilter("", null, null);
     }
     
     

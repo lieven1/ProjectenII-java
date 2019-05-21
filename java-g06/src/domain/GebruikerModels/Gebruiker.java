@@ -54,33 +54,23 @@ public class Gebruiker extends AGebruiker {
 
     
     // Constructors
-    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, Adres adres, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
-        if(gebruikersnaam == null || gebruikersnaam.isBlank())
-            throw new IllegalArgumentException("Gebruikersnaam mag geen lege waarde bevatten.");
-        if(rijksregisternummer == null || rijksregisternummer.isBlank())
-            throw new IllegalArgumentException("Rijksregisternummer mag geen lege waarde bevatten.");
-        if(! Pattern.compile("^\\d{11}$").matcher(rijksregisternummer).matches())
-            throw new IllegalArgumentException("Ongeldige waarde voor rijksregisternummer");
-        // Toevoegen geboortedatum check (6cijfers)
-        // Toevoegen GeslachtCheck: even=vrouw (3cijfers)
-        // Toevoegen rijksregisternummercheck modulo 97 (2cijfers)
-        
-        this.gebruikersnaam = gebruikersnaam;
-        this.rijksregisternummer = rijksregisternummer;
-        super.setInschrijvingsDatum(inschrijvingsdatum);
+    public Gebruiker(String gebruikersnaam, String rijksregisternummer, Calendar inschrijvingsdatum, String naam, String voornaam, Geslacht geslacht, Calendar geboortedatum, String geboorteplaats, String telefoonnummer, String gsmnummer, String email, String emailOuders, String land, String postcode, String stad, String straat, String huisnummer, Gradatie graad, TypeGebruiker type, Lesformule lesformule){
+        super.setGebruikersnaam(gebruikersnaam);
         super.setNaam(naam);
         super.setVoornaam(voornaam);
+        this.setRijksregisternummer(rijksregisternummer);
         this.setGeslacht(geslacht);
-        this.setGeboorteDatum(geboortedatum);
+        this.setGeboorteDatum(geboortedatum); 
         this.setGeboorteplaats(geboorteplaats);
+        this.setAdres(new Adres(land, postcode, stad, straat, huisnummer));
         super.setTelefoonnummer(telefoonnummer);
         this.setGsmnummer(gsmnummer);
         super.setEmail(email);
         this.setEmailOuders(emailOuders);
-        this.setAdres(adres);
         this.setGraad(graad);
-        this.setTypeG(type);
         this.setLesformule(lesformule);
+        super.setInschrijvingsDatum(inschrijvingsdatum);
+        this.setTypeG(type);
     }
     public Gebruiker(){}
   
@@ -122,9 +112,22 @@ public class Gebruiker extends AGebruiker {
     }
     
     // Setters
+    private void setRijksregisternummer(String rijksregisternummer) {
+        if(rijksregisternummer == null || rijksregisternummer.isBlank())
+            throw new IllegalArgumentException("Rijksregisternummer mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^\\d{11}$").matcher(rijksregisternummer).matches())
+            throw new IllegalArgumentException("Ongeldige waarde voor rijksregisternummer");
+        // Toevoegen geboortedatum check (6cijfers)
+        // Toevoegen GeslachtCheck: even=vrouw (3cijfers)
+        // Toevoegen rijksregisternummercheck modulo 97 (2cijfers)
+        this.rijksregisternummer = rijksregisternummer;
+    }
+    
     private void setGeboorteplaats(String _geboorteplaats) {
         if(_geboorteplaats == null || _geboorteplaats.isBlank())
             throw new IllegalArgumentException("Geboorteplaats mag geen lege waarde bevatten.");
+        if(! Pattern.compile("^[a-z A-Z]+$").matcher(_geboorteplaats).matches())
+            throw new IllegalArgumentException("Ongeldig formaat voor geboorteplaats.");
         
         this.geboorteplaats = _geboorteplaats;
     }

@@ -26,14 +26,19 @@
                         <MenuItem fx:id="actMenuBeheer" mnemonicParsing="false" text="Activiteit beheren" />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Lesmateriaal">
+                    <items>
+                        <MenuItem fx:id="lesmateriaalBeheer" mnemonicParsing="false" text="Lesmateriaal beheren" />
+                    </items>
+                </Menu> 
                 <Menu mnemonicParsing="false" text="Overzicht">
                     <items>
                         <MenuItem fx:id="overzichtAanwezigheden" mnemonicParsing="false" text="Aanwezigheden" />
                         <MenuItem fx:id="overzichtActiviteiten" mnemonicParsing="false" text="Activiteiten" />
-                        <MenuItem fx:id="overzichtKampioenschap" mnemonicParsing="false" text="Kampioenschap" />
-                         <MenuItem fx:id="overzichtRaadplegingen" mnemonicParsing="false" text="Raadplegingen Lesmateriaal" />
-                       </items>
-                </Menu>
+                        <!-- <MenuItem fx:id="overzichtKampioenschap" mnemonicParsing="false" text="Kampioenschap" /> -->
+                        <MenuItem fx:id="overzichtRaadplegingen" mnemonicParsing="false" text="Raadplegingen Lesmateriaal" />
+                    </items>
+                </Menu>      
             </menus>
         </MenuBar>
         <AnchorPane fx:id="contentPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="397.0" prefWidth="640.0" VBox.vgrow="ALWAYS" />

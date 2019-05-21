@@ -8,6 +8,7 @@ import domain.Activiteit;
 import domain.beheerders.GebruikerBeheerder;
 import domain.GebruikerModels.ProefGebruiker;
 import gui.Gebruiker.GuiGebruikerController;
+import gui.Lesmateriaal.GuiLesmateriaalController;
 import gui.Overzichten.OverzichtPanelController;
 import gui.activiteit.GuiActiviteitController;
 import java.beans.PropertyChangeEvent;
@@ -45,10 +46,12 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
     private MenuItem overzichtAanwezigheden;
     @FXML
     private MenuItem overzichtActiviteiten;
-    @FXML
-    private MenuItem overzichtKampioenschap;
+//    @FXML
+//    private MenuItem overzichtKampioenschap;
     @FXML
     private MenuItem overzichtRaadplegingen;
+    @FXML
+    private MenuItem lesmateriaalBeheer;
 
     @FXML
     private AnchorPane contentPane;
@@ -87,14 +90,17 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
         overzichtActiviteiten.setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), dc.getRaadplegingController(), dc.getLesmateriaalController(), 1), this.getHeight(), this.getWidth());
         });
-        overzichtKampioenschap.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), dc.getRaadplegingController(), dc.getLesmateriaalController(), 2), this.getHeight(), this.getWidth());
-        });
+//        overzichtKampioenschap.setOnAction((ActionEvent t) -> {
+//            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), dc.getRaadplegingController(), dc.getLesmateriaalController(), 2), this.getHeight(), this.getWidth());
+//        });
         overzichtRaadplegingen.setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), dc.getRaadplegingController(), dc.getLesmateriaalController(), 3), this.getHeight(), this.getWidth());
         });
         actMenuBeheer.setOnAction((t) -> {
             dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
+        });
+        lesmateriaalBeheer.setOnAction((t) -> {
+            dc.getGuiController().setPane(new GuiLesmateriaalController(dc.getLesmateriaalController()), this.getHeight(), this.getWidth());
         });
 
         this.dc.getGuiController().addPropertyChangeListener(this);

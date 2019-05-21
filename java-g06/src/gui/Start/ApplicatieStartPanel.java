@@ -21,13 +21,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class ApplicatieStartPanel extends AnchorPane implements Panel {
-    
+
     private ImageView logo;
     private GridPane menuPanel;
-    
+
     private DomeinController dc;
-    
-    public ApplicatieStartPanel(DomeinController dc){
+
+    public ApplicatieStartPanel(DomeinController dc) {
         this.dc = dc;
         
         // Applicatie Logo
@@ -38,22 +38,22 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
             System.err.println(ex);
         }
         logo.fitHeightProperty().setValue(233.0);
-        
+
         // MenuPanel
         menuPanel = new GridPane();
-        menuPanel.setPrefWidth(800);
+        menuPanel.setPrefWidth(1000);
         menuPanel.setLayoutY(230);
-        menuPanel.getColumnConstraints().add(new ColumnConstraints(200));
-        
+        menuPanel.getColumnConstraints().add(new ColumnConstraints(250));
+
         // Label
         Label lblTitle = new Label("Taijitan");
         lblTitle.setFont(new Font("Arial Black", 96.0));
         lblTitle.setTextFill(Paint.valueOf("#393980"));
         lblTitle.setLayoutY(242);
         lblTitle.setPadding(new Insets(0, 0, 20, 0));
-        menuPanel.add(lblTitle, 0, 0, 2, 1);        
+        menuPanel.add(lblTitle, 0, 0, 2, 1);
         GridPane.setHalignment(lblTitle, HPos.CENTER);
-        
+
         // Buttons
         createButton("Gebruikers", 0, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
@@ -64,11 +64,11 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         createButton("Activiteit", 2, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
         });
-        
+
         this.getChildren().addAll(logo, menuPanel);
     }
-    
-    private Button createButton(String text, int x, int y){
+
+    private Button createButton(String text, int x, int y) {
         Button btn = new Button(text);
         btn.getStyleClass().addAll("lg", "primary");
         btn.setPrefWidth(150);
@@ -80,7 +80,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
     @Override
     public void resizeWidth(double width) {
         logo.fitWidthProperty().setValue(width);
-        menuPanel.setLayoutX(width/2 - 200);
+        menuPanel.setLayoutX(width / 2 - 200);
     }
 
     @Override

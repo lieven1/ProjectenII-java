@@ -1,5 +1,5 @@
 package gui.Start;
-
+//startpage
 import gui.Panel;
 import domain.controllers.DomeinController;
 import gui.Gebruiker.GuiGebruikerController;

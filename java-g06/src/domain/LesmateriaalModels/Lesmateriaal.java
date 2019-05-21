@@ -21,7 +21,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Lesmateriaal implements Serializable {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LesmateriaalId")
     private int id;
     @Column(name = "Naam")
@@ -36,15 +38,15 @@ public class Lesmateriaal implements Serializable {
     private Thema thema;
     @Column(name = "VideoId")
     private String videoId;
-    
+
     @ManyToMany
     @JoinTable(
-      name = "FotoLesmateriaal", 
-      joinColumns = @JoinColumn(name = "LesmateriaalId"), 
-      inverseJoinColumns = @JoinColumn(name = "FotoId"))
-    private List<Foto> fotos;    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="LesmateriaalId", nullable=false)
+            name = "FotoLesmateriaal",
+            joinColumns = @JoinColumn(name = "LesmateriaalId"),
+            inverseJoinColumns = @JoinColumn(name = "FotoId"))
+    private List<Foto> fotos;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "LesmateriaalId", nullable = false)
     private List<Raadpleging> raadplegingen;
 
     public Lesmateriaal(String naam, String beschrijving, Gradatie graad, Thema thema, String videoId, List<Foto> fotos, List<Raadpleging> raadplegingen) {
@@ -56,17 +58,19 @@ public class Lesmateriaal implements Serializable {
         setFotos(fotos);
         setRaadplegingen(raadplegingen);
     }
-    
-    public Lesmateriaal(){}
+
+    public Lesmateriaal() {
+    }
 
     public String getNaam() {
         return naam;
     }
 
     public void setNaam(String naam) {
-        if(naam == null || naam.isBlank())
+        if (naam == null || naam.isBlank()) {
             throw new IllegalArgumentException("Naam mag geen lege waarde bevatten.");
-        
+        }
+
         this.naam = naam;
     }
 
@@ -83,9 +87,10 @@ public class Lesmateriaal implements Serializable {
     }
 
     public void setGraad(Gradatie graad) {
-        if(graad == null)
+        if (graad == null) {
             throw new IllegalArgumentException("Graad mag geen lege waarde bevatten.");
-        
+        }
+
         this.graad = graad;
     }
 
@@ -94,9 +99,10 @@ public class Lesmateriaal implements Serializable {
     }
 
     public void setThema(Thema thema) {
-        if(thema == null)
+        if (thema == null) {
             throw new IllegalArgumentException("Thema mag geen lege waarde bevatten.");
-        
+        }
+
         this.thema = thema;
     }
 
@@ -113,9 +119,10 @@ public class Lesmateriaal implements Serializable {
     }
 
     public void setFotos(List<Foto> fotos) {
-        if(fotos == null)
+        if (fotos == null) {
             fotos = new ArrayList<>();
-        
+        }
+
         this.fotos = fotos;
     }
 
@@ -124,9 +131,14 @@ public class Lesmateriaal implements Serializable {
     }
 
     public void setRaadplegingen(List<Raadpleging> raadplegingen) {
-        if(raadplegingen == null)
+        if (raadplegingen == null) {
             raadplegingen = new ArrayList<>();
-        
+        }
+
         this.raadplegingen = raadplegingen;
+    }
+
+    public int getAantalraadplegingen() {
+        return raadplegingen.size();
     }
 }

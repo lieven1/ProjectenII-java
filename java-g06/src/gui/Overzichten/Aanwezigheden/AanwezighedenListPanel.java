@@ -114,7 +114,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         btnVerwFilter.setOnAction((ActionEvent t) -> {
             dpVanFilter.setValue(null);
             dpTotFilter.setValue(null);
-            lesmomentList.setItems(oc.getLesomentObservableList());
+            oc.veranderFilter(null, null);
         });
 
         filterPane.getChildren().addAll(imgLogo, lblFilterTitle, lblVanFilter, lblTotFilter, dpVanFilter, dpTotFilter, btnFilter, btnVerwFilter);
@@ -141,7 +141,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         StarttijdColumn.setResizable(false);
 
         lesmomentList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
-            oc.setCurrentLesmoment((Lesmoment) newValue);          
+            oc.setCurrentLesmoment((Lesmoment) newValue);
         });
 
         return lesmomentList;

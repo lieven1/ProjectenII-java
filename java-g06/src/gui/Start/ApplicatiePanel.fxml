@@ -31,6 +31,7 @@
                         <MenuItem fx:id="overzichtAanwezigheden" mnemonicParsing="false" text="Aanwezigheden" />
                         <MenuItem fx:id="overzichtActiviteiten" mnemonicParsing="false" text="Activiteiten" />
                         <MenuItem fx:id="overzichtKampioenschap" mnemonicParsing="false" text="Kampioenschap" />
+                         <MenuItem fx:id="overzichtRaadplegingen" mnemonicParsing="false" text="Raadplegingen Lesmateriaal" />
                        </items>
                 </Menu>
             </menus>

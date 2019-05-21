@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -10,186 +11,227 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="1327.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="851.0" prefWidth="1205.0">
          <children>
-            <VBox layoutX="208.0" layoutY="77.0" spacing="12.0">
+            <VBox layoutX="-2.0" layoutY="14.0">
                <children>
-                  <TextField id="txfGebruikersnaam" fx:id="txfTitel" prefWidth="230.0" promptText="Titel" />
-                  <TextField id="txfNaam" fx:id="txfType" prefWidth="230.0" promptText="Type" />
-                  <DatePicker id="dpGeboortedatum" fx:id="dpStartdatum" prefWidth="231.0" promptText="Startdatum" />
-                  <DatePicker id="dpGeboortedatum" fx:id="dpEinddatum" prefWidth="231.0" promptText="Einddatum" />
-               </children>
-            </VBox>
-            <VBox layoutX="237.0" layoutY="234.0" prefHeight="62.0" prefWidth="200.0" spacing="12.0">
-               <children>
-                  <TextField fx:id="txfMaxAantalDeelnemers" prefHeight="25.0" prefWidth="0.0" promptText="Maximum aantal deelnemers" />
-                  <TextField fx:id="txfAantalDeelnemers" editable="false" text="0" />
-               </children>
-            </VBox>
-            <Button id="btnOpslaan" fx:id="btnOpslaan" layoutX="244.0" layoutY="749.0" mnemonicParsing="false" onAction="#slaActiviteitOp" prefHeight="46.0" prefWidth="178.0" text="Opslaan">
-               <styleClass>
-                  <String fx:value="info" />
-                  <String fx:value="lg" />
-               </styleClass>
-            </Button>
-            <Button id="btnVerwijder" fx:id="btnVerwijder" layoutX="579.0" layoutY="748.0" mnemonicParsing="false" onAction="#verwijderActiviteit" prefHeight="46.0" prefWidth="178.0" text="Verwijder">
-               <styleClass>
-                  <String fx:value="danger" />
-                  <String fx:value="lg" />
-               </styleClass>
-            </Button>
-            <Separator layoutX="19.0" layoutY="218.0" prefHeight="14.0" prefWidth="436.0" />
-            <VBox layoutX="23.0" layoutY="77.0" spacing="12.0">
-               <children>
-                  <Label text="Titel">
+                  <Label prefHeight="53.0" prefWidth="813.0" text="Detailoverzicht activiteit">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Type">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Startdatum">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Einddatum">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox layoutX="19.0" layoutY="234.0" spacing="12.0">
-               <children>
-                  <Label text="Maximum aantal deelnemers">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Aantal deelnemers">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <Separator layoutX="456.0" layoutY="64.0" orientation="VERTICAL" prefHeight="473.0" prefWidth="10.0" />
-            <Separator layoutX="-2.0" layoutY="63.0" prefHeight="13.0" prefWidth="905.0" />
-            <Label fx:id="lblFout" layoutX="15.0" layoutY="817.0" text="Fout" textFill="#cf0e0e">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Button id="btnNieuw" layoutX="22.0" layoutY="750.0" mnemonicParsing="false" onAction="#nieuweActiviteit" prefHeight="44.0" prefWidth="199.0" text="Nieuwe activiteit">
-               <styleClass>
-                  <String fx:value="primary" />
-                  <String fx:value="lg" />
-               </styleClass></Button>
-            <Button id="btnOpslaan" layoutX="483.0" layoutY="79.0" minHeight="37.0" mnemonicParsing="false" onAction="#pasDeelnemersAan" prefHeight="37.0" prefWidth="124.0" text="deelnemers">
-               <styleClass>
-                  <String fx:value="info" />
-                  <String fx:value="lg" />
-               </styleClass>
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <ListView fx:id="alleGebruikersListView" layoutX="466.0" layoutY="131.0" prefHeight="175.0" prefWidth="403.0" />
-            <Button id="btnOpslaan" layoutX="639.0" layoutY="79.0" minHeight="33.0" mnemonicParsing="false" onAction="#pasBegeleidersAan" prefHeight="38.0" prefWidth="134.0" text="begeleiders">
-               <styleClass>
-                  <String fx:value="info" />
-                  <String fx:value="lg" />
-               </styleClass>
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
-            <ListView fx:id="gekozenGebruikersListView" layoutX="466.0" layoutY="362.0" prefHeight="175.0" prefWidth="403.0" />
-            <Button fx:id="addGebruikerButton" layoutX="607.0" layoutY="309.0" mnemonicParsing="false" onAction="#addGebruiker" prefHeight="46.0" prefWidth="30.0" styleClass="lg" />
-            <Line endX="-100.0" endY="31.4000244140625" layoutX="722.0" layoutY="314.0" startX="-100.0" />
-            <Button fx:id="removeGebruikerButton" layoutX="676.0" layoutY="308.0" mnemonicParsing="false" onAction="#removeGebruiker" prefHeight="46.0" prefWidth="30.0" styleClass="lg" />
-            <Line endX="-105.5" endY="30.9000244140625" layoutX="728.0" layoutY="315.0" startX="-94.0" startY="17.20001220703125" />
-            <Line endX="-115.5" endY="20.9000244140625" layoutX="738.0" layoutY="325.0" startX="-128.0" startY="7.20001220703125" />
-            <Line endX="-100.0" endY="31.4000244140625" layoutX="791.0" layoutY="314.0" startX="-100.0" />
-            <Line endX="-82.0" endY="-6.79998779296875" layoutX="760.0" layoutY="338.0" startX="-69.70709228515625" startY="-25.20709228515625" />
-            <Line endX="-83.60003662109375" endY="17.20001220703125" layoutX="788.0" layoutY="314.0" startX="-97.0" startY="-1.9141845703125" />
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="813.0" text="Detailoverzicht activiteit">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Separator layoutX="19.0" layoutY="305.0" prefHeight="14.0" prefWidth="436.0" />
-            <CheckBox fx:id="contactgegevensToggle" layoutX="17.0" layoutY="321.0" mnemonicParsing="false" onAction="#toggleContactgegevens" text="Contactgegevens locatie" />
-            <AnchorPane fx:id="contactgegevensPanel" layoutX="19.0" layoutY="343.0" prefHeight="301.0" prefWidth="450.0">
-               <children>
-                  <VBox spacing="12.0">
+                  <Separator prefHeight="13.0" prefWidth="905.0" />
+                  <HBox spacing="10.0">
                      <children>
-                        <Label text="Contactpersoon">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Email">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Telefoonnummer">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Land">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Postcode">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Stad">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Straat">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Huisnummer">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <VBox spacing="5.0">
+                           <children>
+                              <HBox spacing="100.0">
+                                 <children>
+                                    <VBox spacing="12.0">
+                                       <children>
+                                          <Label text="Titel">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Type">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Startdatum">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Einddatum">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="12.0">
+                                       <children>
+                                          <TextField id="txfGebruikersnaam" fx:id="txfTitel" prefWidth="230.0" promptText="Titel" />
+                                          <TextField id="txfNaam" fx:id="txfType" prefWidth="230.0" promptText="Type" />
+                                          <DatePicker id="dpGeboortedatum" fx:id="dpStartdatum" prefWidth="231.0" promptText="Startdatum" />
+                                          <DatePicker id="dpGeboortedatum" fx:id="dpEinddatum" prefWidth="231.0" promptText="Einddatum" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Separator prefHeight="14.0" prefWidth="429.0" />
+                              <HBox spacing="12.0">
+                                 <children>
+                                    <VBox spacing="12.0">
+                                       <children>
+                                          <Label text="Maximum aantal deelnemers">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Aantal deelnemers">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="62.0" prefWidth="200.0" spacing="12.0">
+                                       <children>
+                                          <TextField fx:id="txfMaxAantalDeelnemers" prefHeight="25.0" prefWidth="0.0" promptText="Maximum aantal deelnemers" />
+                                          <TextField fx:id="txfAantalDeelnemers" editable="false" text="0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Separator prefHeight="14.0" prefWidth="428.0" />
+                              <CheckBox fx:id="contactgegevensToggle" mnemonicParsing="false" onAction="#toggleContactgegevens" text="Contactgegevens locatie" />
+                              <AnchorPane fx:id="contactgegevensPanel" prefHeight="301.0" prefWidth="450.0">
+                                 <children>
+                                    <VBox spacing="12.0">
+                                       <children>
+                                          <Label text="Contactpersoon">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Email">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Telefoonnummer">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Land">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Postcode">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Stad">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Straat">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Huisnummer">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="201.0" layoutY="2.0" prefHeight="284.0" prefWidth="220.0" spacing="12.0">
+                                       <children>
+                                          <TextField fx:id="contactPersoonTextField" prefHeight="25.0" prefWidth="230.0" promptText="Contactpersoon" />
+                                          <TextField fx:id="emailTextField" prefHeight="25.0" prefWidth="230.0" promptText="Email" />
+                                          <TextField fx:id="telefoonnummerTextField" prefHeight="25.0" prefWidth="230.0" promptText="Telefoonnummer" />
+                                          <TextField fx:id="landTextField" prefHeight="25.0" prefWidth="231.0" text="België" />
+                                          <TextField fx:id="postcodeTextField" prefHeight="25.0" prefWidth="230.0" promptText="Postcode" />
+                                          <TextField fx:id="stadTextField" prefHeight="25.0" prefWidth="230.0" promptText="Stad" />
+                                          <TextField fx:id="straatTextField" prefHeight="25.0" prefWidth="230.0" promptText="Straat" />
+                                          <TextField fx:id="huisnummerTextField" prefHeight="25.0" prefWidth="230.0" promptText="Huisnummer" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" prefHeight="563.0" prefWidth="6.0" />
+                        <VBox alignment="CENTER" prefHeight="577.0" prefWidth="403.0" spacing="10.0">
+                           <children>
+                              <HBox alignment="CENTER" spacing="40.0">
+                                 <children>
+                                    <Button id="btnOpslaan" minHeight="37.0" mnemonicParsing="false" onAction="#pasDeelnemersAan" prefHeight="37.0" prefWidth="124.0" text="deelnemers">
+                                       <styleClass>
+                                          <String fx:value="info" />
+                                          <String fx:value="lg" />
+                                       </styleClass>
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="btnOpslaan" minHeight="33.0" mnemonicParsing="false" onAction="#pasBegeleidersAan" prefHeight="38.0" prefWidth="134.0" text="begeleiders">
+                                       <styleClass>
+                                          <String fx:value="info" />
+                                          <String fx:value="lg" />
+                                       </styleClass>
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="alleGebruikersListView" prefHeight="175.0" prefWidth="403.0" />
+                              <HBox alignment="CENTER" spacing="40.0">
+                                 <children>
+                                    <Button fx:id="addGebruikerButton" mnemonicParsing="false" onAction="#addGebruiker" prefHeight="46.0" prefWidth="52.0" styleClass="lg" text="Add" />
+                                    <Button fx:id="removeGebruikerButton" mnemonicParsing="false" onAction="#removeGebruiker" prefHeight="46.0" prefWidth="71.0" styleClass="lg" text="Remove" />
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="gekozenGebruikersListView" prefHeight="175.0" prefWidth="403.0" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox layoutX="201.0" layoutY="2.0" prefHeight="284.0" prefWidth="220.0" spacing="12.0">
+                  </HBox>
+                  <HBox spacing="200.0">
                      <children>
-                        <TextField fx:id="contactPersoonTextField" prefHeight="25.0" prefWidth="230.0" promptText="Contactpersoon" />
-                        <TextField fx:id="emailTextField" prefHeight="25.0" prefWidth="230.0" promptText="Email" />
-                        <TextField fx:id="telefoonnummerTextField" prefHeight="25.0" prefWidth="230.0" promptText="Telefoonnummer" />
-                        <TextField fx:id="landTextField" prefHeight="25.0" prefWidth="231.0" text="België" />
-                        <TextField fx:id="postcodeTextField" prefHeight="25.0" prefWidth="230.0" promptText="Postcode" />
-                        <TextField fx:id="stadTextField" prefHeight="25.0" prefWidth="230.0" promptText="Stad" />
-                        <TextField fx:id="straatTextField" prefHeight="25.0" prefWidth="230.0" promptText="Straat" />
-                        <TextField fx:id="huisnummerTextField" prefHeight="25.0" prefWidth="230.0" promptText="Huisnummer" />
+                        <HBox prefWidth="450.0" spacing="40.0">
+                           <children>
+                              <Button id="btnNieuw" mnemonicParsing="false" onAction="#nieuweActiviteit" prefHeight="44.0" prefWidth="199.0" text="Nieuwe activiteit">
+                                 <styleClass>
+                                    <String fx:value="primary" />
+                                    <String fx:value="lg" />
+                                 </styleClass>
+                              </Button>
+                              <Button id="btnOpslaan" fx:id="btnOpslaan" mnemonicParsing="false" onAction="#slaActiviteitOp" prefHeight="46.0" prefWidth="178.0" text="Opslaan">
+                                 <styleClass>
+                                    <String fx:value="info" />
+                                    <String fx:value="lg" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button id="btnVerwijder" fx:id="btnVerwijder" mnemonicParsing="false" onAction="#verwijderActiviteit" prefHeight="46.0" prefWidth="178.0" text="Verwijder">
+                           <styleClass>
+                              <String fx:value="danger" />
+                              <String fx:value="lg" />
+                           </styleClass>
+                        </Button>
                      </children>
-                  </VBox>
+                  </HBox>
+                  <Label fx:id="lblFout" prefHeight="20.0" prefWidth="894.0" text="Fout" textFill="#cf0e0e">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
-            </AnchorPane>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
          </children>
       </AnchorPane>
    </content>

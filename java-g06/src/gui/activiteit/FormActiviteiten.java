@@ -117,6 +117,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     public void initialize(URL url, ResourceBundle rb) {
         btnVerwijder.setDisable(true);
         lblFout.setVisible(false);
+        contactgegevensToggle.selectedProperty().setValue(false);
+        contactgegevensPanel.setVisible(false);
     }
 
     @FXML

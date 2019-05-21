@@ -104,6 +104,9 @@ public class Activiteit {
     }
 
     public void deleteBegeleider(AGebruiker begeleider) {
+        if (activiteitBegeleiders.size() <= 1) {
+            throw new IllegalArgumentException("Er moet minstens één begeleider aanwezig zijn.");
+        }
         List<ActiviteitBegeleider> begeleiders = new ArrayList<>();
         for (ActiviteitBegeleider acb : activiteitBegeleiders) {
             if (!(acb.getGebruiker().getGebruikersnaam().equals(begeleider.getGebruikersnaam()) && acb.getActiviteit().getId() == this.id)) {
@@ -116,7 +119,6 @@ public class Activiteit {
     /*
         Getters en setters
      */
-
     public String getEmailadres() {
         return emailadres;
     }
@@ -148,8 +150,7 @@ public class Activiteit {
     public void setAdres(Adres adres) {
         this.adres = adres;
     }
-    
-    
+
     public String getTitel() {
         return titel;
     }
@@ -202,11 +203,11 @@ public class Activiteit {
         if (maxAantalDeelnemers < 1) {
             throw new IllegalArgumentException("Het maximum aantal deelnemers moet minstens 0 zijn.");
         }
-        /*
-        if (deelnemers != null && maxAantalDeelnemers < deelnemers.size()) {
+        
+        if (activiteitDeelnemers != null && maxAantalDeelnemers < activiteitDeelnemers.size()) {
             throw new IllegalArgumentException("Het maximum aantal deelnemers kan niet lager liggen dan het aantal werkelijke deelnemers");
         }
-         */
+         
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
@@ -215,11 +216,9 @@ public class Activiteit {
     }
 
     public void setActiviteitDeelnemers(List<ActiviteitDeelnemer> activiteitDeelnemers) {
-        /*
-        if (deelnemers.size() > maxAantalDeelnemers) {
+        if (activiteitDeelnemers.size() > maxAantalDeelnemers) {
             throw new IllegalArgumentException("Er kunnen niet meer leden ingeschreven zijn dan er maximum toegelaten zijn.");
         }
-         */
         this.activiteitDeelnemers = activiteitDeelnemers;
     }
 
@@ -227,12 +226,10 @@ public class Activiteit {
         return activiteitBegeleiders;
     }
 
-    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
-        /*
-        if (begeleiders.size() < 1) {
+    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {        
+        if (activiteitBegeleiders.size() < 1) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
-        }
-         */
+        }         
         this.activiteitBegeleiders = activiteitBegeleiders;
     }
 

@@ -6,6 +6,7 @@
 package domain;
 
 import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.Adres;
 import domain.GebruikerModels.Gebruiker;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.eclipse.persistence.jpa.config.Cascade;
@@ -46,10 +48,19 @@ public class Activiteit {
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
     private int maxAantalDeelnemers;
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+    @Column(name = "Emailadres")
+    private String emailadres;
+    @Column(name = "Telefoonnummer")
+    private String telefoonnummer;
+    @Column(name = "Contactpersoon")
+    private String contactpersoon;
+    @JoinColumn(name = "AdresId")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Adres adres;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitDeelnemer> activiteitDeelnemers;
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
@@ -105,6 +116,40 @@ public class Activiteit {
     /*
         Getters en setters
      */
+
+    public String getEmailadres() {
+        return emailadres;
+    }
+
+    public void setEmailadres(String emailadres) {
+        this.emailadres = emailadres;
+    }
+
+    public String getTelefoonnummer() {
+        return telefoonnummer;
+    }
+
+    public void setTelefoonnummer(String telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
+    }
+
+    public String getContactpersoon() {
+        return contactpersoon;
+    }
+
+    public void setContactpersoon(String contactpersoon) {
+        this.contactpersoon = contactpersoon;
+    }
+
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
+    
+    
     public String getTitel() {
         return titel;
     }

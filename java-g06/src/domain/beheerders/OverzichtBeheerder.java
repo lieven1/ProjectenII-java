@@ -59,16 +59,20 @@ public class OverzichtBeheerder {
         );
         //lesmomentleden lists
         lesmomentLedenList = lesmomentLedenRepo.findAll();
-        
+
         subject = new PropertyChangeSupport(this);
     }
 
-    public ObservableList<Lesmoment> getLesomentList() {
+    public ObservableList<Lesmoment> getLesomentObservableList() {
         return sortedList;
     }
 
+    public List<Lesmoment> getLesomentList() {
+        return lesmomentRepo.findAll();
+    }
+
     public List<LesmomentLeden> getLesmomentLeden() {
-        return lesmomentLedenList;
+        return lesmomentLedenRepo.findAll();
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -77,16 +81,16 @@ public class OverzichtBeheerder {
 
     public void veranderFilter(LocalDate van, LocalDate tot) {
         filteredList.setPredicate(g -> {
-            boolean naamLeeg = van == null;
-            boolean voornaamLeeg = tot == null;
+            boolean vanLeeg = van == null;
+            boolean totLeeg = tot == null;
 
-            if (naamLeeg && voornaamLeeg) {
+            if (vanLeeg && totLeeg) {
                 return true;
             }
 
-            boolean naamFilter = naamLeeg ? true
+            boolean naamFilter = vanLeeg ? true
                     : (g.getStartTijd().compareTo(convertToDateViaInstant(van)) > 0);
-            boolean voornaamFilter = voornaamLeeg ? true
+            boolean voornaamFilter = totLeeg ? true
                     : (g.getEindTijd().compareTo(convertToDateViaInstant(tot)) < 0);
 
             return (naamFilter && voornaamFilter);

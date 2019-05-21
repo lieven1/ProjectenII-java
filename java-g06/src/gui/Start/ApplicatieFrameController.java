@@ -80,16 +80,16 @@ public class ApplicatieFrameController extends VBox implements Panel, PropertyCh
             dc.getGuiController().setPane(new GuiGebruikerController(dc.getGebruikerController()), this.getHeight(), this.getWidth());
         });
         overzichtAanwezigheden.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 0), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), 0), this.getHeight(), this.getWidth());
         });
         overzichtActiviteiten.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 1), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), 1), this.getHeight(), this.getWidth());
         });
         overzichtKampioenschap.setOnAction((ActionEvent t) -> {
-            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), 2), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), 2), this.getHeight(), this.getWidth());
         });
         actMenuBeheer.setOnAction((t) -> {
-           dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
+            dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
         });
 
         this.dc.getGuiController().addPropertyChangeListener(this);

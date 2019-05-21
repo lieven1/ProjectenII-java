@@ -15,7 +15,7 @@ public class Aanwezigheid {
 
     private String naam, voornaam, aanwezig, ingeschreven, lesformule, email, telefoon, gradatie;
 
-    public Aanwezigheid(String naam, String voornaam, String aanwezig, String ingeschreven, String lesformule, String email, String telefoon, String gradatie) {
+    public Aanwezigheid(String naam, String voornaam, String aanwezig, String ingeschreven, String email, String telefoon, String gradatie) {
         this.naam = naam;
         this.voornaam = voornaam;
         this.aanwezig = aanwezig;
@@ -35,10 +35,20 @@ public class Aanwezigheid {
     }
 
     public String getAanwezig() {
+        if (aanwezig.toLowerCase().equals("true")) {
+            return "✓";
+        } else if (aanwezig.toLowerCase().equals("false")) {
+            return "x";
+        }
         return aanwezig;
     }
 
     public String getIngeschreven() {
+        if (ingeschreven.toLowerCase().equals("true")) {
+            return "✓";
+        } else if (ingeschreven.toLowerCase().equals("false")) {
+            return "x";
+        }
         return ingeschreven;
     }
 

@@ -35,6 +35,7 @@ public class LesmomentLeden implements Serializable {
     @Id
     @Column(name = "LesmomentId")
     private String LesmomentId;
+    @Id
     @Column(name = "Gebruikersnaam")
     private String Gebruikersnaam;
     @Column(name = "Ingeschreven")

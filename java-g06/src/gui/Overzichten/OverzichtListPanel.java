@@ -7,6 +7,7 @@ package gui.Overzichten;
 
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -15,7 +16,7 @@ import javafx.scene.layout.VBox;
  */
 public abstract class OverzichtListPanel extends VBox {
 
-    public abstract AnchorPane createFilterPane();
+    public abstract Pane createFilterPane();
 
     public abstract TableView createList();
 

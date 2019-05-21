@@ -114,7 +114,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         btnVerwFilter.setOnAction((ActionEvent t) -> {
             dpVanFilter.setValue(null);
             dpTotFilter.setValue(null);
-            lesmomentList.setItems(oc.getLesomentList());
+            lesmomentList.setItems(oc.getLesomentObservableList());
         });
 
         filterPane.getChildren().addAll(imgLogo, lblFilterTitle, lblVanFilter, lblTotFilter, dpVanFilter, dpTotFilter, btnFilter, btnVerwFilter);
@@ -131,7 +131,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("LesmomentId"));
         StarttijdColumn.setCellValueFactory(l -> new ReadOnlyStringWrapper(dateFormat.format(l.getValue().getStartTijd())));
         lesmomentList.getColumns().addAll(idColumn, StarttijdColumn);
-        lesmomentList.setItems(oc.getLesomentList());
+        lesmomentList.setItems(oc.getLesomentObservableList());
         lesmomentList.setPrefHeight(1080);
 
         idColumn.prefWidthProperty().bind(lesmomentList.widthProperty().multiply(0.3));
@@ -141,8 +141,7 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
         StarttijdColumn.setResizable(false);
 
         lesmomentList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {
-            oc.setCurrentLesmoment((Lesmoment) newValue);
-            
+            oc.setCurrentLesmoment((Lesmoment) newValue);          
         });
 
         return lesmomentList;

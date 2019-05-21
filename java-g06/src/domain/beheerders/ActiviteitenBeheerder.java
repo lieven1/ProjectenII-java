@@ -10,12 +10,20 @@ import domain.DateConverter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import persistentie.GenericDaoJpa;
+import domain.ActiviteitBegeleider;
+import domain.ActiviteitDeelnemer;
+import domain.Overzicht.Lesmoment;
+import domain.Overzicht.LesmomentLeden;
+import persistentie.GenericDao;
 
 /**
  *
@@ -28,11 +36,16 @@ public class ActiviteitenBeheerder {
     private final FilteredList<Activiteit> filteredList;
     private final SortedList<Activiteit> sortedList;
 
+    private final GenericDao<ActiviteitBegeleider> activiteitBegeleiderRepo;
+    private final GenericDao<ActiviteitDeelnemer> activiteitDeelnemerRepo;
+
     private Activiteit currentActiviteit;
     private final PropertyChangeSupport subject;
 
     public ActiviteitenBeheerder() {
         repository = new GenericDaoJpa<>(Activiteit.class);
+        activiteitBegeleiderRepo = new GenericDaoJpa<>(ActiviteitBegeleider.class);
+        activiteitDeelnemerRepo = new GenericDaoJpa<>(ActiviteitDeelnemer.class);
         activiteiten = FXCollections.observableArrayList(repository.findAll());
         filteredList = new FilteredList<>(activiteiten, p -> true);
         sortedList = new SortedList<>(filteredList,
@@ -101,6 +114,15 @@ public class ActiviteitenBeheerder {
 
     public ObservableList<Activiteit> getActiviteitenLijst() {
         return sortedList;
+    }
+
+    public List<ActiviteitBegeleider> getActiviteitenBegeleiders() {
+        
+        return activiteitBegeleiderRepo.findAll();
+    }
+
+    public List<ActiviteitDeelnemer> getActiviteitenDeelnemers() {
+        return activiteitDeelnemerRepo.findAll();
     }
 
     public Activiteit getCurrentActiviteit() {

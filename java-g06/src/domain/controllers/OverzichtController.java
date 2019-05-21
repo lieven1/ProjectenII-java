@@ -32,11 +32,15 @@ public class OverzichtController {
         beheerder.veranderFilter(van, tot);
     }
 
-    public ObservableList<Lesmoment> getLesomentList() {
+    public ObservableList<Lesmoment> getLesomentObservableList() {
+        return beheerder.getLesomentObservableList();
+    }
+
+    public List<Lesmoment> getLesomentList() {
         return beheerder.getLesomentList();
     }
-    
-    public List<LesmomentLeden> getLesmomentLeden(){
+
+    public List<LesmomentLeden> getLesmomentLeden() {
         return beheerder.getLesmomentLeden();
     }
 
@@ -52,5 +56,4 @@ public class OverzichtController {
         beheerder.addPropertyChangeListener(pcl);
     }
 
- 
 }

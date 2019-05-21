@@ -5,11 +5,13 @@
  */
 package gui.Overzichten;
 
+import gui.Overzichten.Activiteiten.ActiviteitenListPanel;
+import domain.controllers.ActiviteitenController;
 import domain.controllers.GebruikerController;
 import gui.Overzichten.Aanwezigheden.AanwezighedenListPanel;
-import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanel;
 import domain.controllers.OverzichtController;
-import domain.Overzicht.Lesmoment;
+import gui.Overzichten.Aanwezigheden.AanwezighedenDetailPanelController;
+import gui.Overzichten.Activiteiten.ActiviteitenDetailPanelController;
 import gui.Panel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -28,7 +30,7 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
 
     //meerdere ctor per type overzicht --> in framecontroller wordt juist ctor aangeroepen bij constructie
     //default ctor --> aanwezigheden
-    public OverzichtPanelController(OverzichtController oc, GebruikerController gc , int typeOverzicht) {
+    public OverzichtPanelController(OverzichtController oc, GebruikerController gc, ActiviteitenController ac, int typeOverzicht) {
         this.oc = oc;
 
         // Panels
@@ -36,14 +38,15 @@ public class OverzichtPanelController extends HBox implements Panel, PropertyCha
             listPanel = new KampioenschapListPanel(oc);
             gegevensPanel = new KampioenschapDetailPanel(oc);
         } else if (typeOverzicht == 1) {
-            listPanel = new ActiviteitenListPanel(oc);
-            gegevensPanel = new ActiviteitenDetailPanel(oc);
+            listPanel = new ActiviteitenListPanel(oc, ac);
+            gegevensPanel = new ActiviteitenDetailPanelController(oc, ac, gc);
+            ac.addPropertyChangeListener(this);
         } else {
             listPanel = new AanwezighedenListPanel(oc);
-            gegevensPanel = new AanwezighedenDetailPanel(oc, gc);
+            gegevensPanel = new AanwezighedenDetailPanelController(oc, gc);
+            oc.addPropertyChangeListener(this);
         }
-
-        oc.addPropertyChangeListener(this);
+        oc.setCurrentLesmoment(oc.getLesomentList().stream().findFirst().get());
         this.getChildren().addAll(listPanel, gegevensPanel);
     }
 

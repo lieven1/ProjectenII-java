@@ -26,6 +26,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 public class FormProefgebruiker extends GebruikerForm {
+    
     private GebruikerController gc;
     private AGebruiker oldGeb;
     

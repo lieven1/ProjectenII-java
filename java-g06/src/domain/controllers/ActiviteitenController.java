@@ -10,6 +10,9 @@ import domain.Activiteit;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
+import domain.ActiviteitBegeleider;
+import domain.ActiviteitDeelnemer;
+import java.util.List;
 
 /**
  *
@@ -25,6 +28,14 @@ public class ActiviteitenController {
 
     public ObservableList<Activiteit> getActiviteiten() {
         return beheerder.getActiviteitenLijst();
+    }
+
+    public List<ActiviteitBegeleider> getActiviteitenBegeleiders() {
+        return beheerder.getActiviteitenBegeleiders();
+    }
+
+    public List<ActiviteitDeelnemer> getActiviteitenDeelnemers() {
+        return beheerder.getActiviteitenDeelnemers();
     }
 
     public void create(Activiteit activiteit) {

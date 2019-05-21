@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.eclipse.persistence.jpa.config.Cascade;
 
 /**
  *
@@ -45,10 +46,10 @@ public class Activiteit {
     private Calendar eindDatum;
     @Column(name = "MaxAantalDeelnemers")
     private int maxAantalDeelnemers;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitDeelnemer> activiteitDeelnemers;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
     @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
@@ -78,11 +79,13 @@ public class Activiteit {
     }
 
     public void deleteDeelnemer(AGebruiker deelnemer) {
+        List<ActiviteitDeelnemer> deelnemers = new ArrayList<>();
         for (ActiviteitDeelnemer acd : activiteitDeelnemers) {
-            if (acd.getGebruiker().getGebruikersnaam().equals(deelnemer.getGebruikersnaam()) && acd.getActiviteit().getId() == this.id) {
-                activiteitDeelnemers.remove(acd);
+            if (!(acd.getGebruiker().getGebruikersnaam().equals(deelnemer.getGebruikersnaam()) && acd.getActiviteit().getId() == this.id)) {
+                deelnemers.add(acd);
             }
         }
+        this.activiteitDeelnemers = deelnemers;
     }
 
     public void addBegeleider(AGebruiker begeleider) {
@@ -90,11 +93,13 @@ public class Activiteit {
     }
 
     public void deleteBegeleider(AGebruiker begeleider) {
+        List<ActiviteitBegeleider> begeleiders = new ArrayList<>();
         for (ActiviteitBegeleider acb : activiteitBegeleiders) {
-            if (acb.getGebruiker().getGebruikersnaam().equals(begeleider.getGebruikersnaam()) && acb.getActiviteit().getId() == this.id) {
-                activiteitBegeleiders.remove(acb);
+            if (!(acb.getGebruiker().getGebruikersnaam().equals(begeleider.getGebruikersnaam()) && acb.getActiviteit().getId() == this.id)) {
+                begeleiders.add(acb);
             }
         }
+        this.activiteitBegeleiders = begeleiders;
     }
 
     /*

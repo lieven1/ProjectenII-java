@@ -7,6 +7,7 @@ package domain;
 
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,11 +31,11 @@ public class ActiviteitBegeleider {
     @Column(name = "ActiviteitBegeleiderId")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "ActiviteitId")
     private Activiteit activiteit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "Gebruikersnaam")
     private AGebruiker gebruiker;
 

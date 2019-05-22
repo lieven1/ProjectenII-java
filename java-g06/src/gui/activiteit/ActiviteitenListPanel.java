@@ -87,7 +87,7 @@ public class ActiviteitenListPanel extends VBox {
         TableColumn<Activiteit, String> typeColumn = new TableColumn<>("Type");
         TableColumn<Activiteit, Calendar> startDatumColumn = new TableColumn<>("Startdatum");
         TableColumn<Activiteit, Calendar> eindDatumColumn = new TableColumn<>("Einddatum");
-        TableColumn<Activiteit, String> aantalDeelnemersColumn = new TableColumn<>("Aantal deelnemers");
+        TableColumn<Activiteit, String> aantalDeelnemersColumn = new TableColumn<>("Deelnemers");
 
         naamColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("titel"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("type"));

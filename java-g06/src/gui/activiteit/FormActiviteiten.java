@@ -161,6 +161,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     }
 
     private void toonDeelnemers() {
+        updateTextFieldAantalDeelnemers();
         controller.toonDeelnemers();
         alleGebruikersTable.setItems(controller.getAlleGebruikers());
         specifiekeGebruikersTable.setItems(controller.getSpecifiekeGebruikers());
@@ -239,6 +240,10 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private void toggleContactgegevens(ActionEvent event) {
         contactgegevensPanel.setVisible(contactgegevensToggle.selectedProperty().getValue());
+    }
+    
+    private void updateTextFieldAantalDeelnemers(){
+        txfAantalDeelnemers.setText(Integer.toString(controller.getActiviteitenDeelnemers().size()));
     }
 
     private Activiteit voegExtraInfoToe(Activiteit act) {

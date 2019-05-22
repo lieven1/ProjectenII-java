@@ -148,9 +148,10 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         specifiekeGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (controller.getSelectedSpecifiekeGebruikers().contains(newValue)) {
                 controller.getSelectedSpecifiekeGebruikers().remove(newValue);
-            }else{
+            } else {
                 controller.addSelectedSpecifiekeGebruiker(newValue);
             }
+
         });
         alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (controller.getSelectedAlleGebruikers().contains(newValue)) {
@@ -158,6 +159,15 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
             } else {
                 controller.addSelectedAlleGebruiker(newValue);
             }
+
+            if (deelnemersBewerken) {
+                controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addDeelnemer(gebruiker));
+                toonDeelnemers();
+            } else {
+                controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addBegeleider(gebruiker));
+                toonBegeleiders();
+            }
+            controller.clearSelectedAlleGebruikers();
         });
         toonDeelnemers();
 
@@ -246,12 +256,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     @FXML
     private void addGebruiker(ActionEvent event) {
-        if (deelnemersBewerken) {
-            controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addDeelnemer(gebruiker));
-        } else {
-            controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addBegeleider(gebruiker));
-        }
-        controller.clearSelectedAlleGebruikers();
+
     }
 
     @FXML

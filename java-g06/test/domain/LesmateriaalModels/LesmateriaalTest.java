@@ -1,6 +1,5 @@
 package domain.LesmateriaalModels;
 
-import domain.GebruikerModels.Adres;
 import domain.GebruikerModels.Gradatie;
 import java.util.ArrayList;
 import java.util.List;

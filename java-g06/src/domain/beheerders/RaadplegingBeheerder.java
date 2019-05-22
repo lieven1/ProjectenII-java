@@ -8,12 +8,6 @@ package domain.beheerders;
 import domain.LesmateriaalModels.Lesmateriaal;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Comparator;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import persistentie.GenericDaoJpa;
 
 /**
  *

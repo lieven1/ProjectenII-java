@@ -34,6 +34,7 @@ public class GuiActiviteitController extends HBox implements Panel {
 
     @Override
     public void resizeHeight(double height) {
+        listPanel.setPrefHeight(height*2);
     }
 
 }

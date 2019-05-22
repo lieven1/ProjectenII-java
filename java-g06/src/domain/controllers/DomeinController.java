@@ -2,7 +2,6 @@ package domain.controllers;
 
 // Collection van controllers
 import controllers.GuiController;
-import domain.beheerders.ActiviteitenBeheerder;
 
 public class DomeinController {
 

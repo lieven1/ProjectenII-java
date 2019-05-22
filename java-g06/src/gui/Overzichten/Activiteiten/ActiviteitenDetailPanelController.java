@@ -6,7 +6,6 @@
 package gui.Overzichten.Activiteiten;
 
 import domain.Activiteit;
-import domain.ActiviteitBegeleider;
 import domain.Overzicht.ActiviteitGebruiker;
 import domain.controllers.ActiviteitenController;
 import domain.controllers.GebruikerController;

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
 import domain.GebruikerModels.AGebruiker;
@@ -14,9 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class PanelGenerator {
+public class ActiviteitenListPanelGenerator {
 
-    public PanelGenerator() {
+    public ActiviteitenListPanelGenerator() {
     }
 
     public Label createTitleLabel(String title) {

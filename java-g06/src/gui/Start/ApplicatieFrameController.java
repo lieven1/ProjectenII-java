@@ -1,12 +1,7 @@
 package gui.Start;
 
-import domain.beheerders.ActiviteitenBeheerder;
-import gui.Gebruiker.GuiGebruikerController;
 import gui.Panel;
 import domain.controllers.DomeinController;
-import domain.Activiteit;
-import domain.beheerders.GebruikerBeheerder;
-import domain.GebruikerModels.ProefGebruiker;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Lesmateriaal.GuiLesmateriaalController;
 import gui.Overzichten.OverzichtPanelController;
@@ -14,10 +9,6 @@ import gui.activiteit.GuiActiviteitController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,9 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class ApplicatieFrameController extends VBox implements Panel, PropertyChangeListener {
 

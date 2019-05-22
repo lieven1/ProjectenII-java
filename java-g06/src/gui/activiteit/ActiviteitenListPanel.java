@@ -7,7 +7,7 @@ package gui.activiteit;
 
 import domain.controllers.ActiviteitenController;
 import domain.Activiteit;
-import gui.PanelGenerator;
+import gui.ActiviteitenListPanelGenerator;
 import java.text.DateFormat;
 import java.util.Calendar;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,11 +32,11 @@ public class ActiviteitenListPanel extends VBox {
 
     private ActiviteitenController controller;
     private TableView<Activiteit> activiteitenTableView;
-    private PanelGenerator generator;
+    private ActiviteitenListPanelGenerator generator;
 
     public ActiviteitenListPanel(ActiviteitenController controller) {
         this.controller = controller;
-        generator = new PanelGenerator();
+        generator = new ActiviteitenListPanelGenerator();
 
         this.getChildren().addAll(createFilterPane(), new Separator(), generator.createTitleLabel("Activiteiten"), createTableView());
     }
@@ -128,6 +128,6 @@ public class ActiviteitenListPanel extends VBox {
                 setText(dateFormat.format(item.getTime()));
             }
         }
-    }
+    }   
 
 }

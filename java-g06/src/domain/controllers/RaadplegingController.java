@@ -5,16 +5,9 @@
  */
 package domain.controllers;
 
-import domain.Activiteit;
-import domain.ActiviteitBegeleider;
-import domain.ActiviteitDeelnemer;
 import domain.LesmateriaalModels.Lesmateriaal;
-import domain.beheerders.ActiviteitenBeheerder;
 import domain.beheerders.RaadplegingBeheerder;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
-import java.util.List;
-import javafx.collections.ObservableList;
 
 /**
  *

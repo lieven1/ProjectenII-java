@@ -8,12 +8,9 @@ package domain.controllers;
 import domain.Overzicht.Lesmoment;
 import domain.Overzicht.LesmomentLeden;
 import domain.beheerders.OverzichtBeheerder;
-import gui.Overzichten.OverzichtPanelController;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.SortedSet;
 import javafx.collections.ObservableList;
 
 /**

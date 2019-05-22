@@ -7,7 +7,6 @@ package StartUp;
 
 import domain.Activiteit;
 import domain.GebruikerModels.AGebruiker;
-import domain.LesmateriaalModels.Lesmateriaal;
 import java.util.List;
 import persistentie.GenericDaoJpa;
 

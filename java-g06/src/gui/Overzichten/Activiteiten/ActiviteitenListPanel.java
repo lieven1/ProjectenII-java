@@ -9,7 +9,7 @@ import domain.Activiteit;
 import domain.controllers.ActiviteitenController;
 import domain.controllers.OverzichtController;
 import gui.Overzichten.OverzichtListPanel;
-import gui.PanelGenerator;
+import gui.ActiviteitenListPanelGenerator;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Locale;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -31,9 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
@@ -46,13 +43,13 @@ public class ActiviteitenListPanel extends OverzichtListPanel {
     private OverzichtController oc;
     private ActiviteitenController ac;
     private TableView<Activiteit> activiteitenTableView;
-    private PanelGenerator generator;
+    private ActiviteitenListPanelGenerator generator;
     private final DateFormat dateFormat = new SimpleDateFormat("EEE, dd-MM-yyyy hh:mm", new Locale("nl", "BE"));
 
     public ActiviteitenListPanel(OverzichtController oc, ActiviteitenController ac) {
         this.oc = oc;
         this.ac = ac;
-        generator = new PanelGenerator();
+        generator = new ActiviteitenListPanelGenerator();
 
         // VBox Constraints
         this.setPrefWidth(330);

@@ -8,7 +8,6 @@ import domain.GebruikerModels.Geslacht;
 import domain.GebruikerModels.Adres;
 import java.util.Calendar;
 import static java.util.Calendar.YEAR;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Test;

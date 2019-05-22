@@ -5,12 +5,7 @@
  */
 package gui.Overzichten;
 
-import domain.Overzicht.Lesmoment;
-import java.util.List;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 /**
  *

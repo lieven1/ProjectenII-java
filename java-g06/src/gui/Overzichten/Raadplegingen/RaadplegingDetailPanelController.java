@@ -7,10 +7,7 @@ package gui.Overzichten.Raadplegingen;
 
 import domain.GebruikerModels.AGebruiker;
 import domain.LesmateriaalModels.Lesmateriaal;
-import domain.LesmateriaalModels.Raadpleging;
 import domain.controllers.GebruikerController;
-import domain.controllers.LesmateriaalController;
-import domain.controllers.RaadplegingController;
 import gui.Overzichten.DetailPanel;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +21,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import domain.Overzicht.RaadplegingGegevens;
 import java.io.IOException;
-import java.time.LocalTime;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.cell.PropertyValueFactory;

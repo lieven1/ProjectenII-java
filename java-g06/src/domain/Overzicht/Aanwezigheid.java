@@ -5,8 +5,6 @@
  */
 package domain.Overzicht;
 
-import java.util.regex.Pattern;
-
 /**
  *
  * @author Boris

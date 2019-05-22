@@ -16,12 +16,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +30,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -125,6 +122,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         btnVerwijder.setDisable(true);
         lblFout.setVisible(false);
         contactgegevensToggle.selectedProperty().setValue(false);

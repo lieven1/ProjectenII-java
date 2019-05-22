@@ -14,7 +14,6 @@ import domain.ActiviteitBegeleider;
 import domain.ActiviteitDeelnemer;
 import domain.GebruikerModels.AGebruiker;
 import java.util.List;
-import java.util.Set;
 
 /**
  *

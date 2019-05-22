@@ -66,14 +66,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private Label lblFout;
     @FXML
-    private ListView<?> alleGebruikersListView;
-    @FXML
-    private ListView<?> gekozenGebruikersListView;
-    @FXML
-    private Button addGebruikerButton;
-    @FXML
-    private Button removeGebruikerButton;
-    @FXML
     private Button deelnemersSwitchButton;
     @FXML
     private Button begeleidersSwitchButton;
@@ -111,10 +103,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     private TableView<AGebruiker> specifiekeGebruikersTable;
 
     private ActiviteitenController controller;
-    private Activiteit currentActiviteit;
 
     private boolean deelnemersBewerken;
-    private boolean begeleidersBewerken;
 
     public FormActiviteiten(ActiviteitenController contr) {
         controller = contr;
@@ -129,7 +119,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         }
 
         deelnemersBewerken = true;
-        begeleidersBewerken = false;
 
         controller.addPropertyChangeListener(this);
     }
@@ -146,43 +135,47 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         specifiekeGebruikersVoornaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
         specifiekeGebruikersAchternaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
         specifiekeGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(deelnemersBewerken)
+            specifiekeGebruikersTable.getSelectionModel().clearSelection();
+            if (newValue != null && oldValue != null && newValue != oldValue && deelnemersBewerken) {
                 controller.removeDeelnemer(newValue);
-            else
+                toonDeelnemers();
+            } else if (newValue != null && oldValue != null && newValue != oldValue) {
                 controller.removeBegeleider(newValue);
-
-
+                toonBegeleiders();
+            }
         });
-        alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {      
-            if (deelnemersBewerken) {
+        
+        alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            alleGebruikersTable.getSelectionModel().clearSelection();
+            if (newValue != null && oldValue != null && newValue != oldValue && deelnemersBewerken) {
                 controller.addDeelnemer(newValue);
                 toonDeelnemers();
-            } else {
+            } else if (newValue != null && oldValue != null && newValue != oldValue) {
                 controller.addBegeleider(newValue);
                 toonBegeleiders();
             }
         });
         toonDeelnemers();
-
     }
 
     private void toonDeelnemers() {
         controller.toonDeelnemers();
         alleGebruikersTable.setItems(controller.getAlleGebruikers());
         specifiekeGebruikersTable.setItems(controller.getSpecifiekeGebruikers());
-
+        alleGebruikersTable.getSelectionModel().clearSelection();
     }
 
     private void toonBegeleiders() {
         controller.toonBegeleiders();
         alleGebruikersTable.setItems(controller.getAlleGebruikers());
         specifiekeGebruikersTable.setItems(controller.getSpecifiekeGebruikers());
+        alleGebruikersTable.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void slaActiviteitOp(ActionEvent event) {
         try {
-            Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), DateConverter.localDateToCalendar(dpStartdatum.getValue()), DateConverter.localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()), new ArrayList<>(), new ArrayList<>());
+            Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), DateConverter.localDateToCalendar(dpStartdatum.getValue()), DateConverter.localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()));
             act = voegExtraInfoToe(act);
             if (controller.getCurrentActiviteit() != null) {
                 controller.modify(act);
@@ -227,7 +220,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private void pasDeelnemersAan(ActionEvent event) {
         deelnemersBewerken = true;
-        begeleidersBewerken = false;
         deelnemersSwitchButton.setDisable(true);
         begeleidersSwitchButton.setDisable(false);
         toonDeelnemers();
@@ -235,7 +227,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     @FXML
     private void pasBegeleidersAan(ActionEvent event) {
-        begeleidersBewerken = true;
         deelnemersBewerken = false;
         deelnemersSwitchButton.setDisable(false);
         begeleidersSwitchButton.setDisable(true);
@@ -245,16 +236,6 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private void toggleContactgegevens(ActionEvent event) {
         contactgegevensPanel.setVisible(contactgegevensToggle.selectedProperty().getValue());
-    }
-
-    @FXML
-    private void addGebruiker(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void removeGebruiker(ActionEvent event) {
-
     }
 
     private Activiteit voegExtraInfoToe(Activiteit act) {
@@ -281,9 +262,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     private void loadActiviteit(Activiteit act) {
         btnOpslaan.setText("Bijwerken");
-        btnVerwijder.setDisable(false);
+        btnVerwijder.setDisable(false);        
 
-        currentActiviteit = act;
         Adres adres = act.getAdres();
 
         setDetailData(act.getTitel(), act.getType(), calendarToLocalDate(act.getStartDatum()),
@@ -293,6 +273,10 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
                 adres != null ? adres.getLand() : "", adres != null ? adres.getPostcode() : "",
                 adres != null ? adres.getStad() : "", adres != null ? adres.getStraat() : "",
                 adres != null ? adres.getNummer() : "");
+        
+        pasDeelnemersAan(new ActionEvent());
+        pasDeelnemersAan(new ActionEvent());
+        
     }
 
     private void setDetailData(String titel, String type, LocalDate startDatum, LocalDate eindDatum, String aantalDeelnemers, String maxAantalDeelnemers, String contactpersoon, String email, String telefoonnummer, String land, String postcode, String stad, String straat, String huisnummer) {

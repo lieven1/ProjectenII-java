@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="1327.0" type="ScrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="926.0" prefWidth="1327.0" type="ScrollPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="851.0" prefWidth="1205.0">
          <children>
@@ -188,12 +188,6 @@
                                   <TableColumn fx:id="alleGebruikersAchternaamColumn" prefWidth="75.0" text="Achternaam" />
                                 </columns>
                               </TableView>
-                              <HBox alignment="CENTER" spacing="40.0">
-                                 <children>
-                                    <Button fx:id="addGebruikerButton" mnemonicParsing="false" onAction="#addGebruiker" prefHeight="46.0" prefWidth="52.0" styleClass="lg" text="Add" />
-                                    <Button fx:id="removeGebruikerButton" mnemonicParsing="false" onAction="#removeGebruiker" prefHeight="46.0" prefWidth="71.0" styleClass="lg" text="Remove" />
-                                 </children>
-                              </HBox>
                               <TableView fx:id="specifiekeGebruikersTable" prefHeight="200.0" prefWidth="200.0">
                                 <columns>
                                   <TableColumn fx:id="specifiekeGebruikersVoornaamColumn" prefWidth="75.0" text="Voornaam" />

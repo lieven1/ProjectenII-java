@@ -10,9 +10,7 @@ import domain.DateConverter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,12 +22,7 @@ import domain.ActiviteitDeelnemer;
 import domain.GebruikerModels.AGebruiker;
 import domain.GebruikerModels.Gebruiker;
 import domain.GebruikerModels.TypeGebruiker;
-import domain.Overzicht.Lesmoment;
-import domain.Overzicht.LesmomentLeden;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 import persistentie.GenericDao;
 
@@ -95,6 +88,7 @@ public class ActiviteitenBeheerder {
         } else {
             deelnemersOmToeTeVoegen.add(e);
         }
+        specifiekeGebruikers.add(e);
     }
 
     public void addBegeleider(AGebruiker e) {
@@ -103,6 +97,7 @@ public class ActiviteitenBeheerder {
         } else {
             begeleidersOmToeTeVoegen.add(e);
         }
+        specifiekeGebruikers.add(e);
     }
 
     public void removeDeelnemer(AGebruiker e) {
@@ -111,6 +106,7 @@ public class ActiviteitenBeheerder {
         } else {
             deelnemersOmToeTeVoegen.remove(e);
         }
+        specifiekeGebruikers.remove(e);
     }
 
     public void removeBegeleider(AGebruiker e) {
@@ -119,6 +115,7 @@ public class ActiviteitenBeheerder {
         } else {
             begeleidersOmToeTeVoegen.remove(e);
         }
+        specifiekeGebruikers.remove(e);
     }   
 
     public void toonDeelnemers() {
@@ -210,6 +207,8 @@ public class ActiviteitenBeheerder {
 
     public void modify(Activiteit activiteit) {
         activiteit.setId(currentActiviteit.getId());
+        activiteit.setActiviteitDeelnemers(currentActiviteit.getActiviteitDeelnemers());
+        activiteit.setActiviteitBegeleiders(currentActiviteit.getActiviteitBegeleiders());
         GenericDaoJpa.startTransaction();
         repository.update(activiteit);
         GenericDaoJpa.commitTransaction();
@@ -218,10 +217,16 @@ public class ActiviteitenBeheerder {
     }
 
     public void delete() {
+        Activiteit act = currentActiviteit;
+        for(Activiteit a : activiteiten){
+            if(a.getId() == act.getId()){
+                act = a;
+            }
+        }
         GenericDaoJpa.startTransaction();
-        repository.delete(currentActiviteit);
+        repository.delete(act);
         GenericDaoJpa.commitTransaction();
-        activiteiten.remove(currentActiviteit);
+        activiteiten.remove(act);
         currentActiviteit = null;
     }
 

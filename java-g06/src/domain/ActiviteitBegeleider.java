@@ -23,7 +23,6 @@ import javax.persistence.Table;
  * @author Steve
  */
 @Entity(name = "ActiviteitBegeleider")
-@Table(name = "ActiviteitBegeleider")
 public class ActiviteitBegeleider {
 
     @Id
@@ -31,11 +30,11 @@ public class ActiviteitBegeleider {
     @Column(name = "ActiviteitBegeleiderId")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ActiviteitId")
     private Activiteit activiteit;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Gebruikersnaam")
     private AGebruiker gebruiker;
 

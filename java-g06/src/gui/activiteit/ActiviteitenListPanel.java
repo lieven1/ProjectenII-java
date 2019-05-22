@@ -10,6 +10,7 @@ import domain.Activiteit;
 import gui.PanelGenerator;
 import java.text.DateFormat;
 import java.util.Calendar;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -82,11 +83,11 @@ public class ActiviteitenListPanel extends VBox {
     private TableView<Activiteit> createTableView() {
         activiteitenTableView = new TableView<Activiteit>();
         activiteitenTableView.setEditable(false);
-        TableColumn naamColumn = new TableColumn("Naam");
-        TableColumn typeColumn = new TableColumn("Type");
-        TableColumn startDatumColumn = new TableColumn("Startdatum");
-        TableColumn eindDatumColumn = new TableColumn("Einddatum");
-        TableColumn aantalDeelnemersColumn = new TableColumn("max deeln");
+        TableColumn<Activiteit, String> naamColumn = new TableColumn<>("Naam");
+        TableColumn<Activiteit, String> typeColumn = new TableColumn<>("Type");
+        TableColumn<Activiteit, Calendar> startDatumColumn = new TableColumn<>("Startdatum");
+        TableColumn<Activiteit, Calendar> eindDatumColumn = new TableColumn<>("Einddatum");
+        TableColumn<Activiteit, String> aantalDeelnemersColumn = new TableColumn<>("Aantal deelnemers");
 
         naamColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("titel"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("type"));
@@ -98,7 +99,10 @@ public class ActiviteitenListPanel extends VBox {
         eindDatumColumn.setCellFactory((p) -> {
             return new CalenderCell();
         });
-        aantalDeelnemersColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, Integer>("maxAantalDeelnemers"));
+        aantalDeelnemersColumn.setCellValueFactory(cd -> {              
+            Activiteit act = (Activiteit) cd.getValue();
+            return new SimpleStringProperty(act.getAantalDeelnemers() + " / " + act.getMaxAantalDeelnemers());
+        });
 
         activiteitenTableView.getColumns().addAll(naamColumn, typeColumn, aantalDeelnemersColumn, startDatumColumn, eindDatumColumn);
         activiteitenTableView.setItems(controller.getActiviteiten());

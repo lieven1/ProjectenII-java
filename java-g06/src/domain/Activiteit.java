@@ -66,12 +66,18 @@ public class Activiteit {
     @JoinColumn(name = "ActiviteitId")
     private List<ActiviteitBegeleider> activiteitBegeleiders;
 
-    public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<ActiviteitDeelnemer> deelnemers, List<ActiviteitBegeleider> begeleiders) {
+    public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers) {
         setTitel(titel);
         setType(type);
         setStartDatum(startDatum);
         setEindDatum(eindDatum);
         setMaxAantalDeelnemers(maxAantalDeelnemers);
+        activiteitDeelnemers = new ArrayList<>();
+        activiteitBegeleiders = new ArrayList<>();
+    }
+    
+    public Activiteit(String titel, String type, Calendar startDatum, Calendar eindDatum, int maxAantalDeelnemers, List<ActiviteitDeelnemer> deelnemers, List<ActiviteitBegeleider> begeleiders) {
+        this(titel, type, startDatum, eindDatum, maxAantalDeelnemers);
         setActiviteitDeelnemers(deelnemers);
         setActiviteitBegeleiders(begeleiders);
     }
@@ -254,7 +260,7 @@ public class Activiteit {
     }
 
     public int getAantalDeelnemers() {
-        return 0;
+        return activiteitDeelnemers.size();
     }
     
     public List<AGebruiker> getDeelnemers(){

@@ -12,7 +12,9 @@ import java.time.LocalDate;
 import javafx.collections.ObservableList;
 import domain.ActiviteitBegeleider;
 import domain.ActiviteitDeelnemer;
+import domain.GebruikerModels.AGebruiker;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -59,8 +61,64 @@ public class ActiviteitenController {
         beheerder.veranderFilter(naam, type, from, until);
     }
 
+    public ObservableList<AGebruiker> getAlleGebruikers() {
+        return beheerder.getAlleGebruikers();
+    }
+
+    public ObservableList<AGebruiker> getSpecifiekeGebruikers() {
+        return beheerder.getSpecifiekeGebruikers();
+    }
+
+    public void toonDeelnemers() {
+        beheerder.toonDeelnemers();
+    }
+
+    public void toonBegeleiders() {
+        beheerder.toonBegeleiders();
+    }
+
     public void setCurrentActiviteit(Activiteit activiteit) {
         beheerder.setCurrentActiviteit(activiteit);
+    }
+
+    public void addSelectedAlleGebruiker(AGebruiker gebruiker) {
+        beheerder.addSelectedAlleGebruiker(gebruiker);
+    }
+
+    public Set<AGebruiker> getSelectedAlleGebruikers() {
+        return beheerder.getSelectedAlleGebruikers();
+    }
+
+    public void clearSelectedAlleGebruikers() {
+        beheerder.clearSelectedAlleGebruikers();
+    }
+
+    public void addSelectedSpecifiekeGebruiker(AGebruiker gebruiker) {
+        beheerder.addSelectedSpecifiekeGebruiker(gebruiker);
+    }
+
+    public Set<AGebruiker> getSelectedSpecifiekeGebruikers() {
+        return beheerder.getSelectedSpecifiekeGebruikers();
+    }
+
+    public void clearSelectedSpecifiekeGebruikers() {
+        beheerder.clearSelectedSpecifiekeGebruikers();
+    }
+
+    public void addDeelnemer(AGebruiker e) {
+        beheerder.addDeelnemer(e);
+    }
+
+    public void addBegeleider(AGebruiker e) {
+        beheerder.addBegeleider(e);
+    }
+
+    public void removeDeelnemer(AGebruiker e) {
+        beheerder.removeDeelnemer(e);
+    }
+
+    public void removeBegeleider(AGebruiker e) {
+        beheerder.removeBegeleider(e);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {

@@ -11,6 +11,8 @@ import domain.GebruikerModels.Gebruiker;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -124,6 +126,12 @@ public class Activiteit {
     }
 
     public void setEmailadres(String emailadres) {
+        if (emailadres == null || emailadres.isBlank()) {
+            throw new IllegalArgumentException("Email mag geen lege waarde bevatten.");
+        }
+        if (!Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]+$").matcher(emailadres).matches()) {
+            throw new IllegalArgumentException("Ongeldig formaat voor Emailadres.");
+        }
         this.emailadres = emailadres;
     }
 
@@ -132,6 +140,10 @@ public class Activiteit {
     }
 
     public void setTelefoonnummer(String telefoonnummer) {
+        if (telefoonnummer != null && !telefoonnummer.isBlank()
+                && !Pattern.compile("((?:\\+|00)[17](?: |\\-)?|(?:\\+|00)[1-9]\\d{0,2}(?: |\\-)?|(?:\\+|00)1\\-\\d{3}(?: |\\-)?)?(0\\d|\\([0-9]{3}\\)|[1-9]{0,3})(?:((?: |\\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\\-)[0-9]{3}(?: |\\-)[0-9]{4})|([0-9]{7}))").matcher(telefoonnummer).matches()) {
+            throw new IllegalArgumentException("Ongeldig formaat voor telefoonnummer.");
+        }
         this.telefoonnummer = telefoonnummer;
     }
 
@@ -200,14 +212,14 @@ public class Activiteit {
     }
 
     public void setMaxAantalDeelnemers(int maxAantalDeelnemers) {
-        if (maxAantalDeelnemers < 1) {
-            throw new IllegalArgumentException("Het maximum aantal deelnemers moet minstens 0 zijn.");
+        if (maxAantalDeelnemers <= 1) {
+            throw new IllegalArgumentException("Het maximum aantal deelnemers moet minstens 1 zijn.");
         }
-        
+
         if (activiteitDeelnemers != null && maxAantalDeelnemers < activiteitDeelnemers.size()) {
             throw new IllegalArgumentException("Het maximum aantal deelnemers kan niet lager liggen dan het aantal werkelijke deelnemers");
         }
-         
+
         this.maxAantalDeelnemers = maxAantalDeelnemers;
     }
 
@@ -226,10 +238,10 @@ public class Activiteit {
         return activiteitBegeleiders;
     }
 
-    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {        
+    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
         if (activiteitBegeleiders.size() < 1) {
             throw new IllegalArgumentException("Er moet minstens één begeleider zijn.");
-        }         
+        }
         this.activiteitBegeleiders = activiteitBegeleiders;
     }
 
@@ -244,5 +256,23 @@ public class Activiteit {
     public int getAantalDeelnemers() {
         return 0;
     }
+    
+    public List<AGebruiker> getDeelnemers(){
+        List<AGebruiker> gebruikers = new ArrayList<>();
+        for(ActiviteitDeelnemer ad : activiteitDeelnemers){
+            gebruikers.add(ad.getGebruiker());
+        }
+        return gebruikers;
+    }
+    
+    public List<AGebruiker> getBegeleiders(){
+        List<AGebruiker> gebruikers = new ArrayList<>();
+        for(ActiviteitBegeleider ab : activiteitBegeleiders){
+            gebruikers.add(ab.getGebruiker());
+        }
+        return gebruikers;
+    }
+    
+
 
 }

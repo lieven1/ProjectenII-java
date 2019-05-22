@@ -7,6 +7,8 @@ package gui.activiteit;
 
 import domain.Activiteit;
 import domain.DateConverter;
+import domain.GebruikerModels.AGebruiker;
+import domain.GebruikerModels.Adres;
 import domain.controllers.ActiviteitenController;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,6 +21,7 @@ import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +34,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -68,6 +74,10 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     @FXML
     private Button removeGebruikerButton;
     @FXML
+    private Button deelnemersSwitchButton;
+    @FXML
+    private Button begeleidersSwitchButton;
+    @FXML
     private CheckBox contactgegevensToggle;
     @FXML
     private AnchorPane contactgegevensPanel;
@@ -87,7 +97,18 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     private TextField straatTextField;
     @FXML
     private TextField huisnummerTextField;
-    
+    @FXML
+    private TableColumn<AGebruiker, String> alleGebruikersVoornaamColumn;
+    @FXML
+    private TableColumn<AGebruiker, String> alleGebruikersAchternaamColumn;
+    @FXML
+    private TableColumn<AGebruiker, String> specifiekeGebruikersVoornaamColumn;
+    @FXML
+    private TableColumn<AGebruiker, String> specifiekeGebruikersAchternaamColumn;
+    @FXML
+    private TableView<AGebruiker> alleGebruikersTable;
+    @FXML
+    private TableView<AGebruiker> specifiekeGebruikersTable;
 
     private ActiviteitenController controller;
     private Activiteit currentActiviteit;
@@ -119,14 +140,48 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         lblFout.setVisible(false);
         contactgegevensToggle.selectedProperty().setValue(false);
         contactgegevensPanel.setVisible(false);
+
+        alleGebruikersVoornaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
+        alleGebruikersAchternaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
+        specifiekeGebruikersVoornaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
+        specifiekeGebruikersAchternaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
+        specifiekeGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (controller.getSelectedSpecifiekeGebruikers().contains(newValue)) {
+                controller.getSelectedSpecifiekeGebruikers().remove(newValue);
+            }else{
+                controller.addSelectedSpecifiekeGebruiker(newValue);
+            }
+        });
+        alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (controller.getSelectedAlleGebruikers().contains(newValue)) {
+                controller.getSelectedAlleGebruikers().remove(newValue);
+            } else {
+                controller.addSelectedAlleGebruiker(newValue);
+            }
+        });
+        toonDeelnemers();
+
+    }
+
+    private void toonDeelnemers() {
+        controller.toonDeelnemers();
+        alleGebruikersTable.setItems(controller.getAlleGebruikers());
+        specifiekeGebruikersTable.setItems(controller.getSpecifiekeGebruikers());
+
+    }
+
+    private void toonBegeleiders() {
+        controller.toonBegeleiders();
+        alleGebruikersTable.setItems(controller.getAlleGebruikers());
+        specifiekeGebruikersTable.setItems(controller.getSpecifiekeGebruikers());
     }
 
     @FXML
     private void slaActiviteitOp(ActionEvent event) {
         try {
             Activiteit act = new Activiteit(txfTitel.getText(), txfType.getText(), DateConverter.localDateToCalendar(dpStartdatum.getValue()), DateConverter.localDateToCalendar(dpEinddatum.getValue()), Integer.parseInt(txfMaxAantalDeelnemers.getText()), new ArrayList<>(), new ArrayList<>());
-            if (controller.getCurrentActiviteit()
-                    != null) {
+            act = voegExtraInfoToe(act);
+            if (controller.getCurrentActiviteit() != null) {
                 controller.modify(act);
             } else {
                 controller.setCurrentActiviteit(act);
@@ -135,8 +190,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         } catch (IllegalArgumentException ex) {
             lblFout.setVisible(true);
             lblFout.setText(ex.getMessage());
-        } catch (Exception ex){
-            
+        } catch (Exception ex) {
+
         }
 
     }
@@ -163,28 +218,40 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         lblFout.setVisible(false);
         btnOpslaan.setText("Toevoegen");
         controller.setCurrentActiviteit(null);
-        setDetailData("", "", null, null, "0", "0");
+        setDetailData("", "", null, null, "0", "0", "", "", "", "België", "", "", "", "");
     }
 
     @FXML
     private void pasDeelnemersAan(ActionEvent event) {
         deelnemersBewerken = true;
         begeleidersBewerken = false;
+        deelnemersSwitchButton.setDisable(true);
+        begeleidersSwitchButton.setDisable(false);
+        toonDeelnemers();
     }
 
     @FXML
     private void pasBegeleidersAan(ActionEvent event) {
         begeleidersBewerken = true;
         deelnemersBewerken = false;
+        deelnemersSwitchButton.setDisable(false);
+        begeleidersSwitchButton.setDisable(true);
+        toonBegeleiders();
     }
-    
+
     @FXML
-    private void toggleContactgegevens(ActionEvent event){
+    private void toggleContactgegevens(ActionEvent event) {
         contactgegevensPanel.setVisible(contactgegevensToggle.selectedProperty().getValue());
     }
 
     @FXML
     private void addGebruiker(ActionEvent event) {
+        if (deelnemersBewerken) {
+            controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addDeelnemer(gebruiker));
+        } else {
+            controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addBegeleider(gebruiker));
+        }
+        controller.clearSelectedAlleGebruikers();
     }
 
     @FXML
@@ -192,22 +259,53 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     }
 
+    private Activiteit voegExtraInfoToe(Activiteit act) {
+        if (contactgegevensToggle.selectedProperty().getValue()) {
+            if (extraInfoAanwezig(contactPersoonTextField)) {
+                act.setContactpersoon(contactPersoonTextField.getText());
+            }
+            if (extraInfoAanwezig(emailTextField)) {
+                act.setEmailadres(emailTextField.getText());
+            }
+            if (extraInfoAanwezig(telefoonnummerTextField)) {
+                act.setTelefoonnummer(telefoonnummerTextField.getText());
+            }
+            if (extraInfoAanwezig(postcodeTextField) || extraInfoAanwezig(landTextField) || extraInfoAanwezig(stadTextField) || extraInfoAanwezig(straatTextField) || extraInfoAanwezig(huisnummerTextField)) {
+                act.setAdres(new Adres(landTextField.getText(), postcodeTextField.getText(), stadTextField.getText(), straatTextField.getText(), huisnummerTextField.getText()));
+            }
+        }
+        return act;
+    }
+
+    private boolean extraInfoAanwezig(TextField textfield) {
+        return textfield.getText() != null && !textfield.getText().isBlank();
+    }
+
     private void loadActiviteit(Activiteit act) {
         btnOpslaan.setText("Bijwerken");
         btnVerwijder.setDisable(false);
 
         currentActiviteit = act;
+        Adres adres = act.getAdres() != null ? act.getAdres() : new Adres("", "", "", "", "");
 
-        setDetailData(act.getTitel(), act.getType(), calendarToLocalDate(act.getStartDatum()), calendarToLocalDate(act.getEindDatum()), Integer.toString(act.getAantalDeelnemers()), Integer.toString(act.getMaxAantalDeelnemers()));
+        setDetailData(act.getTitel(), act.getType(), calendarToLocalDate(act.getStartDatum()), calendarToLocalDate(act.getEindDatum()), Integer.toString(act.getAantalDeelnemers()), Integer.toString(act.getMaxAantalDeelnemers()), act.getContactpersoon(), act.getEmailadres(), act.getTelefoonnummer(), adres.getLand(), adres.getPostcode(), adres.getStad(), adres.getStraat(), adres.getNummer());
     }
 
-    private void setDetailData(String titel, String type, LocalDate startDatum, LocalDate eindDatum, String aantalDeelnemers, String maxAantalDeelnemers) {
+    private void setDetailData(String titel, String type, LocalDate startDatum, LocalDate eindDatum, String aantalDeelnemers, String maxAantalDeelnemers, String contactpersoon, String email, String telefoonnummer, String land, String postcode, String stad, String straat, String huisnummer) {
         txfTitel.setText(titel);
         txfType.setText(type);
         dpStartdatum.setValue(startDatum);
         dpEinddatum.setValue(eindDatum);
         txfAantalDeelnemers.setText(aantalDeelnemers);
         txfMaxAantalDeelnemers.setText(maxAantalDeelnemers);
+        contactPersoonTextField.setText(contactpersoon);
+        emailTextField.setText(email);
+        telefoonnummerTextField.setText(telefoonnummer);
+        landTextField.setText(land);
+        postcodeTextField.setText(postcode);
+        stadTextField.setText(stad);
+        straatTextField.setText(straat);
+        huisnummerTextField.setText(huisnummer);
     }
 
     @Override

@@ -81,7 +81,7 @@ public class ActiviteitenListPanel extends VBox {
     }
 
     private TableView<Activiteit> createTableView() {
-        activiteitenTableView = new TableView<Activiteit>();
+        activiteitenTableView = new TableView<>();
         activiteitenTableView.setEditable(false);
         TableColumn<Activiteit, String> naamColumn = new TableColumn<>("Naam");
         TableColumn<Activiteit, String> typeColumn = new TableColumn<>("Type");
@@ -89,13 +89,13 @@ public class ActiviteitenListPanel extends VBox {
         TableColumn<Activiteit, Calendar> eindDatumColumn = new TableColumn<>("Einddatum");
         TableColumn<Activiteit, String> aantalDeelnemersColumn = new TableColumn<>("Deelnemers");
 
-        naamColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("titel"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, String>("type"));
-        startDatumColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, Calendar>("startDatum"));
+        naamColumn.setCellValueFactory(new PropertyValueFactory<>("titel"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDatumColumn.setCellValueFactory(new PropertyValueFactory<>("startDatum"));
         startDatumColumn.setCellFactory(p -> {
             return new CalenderCell();
         });
-        eindDatumColumn.setCellValueFactory(new PropertyValueFactory<Activiteit, Calendar>("eindDatum"));
+        eindDatumColumn.setCellValueFactory(new PropertyValueFactory<>("eindDatum"));
         eindDatumColumn.setCellFactory((p) -> {
             return new CalenderCell();
         });

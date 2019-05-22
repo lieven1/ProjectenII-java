@@ -81,30 +81,6 @@ public class ActiviteitenController {
         beheerder.setCurrentActiviteit(activiteit);
     }
 
-    public void addSelectedAlleGebruiker(AGebruiker gebruiker) {
-        beheerder.addSelectedAlleGebruiker(gebruiker);
-    }
-
-    public Set<AGebruiker> getSelectedAlleGebruikers() {
-        return beheerder.getSelectedAlleGebruikers();
-    }
-
-    public void clearSelectedAlleGebruikers() {
-        beheerder.clearSelectedAlleGebruikers();
-    }
-
-    public void addSelectedSpecifiekeGebruiker(AGebruiker gebruiker) {
-        beheerder.addSelectedSpecifiekeGebruiker(gebruiker);
-    }
-
-    public Set<AGebruiker> getSelectedSpecifiekeGebruikers() {
-        return beheerder.getSelectedSpecifiekeGebruikers();
-    }
-
-    public void clearSelectedSpecifiekeGebruikers() {
-        beheerder.clearSelectedSpecifiekeGebruikers();
-    }
-
     public void addDeelnemer(AGebruiker e) {
         beheerder.addDeelnemer(e);
     }

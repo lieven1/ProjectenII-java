@@ -146,7 +146,7 @@
                                           <TextField fx:id="contactPersoonTextField" prefHeight="25.0" prefWidth="230.0" promptText="Contactpersoon" />
                                           <TextField fx:id="emailTextField" prefHeight="25.0" prefWidth="230.0" promptText="Email" />
                                           <TextField fx:id="telefoonnummerTextField" prefHeight="25.0" prefWidth="230.0" promptText="Telefoonnummer" />
-                                          <TextField fx:id="landTextField" prefHeight="25.0" prefWidth="231.0" text="België" />
+                                          <TextField fx:id="landTextField" prefHeight="25.0" prefWidth="231.0" promptText="Land" />
                                           <TextField fx:id="postcodeTextField" prefHeight="25.0" prefWidth="230.0" promptText="Postcode" />
                                           <TextField fx:id="stadTextField" prefHeight="25.0" prefWidth="230.0" promptText="Stad" />
                                           <TextField fx:id="straatTextField" prefHeight="25.0" prefWidth="230.0" promptText="Straat" />

@@ -56,9 +56,6 @@ public class ActiviteitenBeheerder {
     private ObservableList<AGebruiker> specifiekeGebruikers;
     private SortedList<AGebruiker> specifiekeGebruikersSortedList;
 
-    private Set<AGebruiker> selectedAllGebruikers;
-    private Set<AGebruiker> selectedSpecifiekeGebruikers;
-
     private List<AGebruiker> deelnemersOmToeTeVoegen;
     private List<AGebruiker> begeleidersOmToeTeVoegen;
 
@@ -85,8 +82,6 @@ public class ActiviteitenBeheerder {
                         .thenComparing(AGebruiker::getVoornaam)
                         .thenComparing(g -> g.getType().equals(TypeGebruiker.Lid) ? ((Gebruiker) g).getGraad() : null)
         );
-        selectedAllGebruikers = new HashSet<>();
-        selectedSpecifiekeGebruikers = new HashSet<>();
         
         deelnemersOmToeTeVoegen = new ArrayList<>();
         begeleidersOmToeTeVoegen = new ArrayList<>();
@@ -124,31 +119,7 @@ public class ActiviteitenBeheerder {
         } else {
             begeleidersOmToeTeVoegen.remove(e);
         }
-    }
-
-    public void addSelectedAlleGebruiker(AGebruiker gebruiker) {
-        selectedAllGebruikers.add(gebruiker);
-    }
-
-    public Set<AGebruiker> getSelectedAlleGebruikers() {
-        return selectedAllGebruikers;
-    }
-
-    public void clearSelectedAlleGebruikers() {
-        selectedAllGebruikers.clear();
-    }
-
-    public void addSelectedSpecifiekeGebruiker(AGebruiker gebruiker) {
-        selectedSpecifiekeGebruikers.add(gebruiker);
-    }
-
-    public Set<AGebruiker> getSelectedSpecifiekeGebruikers() {
-        return selectedSpecifiekeGebruikers;
-    }
-
-    public void clearSelectedSpecifiekeGebruikers() {
-        selectedSpecifiekeGebruikers.clear();
-    }
+    }   
 
     public void toonDeelnemers() {
         if (currentActiviteit != null) {
@@ -180,7 +151,6 @@ public class ActiviteitenBeheerder {
         specifiekeGebruikersSortedList = new SortedList<>(specifiekeGebruikers,
                 Comparator.comparing(AGebruiker::getNaam)
                         .thenComparing(AGebruiker::getVoornaam)
-                        .thenComparing(g -> g.getType().equals(TypeGebruiker.Lid) ? ((Gebruiker) g).getGraad() : null)
         );
 
         List<String> gebruikersnamen = specifiekeGebruikers.stream().map(ag -> ag.getGebruikersnaam()).collect(Collectors.toList());

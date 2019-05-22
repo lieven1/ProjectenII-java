@@ -146,28 +146,21 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         specifiekeGebruikersVoornaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("voornaam"));
         specifiekeGebruikersAchternaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
         specifiekeGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (controller.getSelectedSpecifiekeGebruikers().contains(newValue)) {
-                controller.getSelectedSpecifiekeGebruikers().remove(newValue);
-            } else {
-                controller.addSelectedSpecifiekeGebruiker(newValue);
-            }
+            if(deelnemersBewerken)
+                controller.removeDeelnemer(newValue);
+            else
+                controller.removeBegeleider(newValue);
+
 
         });
-        alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (controller.getSelectedAlleGebruikers().contains(newValue)) {
-                controller.getSelectedAlleGebruikers().remove(newValue);
-            } else {
-                controller.addSelectedAlleGebruiker(newValue);
-            }
-
+        alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {      
             if (deelnemersBewerken) {
-                controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addDeelnemer(gebruiker));
+                controller.addDeelnemer(newValue);
                 toonDeelnemers();
             } else {
-                controller.getSelectedAlleGebruikers().forEach(gebruiker -> controller.addBegeleider(gebruiker));
+                controller.addBegeleider(newValue);
                 toonBegeleiders();
             }
-            controller.clearSelectedAlleGebruikers();
         });
         toonDeelnemers();
 
@@ -291,9 +284,15 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         btnVerwijder.setDisable(false);
 
         currentActiviteit = act;
-        Adres adres = act.getAdres() != null ? act.getAdres() : new Adres("", "", "", "", "");
+        Adres adres = act.getAdres();
 
-        setDetailData(act.getTitel(), act.getType(), calendarToLocalDate(act.getStartDatum()), calendarToLocalDate(act.getEindDatum()), Integer.toString(act.getAantalDeelnemers()), Integer.toString(act.getMaxAantalDeelnemers()), act.getContactpersoon(), act.getEmailadres(), act.getTelefoonnummer(), adres.getLand(), adres.getPostcode(), adres.getStad(), adres.getStraat(), adres.getNummer());
+        setDetailData(act.getTitel(), act.getType(), calendarToLocalDate(act.getStartDatum()),
+                calendarToLocalDate(act.getEindDatum()), Integer.toString(act.getAantalDeelnemers()),
+                Integer.toString(act.getMaxAantalDeelnemers()), act.getContactpersoon(), act.getEmailadres(),
+                act.getTelefoonnummer(),
+                adres != null ? adres.getLand() : "", adres != null ? adres.getPostcode() : "",
+                adres != null ? adres.getStad() : "", adres != null ? adres.getStraat() : "",
+                adres != null ? adres.getNummer() : "");
     }
 
     private void setDetailData(String titel, String type, LocalDate startDatum, LocalDate eindDatum, String aantalDeelnemers, String maxAantalDeelnemers, String contactpersoon, String email, String telefoonnummer, String land, String postcode, String stad, String straat, String huisnummer) {

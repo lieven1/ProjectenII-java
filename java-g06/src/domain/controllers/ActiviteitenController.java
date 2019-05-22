@@ -103,4 +103,8 @@ public class ActiviteitenController {
     public void removePropertyChangeListener(PropertyChangeListener pcl) {
         beheerder.removePropertyChangeListener(pcl);
     }
+
+    public void clearTabellen() {
+        beheerder.clearTabellen();
+    }
 }

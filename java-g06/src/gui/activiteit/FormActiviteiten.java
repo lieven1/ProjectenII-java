@@ -216,6 +216,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         lblFout.setVisible(false);
         btnOpslaan.setText("Toevoegen");
         controller.setCurrentActiviteit(null);
+        controller.clearTabellen();
         setDetailData("", "", null, null, "0", "0", "", "", "", "België", "", "", "", "");
     }
 

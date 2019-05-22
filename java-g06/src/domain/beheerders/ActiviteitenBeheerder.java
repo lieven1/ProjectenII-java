@@ -252,4 +252,8 @@ public class ActiviteitenBeheerder {
         subject.removePropertyChangeListener(pcl);
     }
 
+    public void clearTabellen() {
+        specifiekeGebruikers.clear();
+    }
+
 }

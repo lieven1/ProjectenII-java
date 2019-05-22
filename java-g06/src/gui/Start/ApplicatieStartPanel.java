@@ -4,6 +4,7 @@ import gui.Panel;
 import domain.controllers.DomeinController;
 import gui.Gebruiker.GuiGebruikerController;
 import gui.Lesmateriaal.GuiLesmateriaalController;
+import gui.Overzichten.OverzichtPanelController;
 import gui.activiteit.GuiActiviteitController;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -43,7 +44,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         menuPanel = new GridPane();
         menuPanel.setPrefWidth(1000);
         menuPanel.setLayoutY(230);
-        menuPanel.getColumnConstraints().add(new ColumnConstraints(250));
+        //menuPanel.getColumnConstraints().add(new ColumnConstraints(250));
 
         // Label
         Label lblTitle = new Label("Taijitan");
@@ -52,6 +53,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         lblTitle.setLayoutY(242);
         lblTitle.setPadding(new Insets(0, 0, 20, 0));
         menuPanel.add(lblTitle, 0, 0, 2, 1);
+        menuPanel.setHgap(50);
         GridPane.setHalignment(lblTitle, HPos.CENTER);
 
         // Buttons
@@ -61,10 +63,12 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
         createButton("Lesmateriaal", 1, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiLesmateriaalController(dc.getLesmateriaalController()), this.getHeight(), this.getWidth());
         });
-        createButton("Activiteit", 2, 1).setOnAction((ActionEvent t) -> {
+        createButton("Activiteiten", 2, 1).setOnAction((ActionEvent t) -> {
             dc.getGuiController().setPane(new GuiActiviteitController(dc.getActiviteitenController()), this.getHeight(), this.getWidth());
         });
-
+        createButton("Overzichten", 3, 1).setOnAction((ActionEvent t) -> {
+            dc.getGuiController().setPane(new OverzichtPanelController(dc.getOverzichtController(), dc.getGebruikerController(), dc.getActiviteitenController(), dc.getRaadplegingController(), dc.getLesmateriaalController(), 3), this.getHeight(), this.getWidth());
+        });
         this.getChildren().addAll(logo, menuPanel);
     }
 
@@ -80,7 +84,7 @@ public class ApplicatieStartPanel extends AnchorPane implements Panel {
     @Override
     public void resizeWidth(double width) {
         logo.fitWidthProperty().setValue(width);
-        menuPanel.setLayoutX(width / 2 - 200);
+        menuPanel.setLayoutX(width / 2 - 400);
     }
 
     @Override

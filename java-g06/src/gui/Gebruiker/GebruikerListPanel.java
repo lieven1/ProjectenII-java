@@ -61,7 +61,7 @@ public class GebruikerListPanel extends VBox {
         lblFilterTitle.setTextFill(Paint.valueOf("#393980"));
         lblFilterTitle.setLayoutX(10);
         lblFilterTitle.setLayoutY(90);
-        Label lblNaamFilter = new Label("Naam");
+        Label lblNaamFilter = new Label("Achternaam");
         lblNaamFilter.setLayoutX(15);
         lblNaamFilter.setLayoutY(111);
         Label lblVoornaamFilter = new Label("Voornaam");

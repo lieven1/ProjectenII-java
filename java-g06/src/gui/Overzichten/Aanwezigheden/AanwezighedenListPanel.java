@@ -126,18 +126,16 @@ public class AanwezighedenListPanel extends OverzichtListPanel {
     public TableView createList() {
         lesmomentList = new TableView<Lesmoment>();
         lesmomentList.setEditable(false);
-        TableColumn<Lesmoment, String> idColumn = new TableColumn<>("lesmomentId");
+        
         TableColumn<Lesmoment, String> StarttijdColumn = new TableColumn<>("Datum");
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("LesmomentId"));
+       
         StarttijdColumn.setCellValueFactory(l -> new ReadOnlyStringWrapper(dateFormat.format(l.getValue().getStartTijd())));
-        lesmomentList.getColumns().addAll(idColumn, StarttijdColumn);
+        lesmomentList.getColumns().addAll(StarttijdColumn);
         lesmomentList.setItems(oc.getLesomentObservableList());
         lesmomentList.setPrefHeight(1080);
 
-        idColumn.prefWidthProperty().bind(lesmomentList.widthProperty().multiply(0.3));
-        StarttijdColumn.prefWidthProperty().bind(lesmomentList.widthProperty().multiply(0.7));
+        StarttijdColumn.prefWidthProperty().bind(lesmomentList.widthProperty().multiply(1));
 
-        idColumn.setResizable(false);
         StarttijdColumn.setResizable(false);
 
         lesmomentList.getSelectionModel().selectedItemProperty().addListener((ObservableValue observableValue, Object oldValue, Object newValue) -> {

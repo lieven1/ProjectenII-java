@@ -136,6 +136,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         specifiekeGebruikersAchternaamColumn.setCellValueFactory(new PropertyValueFactory<AGebruiker, String>("naam"));
         specifiekeGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             specifiekeGebruikersTable.getSelectionModel().clearSelection();
+            alleGebruikersTable.getSelectionModel().clearSelection();
+
             if (newValue != null && oldValue != null && newValue != oldValue && deelnemersBewerken) {
                 controller.removeDeelnemer(newValue);
                 toonDeelnemers();
@@ -144,9 +146,11 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
                 toonBegeleiders();
             }
         });
-        
+
         alleGebruikersTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             alleGebruikersTable.getSelectionModel().clearSelection();
+            specifiekeGebruikersTable.getSelectionModel().clearSelection();
+
             if (newValue != null && oldValue != null && newValue != oldValue && deelnemersBewerken) {
                 controller.addDeelnemer(newValue);
                 toonDeelnemers();
@@ -262,7 +266,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     private void loadActiviteit(Activiteit act) {
         btnOpslaan.setText("Bijwerken");
-        btnVerwijder.setDisable(false);        
+        btnVerwijder.setDisable(false);
 
         Adres adres = act.getAdres();
 
@@ -273,10 +277,10 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
                 adres != null ? adres.getLand() : "", adres != null ? adres.getPostcode() : "",
                 adres != null ? adres.getStad() : "", adres != null ? adres.getStraat() : "",
                 adres != null ? adres.getNummer() : "");
-        
+
         pasDeelnemersAan(new ActionEvent());
         pasDeelnemersAan(new ActionEvent());
-        
+
     }
 
     private void setDetailData(String titel, String type, LocalDate startDatum, LocalDate eindDatum, String aantalDeelnemers, String maxAantalDeelnemers, String contactpersoon, String email, String telefoonnummer, String land, String postcode, String stad, String straat, String huisnummer) {

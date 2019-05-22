@@ -43,14 +43,7 @@ public class Gebruiker extends AGebruiker {
     @Enumerated(EnumType.ORDINAL)
     private Gradatie graad;
     @Transient
-    private Lesformule lesformule;
-    
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="Gebruikersnaam")
-    private List<ActiviteitBegeleider> activiteitBegeleiders;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="Gebruikersnaam")
-    private List<ActiviteitDeelnemer> activiteitDeelnemers;
+    private Lesformule lesformule;   
 
     
     // Constructors
@@ -178,24 +171,7 @@ public class Gebruiker extends AGebruiker {
             _graad = Gradatie.RokkuKyu;
         
         this.graad = _graad;
-    }
-
-    public List<ActiviteitBegeleider> getActiviteitBegeleiders() {
-        return activiteitBegeleiders;
-    }
-
-    public void setActiviteitBegeleiders(List<ActiviteitBegeleider> activiteitBegeleiders) {
-        this.activiteitBegeleiders = activiteitBegeleiders;
-    }
-
-    public List<ActiviteitDeelnemer> getActiviteitDeelnemers() {
-        return activiteitDeelnemers;
-    }
-
-    public void setActiviteitDeelnemers(List<ActiviteitDeelnemer> activiteitDeelnemers) {
-        this.activiteitDeelnemers = activiteitDeelnemers;
-    }
-    
+    }   
     
 
     @Override

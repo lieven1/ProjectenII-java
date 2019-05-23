@@ -138,7 +138,7 @@ public class ActiviteitenDetailPanelController extends DetailPanel implements In
             }
         });
 
-        this.lblPlaatsenIngenomen.setText(String.format("%d", deelnemers.size() + begeleiders.size()));
+        this.lblPlaatsenIngenomen.setText(String.format("%d", deelnemers.size()));
 
         //tableviews opvullen
         tableViewBegeleidersActiviteit.setEditable(false);

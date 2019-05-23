@@ -122,7 +122,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         btnVerwijder.setDisable(true);
         lblFout.setVisible(false);
         contactgegevensToggle.selectedProperty().setValue(false);
@@ -219,6 +219,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
         controller.setCurrentActiviteit(null);
         controller.clearTabellen();
         setDetailData("", "", null, null, "0", "0", "", "", "", "België", "", "", "", "");
+        txfAantalDeelnemers.setText("0");
+
     }
 
     @FXML
@@ -241,8 +243,8 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
     private void toggleContactgegevens(ActionEvent event) {
         contactgegevensPanel.setVisible(contactgegevensToggle.selectedProperty().getValue());
     }
-    
-    private void updateTextFieldAantalDeelnemers(){
+
+    private void updateTextFieldAantalDeelnemers() {
         txfAantalDeelnemers.setText(Integer.toString(controller.getActiviteitenDeelnemers().size()));
     }
 
@@ -284,6 +286,7 @@ public class FormActiviteiten extends ScrollPane implements PropertyChangeListen
 
         pasDeelnemersAan(new ActionEvent());
         pasDeelnemersAan(new ActionEvent());
+        txfAantalDeelnemers.setText(Integer.toString(act.getAantalDeelnemers()));
 
     }
 
